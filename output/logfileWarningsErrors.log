@@ -1,0 +1,19 @@
+2024-01-19T10:50:39,606  WARN PrepareForSimImpl:229 'usePersonIdForMissingVehicleId' is deprecated. It will be removed soon.
+2024-01-19T10:50:39,752  WARN PreProcessEuclidean:60 There are links with stored length smaller than their Euclidean distance in this network. Thus, A* cannot guarantee to calculate the least-cost paths between two nodes.
+2024-01-19T10:50:40,662  WARN RandomizingTimeDistanceTravelDisutilityFactory:113 There will be no routing randomness. The randomization of the travel disutility requires the monetary distance rate to be different than zero. Continuing anyway.
+2024-01-19T10:50:40,662  WARN RandomizingTimeDistanceTravelDisutilityFactory:118 There will be no routing randomness. The randomization of the travel disutility requires the travel time cost rate to be different than zero. Continuing anyway.
+2024-01-19T10:50:40,715  WARN PreProcessEuclidean:60 There are links with stored length smaller than their Euclidean distance in this network. Thus, A* cannot guarantee to calculate the least-cost paths between two nodes.
+2024-01-19T10:50:41,686  WARN QueueWithBuffer:500 Link pt_0_bus too small: enlarge storage capacity from: 27.77777777777778 Vehicles to: 50.0 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,687  WARN QueueWithBuffer:500 Link pt_1_bus too small: enlarge storage capacity from: 105.17529063559581 Vehicles to: 788.8146797669687 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,687  WARN QueueWithBuffer:500 Link pt_10_bus too small: enlarge storage capacity from: 100.92307474753315 Vehicles to: 756.9230606064987 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,687  WARN QueueWithBuffer:500 Link pt_100_bus too small: enlarge storage capacity from: 48.17484921601171 Vehicles to: 361.3113691200878 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,687  WARN QueueWithBuffer:500 Link pt_1000_bus too small: enlarge storage capacity from: 41.82372844956319 Vehicles to: 313.67796337172393 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,687  WARN QueueWithBuffer:500 Link pt_1001_bus too small: enlarge storage capacity from: 39.46737625100742 Vehicles to: 296.0053218825557 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,687  WARN QueueWithBuffer:500 Link pt_1002_bus too small: enlarge storage capacity from: 75.8324360903052 Vehicles to: 568.7432706772889 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,688  WARN QueueWithBuffer:500 Link pt_1003_bus too small: enlarge storage capacity from: 94.35843320642431 Vehicles to: 707.6882490481823 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,688  WARN QueueWithBuffer:500 Link pt_1004_bus too small: enlarge storage capacity from: 33.61287721127312 Vehicles to: 252.09657908454844 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,688  WARN QueueWithBuffer:500 Link pt_1005_bus too small: enlarge storage capacity from: 35.90427244451733 Vehicles to: 269.28204333388 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,688  WARN QueueWithBuffer:500 Link pt_1006_bus too small: enlarge storage capacity from: 42.189122774588455 Vehicles to: 316.4184208094134 Vehicles.  This is not fatal, but modifies the traffic flow dynamics.
+2024-01-19T10:50:41,688  WARN QueueWithBuffer:503 Additional warnings of this type are suppressed.
+2024-01-19T10:50:42,691 ERROR BasicPlanAgentImpl:187 last activity of person driver agent id 1 has end time < infty; setting it to infty
+2024-01-19T10:50:42,692 ERROR BasicPlanAgentImpl:188  This message given only once.

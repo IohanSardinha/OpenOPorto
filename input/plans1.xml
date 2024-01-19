@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plans SYSTEM "http://www.matsim.org/files/dtd/plans_v4.dtd">
+
+<plans>
+
+	<person id="1">
+		<plan>
+			<act type="h" x="-960711.8516812128" y="5035715.516948114" end_time="09:00:00" />
+			<leg mode="car">
+			</leg>
+			<act type="w" x="-967135.0308277807" y="5037149.376731702" end_time="12:00:00" />
+			<leg mode="car">
+			</leg>
+			<act type="w" x="-962027.0358051896" y="5039602.586712185" end_time="17:00:00" />
+			<leg mode="car">
+			</leg>
+			<act type="h" x="-960711.8516812128" y="5035715.516948114"  end_time="09:00:00" />
+		</plan>
+	</person>
+
+</plans>
