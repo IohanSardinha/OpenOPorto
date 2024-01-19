@@ -291,7 +291,7 @@
 				<departure id="AU64_0" departureTime="20:55:00" vehicleRefId="tr_33_metro"/>
 				<departure id="AU6_0" departureTime="08:02:00" vehicleRefId="tr_34_metro"/>
 				<departure id="AU9_0" departureTime="08:39:00" vehicleRefId="tr_35_metro"/>
-				<departure id="copied-24h_AU158_0" departureTime="00:40:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="A---A_1">
@@ -402,10 +402,10 @@
 				<departure id="AU93_0" departureTime="09:40:00" vehicleRefId="tr_88_metro"/>
 				<departure id="AU96_0" departureTime="10:24:00" vehicleRefId="tr_89_metro"/>
 				<departure id="AU99_0" departureTime="11:09:00" vehicleRefId="tr_90_metro"/>
-				<departure id="copied-24h_AU150_0" departureTime="00:07:00"/>
-				<departure id="copied-24h_AU165_0" departureTime="00:32:00"/>
-				<departure id="copied-24h_AU166_0" departureTime="00:46:00"/>
-				<departure id="copied-24h_AU167_0" departureTime="01:00:00"/>
+
+
+
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="A---A_2">
@@ -489,7 +489,7 @@
 				<departure id="AU95_0" departureTime="10:08:00" vehicleRefId="tr_116_metro"/>
 				<departure id="AU97_0" departureTime="10:39:00" vehicleRefId="tr_117_metro"/>
 				<departure id="AU98_0" departureTime="10:54:00" vehicleRefId="tr_118_metro"/>
-				<departure id="copied-24h_AU164_0" departureTime="00:19:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="A---A_3">
@@ -587,8 +587,8 @@
 				<departure id="AU75_0" departureTime="24:54:00" vehicleRefId="tr_158_metro"/>
 				<departure id="AU7_0" departureTime="08:13:00" vehicleRefId="tr_159_metro"/>
 				<departure id="AU8_0" departureTime="08:26:00" vehicleRefId="tr_160_metro"/>
-				<departure id="copied-24h_AU74_0" departureTime="00:25:00"/>
-				<departure id="copied-24h_AU75_0" departureTime="00:54:00"/>
+
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="A---A_4">
@@ -650,7 +650,7 @@
 				<departure id="AU155_0" departureTime="23:09:00" vehicleRefId="tr_164_metro"/>
 				<departure id="AU156_0" departureTime="23:39:00" vehicleRefId="tr_165_metro"/>
 				<departure id="AU157_0" departureTime="24:10:00" vehicleRefId="tr_166_metro"/>
-				<departure id="copied-24h_AU157_0" departureTime="00:10:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="A---A_5">
@@ -707,7 +707,7 @@
 			</route>
 			<departures>
 				<departure id="AU76_0" departureTime="05:59:00" vehicleRefId="tr_167_metro"/>
-				<departure id="copied+24h_AU76_0" departureTime="29:59:00"/>
+
 			</departures>
 		</transitRoute>
 	</transitLine>
@@ -914,8 +914,8 @@
 				<departure id="BU5_0" departureTime="08:30:00" vehicleRefId="tr_201_metro"/>
 				<departure id="BU7_0" departureTime="09:30:00" vehicleRefId="tr_202_metro"/>
 				<departure id="BU8_0" departureTime="10:01:00" vehicleRefId="tr_203_metro"/>
-				<departure id="copied-24h_BU36_0" departureTime="00:01:00"/>
-				<departure id="copied-24h_BU37_0" departureTime="00:32:00"/>
+
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="B---B_2">
@@ -1081,7 +1081,7 @@
 			</route>
 			<departures>
 				<departure id="BU38_0" departureTime="05:44:00" vehicleRefId="tr_206_metro"/>
-				<departure id="copied+24h_BU38_0" departureTime="29:44:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="B---B_4">
@@ -1282,7 +1282,7 @@
 				<departure id="BU74_0" departureTime="23:17:00" vehicleRefId="tr_242_metro"/>
 				<departure id="BU75_0" departureTime="23:49:00" vehicleRefId="tr_243_metro"/>
 				<departure id="BU76_0" departureTime="24:27:00" vehicleRefId="tr_244_metro"/>
-				<departure id="copied-24h_BU76_0" departureTime="00:27:00"/>
+
 			</departures>
 		</transitRoute>
 	</transitLine>
@@ -1615,7 +1615,7 @@
 			</route>
 			<departures>
 				<departure id="CU0_0" departureTime="05:58:00" vehicleRefId="tr_299_metro"/>
-				<departure id="copied+24h_CU0_0" departureTime="29:58:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="C---C_1">
@@ -1707,7 +1707,7 @@
 				<departure id="CU5_0" departureTime="07:50:00" vehicleRefId="tr_331_metro"/>
 				<departure id="CU7_0" departureTime="08:23:00" vehicleRefId="tr_332_metro"/>
 				<departure id="CU9_0" departureTime="09:00:00" vehicleRefId="tr_333_metro"/>
-				<departure id="copied-24h_CU49_0" departureTime="00:26:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="C---C_2">
@@ -1780,7 +1780,7 @@
 				<departure id="CU87_0" departureTime="18:41:00" vehicleRefId="tr_346_metro"/>
 				<departure id="CU89_0" departureTime="19:06:00" vehicleRefId="tr_347_metro"/>
 				<departure id="CU99_0" departureTime="23:52:00" vehicleRefId="tr_348_metro"/>
-				<departure id="copied-24h_CU100_0" departureTime="00:25:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="C---C_3">
@@ -2486,10 +2486,10 @@
 				<departure id="DU98_0" departureTime="16:00:00" vehicleRefId="tr_594_metro"/>
 				<departure id="DU99_0" departureTime="16:06:00" vehicleRefId="tr_595_metro"/>
 				<departure id="DU9_0" departureTime="07:20:00" vehicleRefId="tr_596_metro"/>
-				<departure id="copied-24h_DU165_0" departureTime="00:12:00"/>
-				<departure id="copied-24h_DU166_0" departureTime="00:27:00"/>
-				<departure id="copied-24h_DU167_0" departureTime="00:45:00"/>
-				<departure id="copied-24h_DU168_0" departureTime="01:03:00"/>
+
+
+
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="D---D_2">
@@ -2550,7 +2550,7 @@
 				<departure id="DU37_0" departureTime="09:53:00" vehicleRefId="tr_613_metro"/>
 				<departure id="DU42_0" departureTime="10:23:00" vehicleRefId="tr_614_metro"/>
 				<departure id="DU8_0" departureTime="07:14:00" vehicleRefId="tr_615_metro"/>
-				<departure id="copied-24h_DU164_0" departureTime="00:01:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="D---D_3">
@@ -2661,7 +2661,7 @@
 				<departure id="DU329_0" departureTime="23:38:00" vehicleRefId="tr_641_metro"/>
 				<departure id="DU330_0" departureTime="23:49:00" vehicleRefId="tr_642_metro"/>
 				<departure id="DU333_0" departureTime="24:30:00" vehicleRefId="tr_643_metro"/>
-				<departure id="copied-24h_DU333_0" departureTime="00:30:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="D---D_5">
@@ -2842,10 +2842,10 @@
 				<departure id="DU332_0" departureTime="24:16:00" vehicleRefId="tr_780_metro"/>
 				<departure id="DU334_0" departureTime="24:46:00" vehicleRefId="tr_781_metro"/>
 				<departure id="DU335_0" departureTime="25:03:00" vehicleRefId="tr_782_metro"/>
-				<departure id="copied-24h_DU331_0" departureTime="00:02:00"/>
-				<departure id="copied-24h_DU332_0" departureTime="00:16:00"/>
-				<departure id="copied-24h_DU334_0" departureTime="00:46:00"/>
-				<departure id="copied-24h_DU335_0" departureTime="01:03:00"/>
+
+
+
+
 			</departures>
 		</transitRoute>
 	</transitLine>
@@ -2991,7 +2991,7 @@
 				<departure id="EU7_0" departureTime="10:39:00" vehicleRefId="tr_815_metro"/>
 				<departure id="EU8_0" departureTime="11:08:00" vehicleRefId="tr_816_metro"/>
 				<departure id="EU9_0" departureTime="11:39:00" vehicleRefId="tr_817_metro"/>
-				<departure id="copied-24h_EU34_0" departureTime="00:29:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="E---E_2">
@@ -3217,8 +3217,8 @@
 				<departure id="EU69_0" departureTime="23:27:00" vehicleRefId="tr_866_metro"/>
 				<departure id="EU70_0" departureTime="24:09:00" vehicleRefId="tr_867_metro"/>
 				<departure id="EU71_0" departureTime="24:42:00" vehicleRefId="tr_868_metro"/>
-				<departure id="copied-24h_EU70_0" departureTime="00:09:00"/>
-				<departure id="copied-24h_EU71_0" departureTime="00:42:00"/>
+
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="E---E_6">
@@ -3324,7 +3324,7 @@
 			</route>
 			<departures>
 				<departure id="EU72_0" departureTime="05:58:00" vehicleRefId="tr_881_metro"/>
-				<departure id="copied+24h_EU72_0" departureTime="29:58:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="E---E_8">
@@ -3500,7 +3500,7 @@
 			</route>
 			<departures>
 				<departure id="FU0_0" departureTime="05:59:00" vehicleRefId="tr_909_metro"/>
-				<departure id="copied+24h_FU0_0" departureTime="29:59:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="F---F_1">
@@ -3697,7 +3697,7 @@
 				<departure id="FU93_0" departureTime="09:59:00" vehicleRefId="tr_989_metro"/>
 				<departure id="FU96_0" departureTime="10:43:00" vehicleRefId="tr_990_metro"/>
 				<departure id="FU99_0" departureTime="11:28:00" vehicleRefId="tr_991_metro"/>
-				<departure id="copied-24h_FU150_0" departureTime="00:26:00"/>
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="F---F_3">
@@ -3879,8 +3879,8 @@
 				<departure id="FU75_0" departureTime="24:37:00" vehicleRefId="tr_1056_metro"/>
 				<departure id="FU7_0" departureTime="07:56:00" vehicleRefId="tr_1057_metro"/>
 				<departure id="FU8_0" departureTime="08:09:00" vehicleRefId="tr_1058_metro"/>
-				<departure id="copied-24h_FU74_0" departureTime="00:08:00"/>
-				<departure id="copied-24h_FU75_0" departureTime="00:37:00"/>
+
+
 			</departures>
 		</transitRoute>
 		<transitRoute id="F---F_5">
