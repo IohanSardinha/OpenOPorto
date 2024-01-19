@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE transitSchedule SYSTEM "http://www.matsim.org/files/dtd/transitSchedule_v2.dtd">
+
+<transitSchedule>
+	<attributes>
+		<attribute name="endDate" class="java.lang.String">2024-01-08</attribute>
+		<attribute name="startDate" class="java.lang.String">2024-01-08</attribute>
+	</attributes>
+
+	<transitStops>
+		<stopFacility id="1" x="-959209.2166666886" y="5035542.601613203" linkRefId="pt_6_metro" name="S01" isBlocking="false"/>
+		<stopFacility id="2" x="-959824.0342143399" y="5035761.130442998" linkRefId="pt_7_metro" name="S02" isBlocking="false"/>
+		<stopFacility id="3" x="-960495.9586607682" y="5036055.368518974" linkRefId="pt_8_metro	" name="S03" isBlocking="false"/>
+		<stopFacility id="4" x="-961393.7503540159" y="5036790.854926254" linkRefId="pt_9_metro	" name="S03" isBlocking="false"/>
+	
+		<stopFacility id="5697" x="-957163.8323428531" y="5034313.875290961" linkRefId="pt_3_metro" name="24 de Agosto" isBlocking="false"/>
+		<stopFacility id="5697.1" x="-957163.8323428531" y="5034313.875290961" linkRefId="pt_42_metro" name="24 de Agosto" stopAreaId="5697" isBlocking="false"/>
+		<stopFacility id="5698" x="-951324.3458143104" y="5039751.848606875" linkRefId="pt_167_metro" name="Baguim" isBlocking="false"/>
+		<stopFacility id="5698.1" x="-951324.3458143104" y="5039751.848606875" linkRefId="pt_182_metro" name="Baguim" stopAreaId="5698" isBlocking="false"/>
+		<stopFacility id="5699" x="-958004.5171373237" y="5034460.084227724" linkRefId="pt_4_metro" name="Bolhao" isBlocking="false"/>
+		<stopFacility id="5699.1" x="-958004.5171373237" y="5034460.084227724" linkRefId="pt_41_metro" name="Bolhao" stopAreaId="5699" isBlocking="false"/>
+		<stopFacility id="5700" x="-967529.9033255226" y="5039506.0136724925" linkRefId="pt_20_metro" name="Brito Capelo" isBlocking="false"/>
+		<stopFacility id="5700.1" x="-967529.9033255226" y="5039506.0136724925" linkRefId="pt_25_metro" name="Brito Capelo" stopAreaId="5700" isBlocking="false"/>
+		<stopFacility id="5701" x="-966389.769100818" y="5039031.223789443" linkRefId="pt_18_metro" name="Camara de Matosinhos" isBlocking="false"/>
+		<stopFacility id="5701.1" x="-966389.769100818" y="5039031.223789443" linkRefId="pt_27_metro" name="Camara de Matosinhos" stopAreaId="5701" isBlocking="false"/>
+		<stopFacility id="5702" x="-952221.9148685765" y="5039438.565467178" linkRefId="pt_168_metro" name="Campainha" isBlocking="false"/>
+		<stopFacility id="5702.1" x="-952221.9148685765" y="5039438.565467178" linkRefId="pt_181_metro" name="Campainha" stopAreaId="5702" isBlocking="false"/>
+		<stopFacility id="5703" x="-955816.4212262912" y="5034571.257716348" linkRefId="pt_1_metro" name="Campanha" isBlocking="false"/>
+		<stopFacility id="5703.1" x="-955816.4212262912" y="5034571.257716348" linkRefId="pt_44_metro" name="Campanha" stopAreaId="5703" isBlocking="false"/>
+		<stopFacility id="5703.2" x="-955816.4212262912" y="5034571.257716348" linkRefId="pt_103_metro" name="Campanha" stopAreaId="5703" isBlocking="false"/>
+		<stopFacility id="5704" x="-959824.0342143399" y="5035761.130442998" linkRefId="pt_7_metro" name="Carolina Michaelis" isBlocking="false"/>
+		<stopFacility id="5704.1" x="-959824.0342143399" y="5035761.130442998" linkRefId="pt_38_metro" name="Carolina Michaelis" stopAreaId="5704" isBlocking="false"/>
+		<stopFacility id="5705" x="-951069.6468193752" y="5038902.102715467" linkRefId="pt_166_metro" name="Carreira" isBlocking="false"/>
+		<stopFacility id="5705.1" x="-951069.6468193752" y="5038902.102715467" linkRefId="pt_183_metro" name="Carreira" stopAreaId="5705" isBlocking="false"/>
+		<stopFacility id="5706" x="-960495.9586607682" y="5036055.368518974" linkRefId="pt_8_metro" name="Casa da Musica" isBlocking="false"/>
+		<stopFacility id="5706.1" x="-960495.9586607682" y="5036055.368518974" linkRefId="pt_37_metro" name="Casa da Musica" stopAreaId="5706" isBlocking="false"/>
+		<stopFacility id="5707" x="-954969.7251793176" y="5036814.958059206" linkRefId="pt_173_metro" name="Contumil" isBlocking="false"/>
+		<stopFacility id="5707.1" x="-954969.7251793176" y="5036814.958059206" linkRefId="pt_176_metro" name="Contumil" stopAreaId="5707" isBlocking="false"/>
+		<stopFacility id="5708" x="-955390.1788960438" y="5036076.216882384" linkRefId="pt_0_metro" name="Estadio do Dragao" isBlocking="false"/>
+		<stopFacility id="5708.1" x="-955390.1788960438" y="5036076.216882384" linkRefId="pt_45_metro" name="Estadio do Dragao" stopAreaId="5708" isBlocking="false"/>
+		<stopFacility id="5708.2" x="-955390.1788960438" y="5036076.216882384" linkRefId="pt_174_metro" name="Estadio do Dragao" stopAreaId="5708" isBlocking="false"/>
+		<stopFacility id="5709" x="-964159.1491443024" y="5039781.284134618" linkRefId="pt_15_metro" name="Estadio do Mar" isBlocking="false"/>
+		<stopFacility id="5709.1" x="-964159.1491443024" y="5039781.284134618" linkRefId="pt_30_metro" name="Estadio do Mar" stopAreaId="5709" isBlocking="false"/>
+		<stopFacility id="5710" x="-950995.5080385068" y="5037641.3029543515" linkRefId="pt_164_metro" name="Fanzeres" isBlocking="false"/>
+		<stopFacility id="5710.1" x="-950995.5080385068" y="5037641.3029543515" linkRefId="pt_185_metro" name="Fanzeres" stopAreaId="5710" isBlocking="false"/>
+		<stopFacility id="5711" x="-961393.7503540159" y="5036790.854926254" linkRefId="pt_9_metro" name="Francos" isBlocking="false"/>
+		<stopFacility id="5711.1" x="-961393.7503540159" y="5036790.854926254" linkRefId="pt_36_metro" name="Francos" stopAreaId="5711" isBlocking="false"/>
+		<stopFacility id="5712" x="-956565.9353578024" y="5034003.576674609" linkRefId="pt_2_metro" name="Heroismo" isBlocking="false"/>
+		<stopFacility id="5712.1" x="-956565.9353578024" y="5034003.576674609" linkRefId="pt_43_metro" name="Heroismo" stopAreaId="5712" isBlocking="false"/>
+		<stopFacility id="5713" x="-959209.2166666886" y="5035542.601613203" linkRefId="pt_6_metro" name="Lapa" isBlocking="false"/>
+		<stopFacility id="5713.1" x="-959209.2166666886" y="5035542.601613203" linkRefId="pt_39_metro" name="Lapa" stopAreaId="5713" isBlocking="false"/>
+		<stopFacility id="5714" x="-953130.8385109035" y="5038300.595722657" linkRefId="pt_170_metro" name="Levada" isBlocking="false"/>
+		<stopFacility id="5714.1" x="-953130.8385109035" y="5038300.595722657" linkRefId="pt_179_metro" name="Levada" stopAreaId="5714" isBlocking="false"/>
+		<stopFacility id="5715" x="-967205.2956903696" y="5038953.277643135" linkRefId="pt_19_metro" name="Matosinhos Sul" isBlocking="false"/>
+		<stopFacility id="5715.1" x="-967205.2956903696" y="5038953.277643135" linkRefId="pt_26_metro" name="Matosinhos Sul" stopAreaId="5715" isBlocking="false"/>
+		<stopFacility id="5716" x="-967743.8593868273" y="5040034.965882784" linkRefId="pt_21_metro" name="Mercado" isBlocking="false"/>
+		<stopFacility id="5716.1" x="-967743.8593868273" y="5040034.965882784" linkRefId="pt_24_metro" name="Mercado" stopAreaId="5716" isBlocking="false"/>
+		<stopFacility id="5717" x="-954822.560812489" y="5037562.480688785" linkRefId="pt_172_metro" name="Nasoni" isBlocking="false"/>
+		<stopFacility id="5717.1" x="-954822.560812489" y="5037562.480688785" linkRefId="pt_177_metro" name="Nasoni" stopAreaId="5717" isBlocking="false"/>
+		<stopFacility id="5718" x="-954401.439178818" y="5038058.642783879" linkRefId="pt_171_metro" name="Nau Vitoria" isBlocking="false"/>
+		<stopFacility id="5718.1" x="-954401.439178818" y="5038058.642783879" linkRefId="pt_178_metro" name="Nau Vitoria" stopAreaId="5718" isBlocking="false"/>
+		<stopFacility id="5719" x="-965534.7240920349" y="5038795.908207928" linkRefId="pt_17_metro" name="Parque de Real" isBlocking="false"/>
+		<stopFacility id="5719.1" x="-965534.7240920349" y="5038795.908207928" linkRefId="pt_28_metro" name="Parque de Real" stopAreaId="5719" isBlocking="false"/>
+		<stopFacility id="5720" x="-964720.5333363728" y="5038984.337702168" linkRefId="pt_16_metro" name="Hospital Pedro Hispano" isBlocking="false"/>
+		<stopFacility id="5720.1" x="-964720.5333363728" y="5038984.337702168" linkRefId="pt_29_metro" name="Hospital Pedro Hispano" stopAreaId="5720" isBlocking="false"/>
+		<stopFacility id="5721" x="-961996.9906746246" y="5037887.090571553" linkRefId="pt_10_metro" name="Ramalde" isBlocking="false"/>
+		<stopFacility id="5721.1" x="-961996.9906746246" y="5037887.090571553" linkRefId="pt_35_metro" name="Ramalde" stopAreaId="5721" isBlocking="false"/>
+		<stopFacility id="5722" x="-952924.2295359913" y="5038842.497576954" linkRefId="pt_169_metro" name="Rio Tinto" isBlocking="false"/>
+		<stopFacility id="5722.1" x="-952924.2295359913" y="5038842.497576954" linkRefId="pt_180_metro" name="Rio Tinto" stopAreaId="5722" isBlocking="false"/>
+		<stopFacility id="5723" x="-966823.4698369486" y="5040141.617744464" linkRefId="pt_22_metro" name="Senhor de Matosinhos" isBlocking="false"/>
+		<stopFacility id="5723.1" x="-966823.4698369486" y="5040141.617744464" linkRefId="pt_23_metro" name="Senhor de Matosinhos" stopAreaId="5723" isBlocking="false"/>
+		<stopFacility id="5724" x="-963410.748207699" y="5040126.233769602" linkRefId="pt_13_metro" name="Senhora da Hora" isBlocking="false"/>
+		<stopFacility id="5724.1" x="-963410.748207699" y="5040126.233769602" linkRefId="pt_32_metro" name="Senhora da Hora" stopAreaId="5724" isBlocking="false"/>
+		<stopFacility id="5724.2" x="-963410.748207699" y="5040126.233769602" linkRefId="pt_90_metro" name="Senhora da Hora" stopAreaId="5724" isBlocking="false"/>
+		<stopFacility id="5724.3" x="-963410.748207699" y="5040126.233769602" linkRefId="pt_102_metro" name="Senhora da Hora" stopAreaId="5724" isBlocking="false"/>
+		<stopFacility id="5724.4" x="-963410.748207699" y="5040126.233769602" linkRefId="pt_175_metro" name="Senhora da Hora" stopAreaId="5724" isBlocking="false"/>
+		<stopFacility id="5725" x="-963152.8209475311" y="5039286.217082819" linkRefId="pt_12_metro" name="Sete Bicas" isBlocking="false"/>
+		<stopFacility id="5725.1" x="-963152.8209475311" y="5039286.217082819" linkRefId="pt_33_metro" name="Sete Bicas" stopAreaId="5725" isBlocking="false"/>
+		<stopFacility id="5726" x="-958382.7807670394" y="5034828.499134707" linkRefId="pt_5_metro" name="Trindade" isBlocking="false"/>
+		<stopFacility id="5726.1" x="-958382.7807670394" y="5034828.499134707" linkRefId="pt_40_metro" name="Trindade" stopAreaId="5726" isBlocking="false"/>
+		<stopFacility id="5726.2" x="-958382.7807670394" y="5034828.499134707" linkRefId="pt_134_metro" name="Trindade" stopAreaId="5726" isBlocking="false"/>
+		<stopFacility id="5726.3" x="-958382.7807670394" y="5034828.499134707" linkRefId="pt_149_metro" name="Trindade" stopAreaId="5726" isBlocking="false"/>
+		<stopFacility id="5726.4" x="-958382.7807670394" y="5034828.499134707" linkRefId="pt_163_metro" name="Trindade" stopAreaId="5726" isBlocking="false"/>
+		<stopFacility id="5727" x="-964142.2285817019" y="5040442.201848638" linkRefId="pt_14_metro" name="Vasco da Gama" isBlocking="false"/>
+		<stopFacility id="5727.1" x="-964142.2285817019" y="5040442.201848638" linkRefId="pt_31_metro" name="Vasco da Gama" stopAreaId="5727" isBlocking="false"/>
+		<stopFacility id="5728" x="-950886.8602154927" y="5038211.711330859" linkRefId="pt_165_metro" name="Venda Nova" isBlocking="false"/>
+		<stopFacility id="5728.1" x="-950886.8602154927" y="5038211.711330859" linkRefId="pt_184_metro" name="Venda Nova" stopAreaId="5728" isBlocking="false"/>
+		<stopFacility id="5729" x="-962523.7545050582" y="5038521.996829828" linkRefId="pt_11_metro" name="Via Rapida Viso" isBlocking="false"/>
+		<stopFacility id="5729.1" x="-962523.7545050582" y="5038521.996829828" linkRefId="pt_34_metro" name="Via Rapida Viso" stopAreaId="5729" isBlocking="false"/>
+		<stopFacility id="5730" x="-973513.9938726057" y="5066276.117318926" linkRefId="pt_64_metro" name="Alto de Pega" isBlocking="false"/>
+		<stopFacility id="5730.1" x="-973513.9938726057" y="5066276.117318926" linkRefId="pt_71_metro" name="Alto de Pega" stopAreaId="5730" isBlocking="false"/>
+		<stopFacility id="5731" x="-971324.3394887021" y="5062681.280589737" linkRefId="pt_60_metro" name="Arvore" isBlocking="false"/>
+		<stopFacility id="5731.1" x="-971324.3394887021" y="5062681.280589737" linkRefId="pt_75_metro" name="Arvore" stopAreaId="5731" isBlocking="false"/>
+		<stopFacility id="5732" x="-971610.0966215685" y="5063506.131383986" linkRefId="pt_61_metro" name="Azurara" isBlocking="false"/>
+		<stopFacility id="5732.1" x="-971610.0966215685" y="5063506.131383986" linkRefId="pt_74_metro" name="Azurara" stopAreaId="5732" isBlocking="false"/>
+		<stopFacility id="5733" x="-963647.5247646165" y="5046772.019088163" linkRefId="pt_49_metro" name="Crestins" isBlocking="false"/>
+		<stopFacility id="5733.1" x="-963647.5247646165" y="5046772.019088163" linkRefId="pt_86_metro" name="Crestins" stopAreaId="5733" isBlocking="false"/>
+		<stopFacility id="5734" x="-963532.4204111362" y="5041930.023437694" linkRefId="pt_47_metro" name="Custoias" isBlocking="false"/>
+		<stopFacility id="5734.1" x="-963532.4204111362" y="5041930.023437694" linkRefId="pt_88_metro" name="Custoias" stopAreaId="5734" isBlocking="false"/>
+		<stopFacility id="5735" x="-970559.1293089893" y="5059837.916629487" linkRefId="pt_58_metro" name="Espaco Natureza" isBlocking="false"/>
+		<stopFacility id="5735.1" x="-970559.1293089893" y="5059837.916629487" linkRefId="pt_77_metro" name="Espaco Natureza" stopAreaId="5735" isBlocking="false"/>
+		<stopFacility id="5736" x="-963419.0971695087" y="5044263.9243642995" linkRefId="pt_48_metro" name="Esposade" isBlocking="false"/>
+		<stopFacility id="5736.1" x="-963419.0971695087" y="5044263.9243642995" linkRefId="pt_87_metro" name="Esposade" stopAreaId="5736" isBlocking="false"/>
+		<stopFacility id="5737" x="-963556.0201431842" y="5041022.686926141" linkRefId="pt_46_metro" name="Fonte do Cuco" isBlocking="false"/>
+		<stopFacility id="5737.1" x="-963556.0201431842" y="5041022.686926141" linkRefId="pt_89_metro" name="Fonte do Cuco" stopAreaId="5737" isBlocking="false"/>
+		<stopFacility id="5737.2" x="-963556.0201431842" y="5041022.686926141" linkRefId="pt_124_metro" name="Fonte do Cuco" stopAreaId="5737" isBlocking="false"/>
+		<stopFacility id="5739" x="-964919.3499469296" y="5050020.217364927" linkRefId="pt_52_metro" name="Lidador" isBlocking="false"/>
+		<stopFacility id="5739.1" x="-964919.3499469296" y="5050020.217364927" linkRefId="pt_83_metro" name="Lidador" stopAreaId="5739" isBlocking="false"/>
+		<stopFacility id="5740" x="-970061.3085461617" y="5058927.120154919" linkRefId="pt_57_metro" name="Mindelo" isBlocking="false"/>
+		<stopFacility id="5740.1" x="-970061.3085461617" y="5058927.120154919" linkRefId="pt_78_metro" name="Mindelo" stopAreaId="5740" isBlocking="false"/>
+		<stopFacility id="5740.2" x="-970061.3085461617" y="5058927.120154919" linkRefId="pt_100_metro" name="Mindelo" stopAreaId="5740" isBlocking="false"/>
+		<stopFacility id="5741" x="-968394.7444494956" y="5055756.972975407" linkRefId="pt_55_metro" name="Modivas Centro" isBlocking="false"/>
+		<stopFacility id="5741.1" x="-968394.7444494956" y="5055756.972975407" linkRefId="pt_80_metro" name="Modivas Centro" stopAreaId="5741" isBlocking="false"/>
+		<stopFacility id="5742" x="-968925.2931426163" y="5056765.711745952" linkRefId="pt_56_metro" name="VC Fashion Outlet Modivas" isBlocking="false"/>
+		<stopFacility id="5742.1" x="-968925.2931426163" y="5056765.711745952" linkRefId="pt_79_metro" name="VC Fashion Outlet Modivas" stopAreaId="5742" isBlocking="false"/>
+		<stopFacility id="5742.2" x="-968925.2931426163" y="5056765.711745952" linkRefId="pt_92_metro" name="VC Fashion Outlet Modivas" stopAreaId="5742" isBlocking="false"/>
+		<stopFacility id="5743" x="-967778.5910679548" y="5054507.604529423" linkRefId="pt_54_metro" name="Modivas Sul" isBlocking="false"/>
+		<stopFacility id="5743.1" x="-967778.5910679548" y="5054507.604529423" linkRefId="pt_81_metro" name="Modivas Sul" stopAreaId="5743" isBlocking="false"/>
+		<stopFacility id="5744" x="-964227.9445896125" y="5048729.09821532" linkRefId="pt_51_metro" name="Pedras Rubras" isBlocking="false"/>
+		<stopFacility id="5744.1" x="-964227.9445896125" y="5048729.09821532" linkRefId="pt_84_metro" name="Pedras Rubras" stopAreaId="5744" isBlocking="false"/>
+		<stopFacility id="5744.2" x="-964227.9445896125" y="5048729.09821532" linkRefId="pt_91_metro" name="Pedras Rubras" stopAreaId="5744" isBlocking="false"/>
+		<stopFacility id="5744.3" x="-964227.9445896125" y="5048729.09821532" linkRefId="pt_101_metro" name="Pedras Rubras" stopAreaId="5744" isBlocking="false"/>
+		<stopFacility id="5745" x="-973996.3412262133" y="5066915.412104909" linkRefId="pt_65_metro" name="Portas Fronhas" isBlocking="false"/>
+		<stopFacility id="5745.1" x="-973996.3412262133" y="5066915.412104909" linkRefId="pt_70_metro" name="Portas Fronhas" stopAreaId="5745" isBlocking="false"/>
+		<stopFacility id="5745.2" x="-973996.3412262133" y="5066915.412104909" linkRefId="pt_95_metro" name="Portas Fronhas" stopAreaId="5745" isBlocking="false"/>
+		<stopFacility id="5745.3" x="-973996.3412262133" y="5066915.412104909" linkRefId="pt_97_metro" name="Portas Fronhas" stopAreaId="5745" isBlocking="false"/>
+		<stopFacility id="5746" x="-974945.1172462442" y="5068276.168204847" linkRefId="pt_67_metro" name="Povoa de Varzim" isBlocking="false"/>
+		<stopFacility id="5746.1" x="-974945.1172462442" y="5068276.168204847" linkRefId="pt_68_metro" name="Povoa de Varzim" stopAreaId="5746" isBlocking="false"/>
+		<stopFacility id="5746.2" x="-974945.1172462442" y="5068276.168204847" linkRefId="pt_96_metro" name="Povoa de Varzim" stopAreaId="5746" isBlocking="false"/>
+		<stopFacility id="5747" x="-972467.7019786399" y="5064695.119960402" linkRefId="pt_62_metro" name="Santa Clara" isBlocking="false"/>
+		<stopFacility id="5747.1" x="-972467.7019786399" y="5064695.119960402" linkRefId="pt_73_metro" name="Santa Clara" stopAreaId="5747" isBlocking="false"/>
+		<stopFacility id="5748" x="-974504.4033821936" y="5067583.379484052" linkRefId="pt_66_metro" name="Sao Bras" isBlocking="false"/>
+		<stopFacility id="5748.1" x="-974504.4033821936" y="5067583.379484052" linkRefId="pt_69_metro" name="Sao Bras" stopAreaId="5748" isBlocking="false"/>
+		<stopFacility id="5749" x="-970786.2210702074" y="5061765.471827959" linkRefId="pt_59_metro" name="Varziela" isBlocking="false"/>
+		<stopFacility id="5749.1" x="-970786.2210702074" y="5061765.471827959" linkRefId="pt_76_metro" name="Varziela" stopAreaId="5749" isBlocking="false"/>
+		<stopFacility id="5749.2" x="-970786.2210702074" y="5061765.471827959" linkRefId="pt_93_metro" name="Varziela" stopAreaId="5749" isBlocking="false"/>
+		<stopFacility id="5749.3" x="-970786.2210702074" y="5061765.471827959" linkRefId="pt_99_metro" name="Varziela" stopAreaId="5749" isBlocking="false"/>
+		<stopFacility id="5750" x="-963827.7510202108" y="5047546.661244753" linkRefId="pt_50_metro" name="Verdes" isBlocking="false"/>
+		<stopFacility id="5750.1" x="-963827.7510202108" y="5047546.661244753" linkRefId="pt_85_metro" name="Verdes" stopAreaId="5750" isBlocking="false"/>
+		<stopFacility id="5750.2" x="-963827.7510202108" y="5047546.661244753" linkRefId="pt_162_metro" name="Verdes" stopAreaId="5750" isBlocking="false"/>
+		<stopFacility id="5752" x="-972917.8779994078" y="5065453.4027943155" linkRefId="pt_63_metro" name="Vila do Conde" isBlocking="false"/>
+		<stopFacility id="5752.1" x="-972917.8779994078" y="5065453.4027943155" linkRefId="pt_72_metro" name="Vila do Conde" stopAreaId="5752" isBlocking="false"/>
+		<stopFacility id="5752.2" x="-972917.8779994078" y="5065453.4027943155" linkRefId="pt_94_metro" name="Vila do Conde" stopAreaId="5752" isBlocking="false"/>
+		<stopFacility id="5752.3" x="-972917.8779994078" y="5065453.4027943155" linkRefId="pt_98_metro" name="Vila do Conde" stopAreaId="5752" isBlocking="false"/>
+		<stopFacility id="5753" x="-966199.19013258" y="5052292.53181052" linkRefId="pt_53_metro" name="Vilar Pinheiro" isBlocking="false"/>
+		<stopFacility id="5753.1" x="-966199.19013258" y="5052292.53181052" linkRefId="pt_82_metro" name="Vilar Pinheiro" stopAreaId="5753" isBlocking="false"/>
+		<stopFacility id="5754" x="-961909.2709158796" y="5044388.233354586" linkRefId="pt_106_metro" name="Araujo" isBlocking="false"/>
+		<stopFacility id="5754.1" x="-961909.2709158796" y="5044388.233354586" linkRefId="pt_121_metro" name="Araujo" stopAreaId="5754" isBlocking="false"/>
+		<stopFacility id="5755" x="-962880.5334730508" y="5041989.795532294" linkRefId="pt_104_metro" name="Candido dos Reis" isBlocking="false"/>
+		<stopFacility id="5755.1" x="-962880.5334730508" y="5041989.795532294" linkRefId="pt_123_metro" name="Candido dos Reis" stopAreaId="5755" isBlocking="false"/>
+		<stopFacility id="5756" x="-959238.4936927675" y="5051174.6712003155" linkRefId="pt_112_metro" name="Castelo da Maia" isBlocking="false"/>
+		<stopFacility id="5756.1" x="-959238.4936927675" y="5051174.6712003155" linkRefId="pt_115_metro" name="Castelo da Maia" stopAreaId="5756" isBlocking="false"/>
+		<stopFacility id="5757" x="-961688.6356851273" y="5045192.432702551" linkRefId="pt_107_metro" name="Custio" isBlocking="false"/>
+		<stopFacility id="5757.1" x="-961688.6356851273" y="5045192.432702551" linkRefId="pt_120_metro" name="Custio" stopAreaId="5757" isBlocking="false"/>
+		<stopFacility id="5760" x="-960012.2754732713" y="5047011.9694499" linkRefId="pt_109_metro" name="Forum Maia" isBlocking="false"/>
+		<stopFacility id="5760.1" x="-960012.2754732713" y="5047011.9694499" linkRefId="pt_118_metro" name="Forum Maia" stopAreaId="5760" isBlocking="false"/>
+		<stopFacility id="5760.2" x="-960012.2754732713" y="5047011.9694499" linkRefId="pt_125_metro" name="Forum Maia" stopAreaId="5760" isBlocking="false"/>
+		<stopFacility id="5761" x="-959060.4938269889" y="5052086.366558188" linkRefId="pt_113_metro" name="ISMAI" isBlocking="false"/>
+		<stopFacility id="5761.1" x="-959060.4938269889" y="5052086.366558188" linkRefId="pt_114_metro" name="ISMAI" stopAreaId="5761" isBlocking="false"/>
+		<stopFacility id="5762" x="-960498.8529675287" y="5049816.469680521" linkRefId="pt_111_metro" name="Mandim" isBlocking="false"/>
+		<stopFacility id="5762.1" x="-960498.8529675287" y="5049816.469680521" linkRefId="pt_116_metro" name="Mandim" stopAreaId="5762" isBlocking="false"/>
+		<stopFacility id="5763" x="-960341.7811660194" y="5046180.828101804" linkRefId="pt_108_metro" name="Parque da Maia" isBlocking="false"/>
+		<stopFacility id="5763.1" x="-960341.7811660194" y="5046180.828101804" linkRefId="pt_119_metro" name="Parque da Maia" stopAreaId="5763" isBlocking="false"/>
+		<stopFacility id="5764" x="-962593.2178673133" y="5043104.819869117" linkRefId="pt_105_metro" name="Pias" isBlocking="false"/>
+		<stopFacility id="5764.1" x="-962593.2178673133" y="5043104.819869117" linkRefId="pt_122_metro" name="Pias" stopAreaId="5764" isBlocking="false"/>
+		<stopFacility id="5765" x="-960526.3488817548" y="5048393.761168725" linkRefId="pt_110_metro" name="Zona Industrial" isBlocking="false"/>
+		<stopFacility id="5765.1" x="-960526.3488817548" y="5048393.761168725" linkRefId="pt_117_metro" name="Zona Industrial" stopAreaId="5765" isBlocking="false"/>
+		<stopFacility id="5766" x="-958566.012648885" y="5034282.091031321" linkRefId="pt_133_metro" name="Aliados" isBlocking="false"/>
+		<stopFacility id="5766.1" x="-958566.012648885" y="5034282.091031321" linkRefId="pt_150_metro" name="Aliados" stopAreaId="5766" isBlocking="false"/>
+		<stopFacility id="5767" x="-958028.4508278444" y="5031486.22314686" linkRefId="pt_129_metro" name="Camara de Gaia" isBlocking="false"/>
+		<stopFacility id="5767.1" x="-958028.4508278444" y="5031486.22314686" linkRefId="pt_154_metro" name="Camara de Gaia" stopAreaId="5767" isBlocking="false"/>
+		<stopFacility id="5768" x="-957176.6340842942" y="5036754.182789902" linkRefId="pt_137_metro" name="Combatentes" isBlocking="false"/>
+		<stopFacility id="5768.1" x="-957176.6340842942" y="5036754.182789902" linkRefId="pt_146_metro" name="Combatentes" stopAreaId="5768" isBlocking="false"/>
+		<stopFacility id="5769" x="-958041.1412497947" y="5030007.540182256" linkRefId="pt_127_metro" name="Dom Joao II" isBlocking="false"/>
+		<stopFacility id="5769.1" x="-958041.1412497947" y="5030007.540182256" linkRefId="pt_156_metro" name="Dom Joao II" stopAreaId="5769" isBlocking="false"/>
+		<stopFacility id="5770" x="-958365.192287494" y="5035559.161135466" linkRefId="pt_135_metro" name="Faria Guimaraes" isBlocking="false"/>
+		<stopFacility id="5770.1" x="-958365.192287494" y="5035559.161135466" linkRefId="pt_148_metro" name="Faria Guimaraes" stopAreaId="5770" isBlocking="false"/>
+		<stopFacility id="5771" x="-958181.2924887035" y="5032107.703781711" linkRefId="pt_130_metro" name="General Torres" isBlocking="false"/>
+		<stopFacility id="5771.1" x="-958181.2924887035" y="5032107.703781711" linkRefId="pt_153_metro" name="General Torres" stopAreaId="5771" isBlocking="false"/>
+		<stopFacility id="5772" x="-957850.8962400291" y="5039113.311965063" linkRefId="pt_140_metro" name="I.P.O." isBlocking="false"/>
+		<stopFacility id="5772.1" x="-957850.8962400291" y="5039113.311965063" linkRefId="pt_143_metro" name="I.P.O." stopAreaId="5772" isBlocking="false"/>
+		<stopFacility id="5773" x="-958310.0891395515" y="5032664.631567769" linkRefId="pt_131_metro" name="Jardim do Morro" isBlocking="false"/>
+		<stopFacility id="5773.1" x="-958310.0891395515" y="5032664.631567769" linkRefId="pt_152_metro" name="Jardim do Morro" stopAreaId="5773" isBlocking="false"/>
+		<stopFacility id="5774" x="-957974.0155968465" y="5030953.008253726" linkRefId="pt_128_metro" name="Joao de Deus" isBlocking="false"/>
+		<stopFacility id="5774.1" x="-957974.0155968465" y="5030953.008253726" linkRefId="pt_155_metro" name="Joao de Deus" stopAreaId="5774" isBlocking="false"/>
+		<stopFacility id="5775" x="-957823.1776868217" y="5036136.396452466" linkRefId="pt_136_metro" name="Marques" isBlocking="false"/>
+		<stopFacility id="5775.1" x="-957823.1776868217" y="5036136.396452466" linkRefId="pt_147_metro" name="Marques" stopAreaId="5775" isBlocking="false"/>
+		<stopFacility id="5776" x="-957749.150225444" y="5038077.129194968" linkRefId="pt_139_metro" name="Polo Universitario" isBlocking="false"/>
+		<stopFacility id="5776.1" x="-957749.150225444" y="5038077.129194968" linkRefId="pt_144_metro" name="Polo Universitario" stopAreaId="5776" isBlocking="false"/>
+		<stopFacility id="5777" x="-957207.8035417163" y="5037402.32410187" linkRefId="pt_138_metro" name="Salgueiros" isBlocking="false"/>
+		<stopFacility id="5777.1" x="-957207.8035417163" y="5037402.32410187" linkRefId="pt_145_metro" name="Salgueiros" stopAreaId="5777" isBlocking="false"/>
+		<stopFacility id="5778" x="-958551.5411150821" y="5033743.548466241" linkRefId="pt_132_metro" name="Sao Bento" isBlocking="false"/>
+		<stopFacility id="5778.1" x="-958551.5411150821" y="5033743.548466241" linkRefId="pt_151_metro" name="Sao Bento" stopAreaId="5778" isBlocking="false"/>
+		<stopFacility id="5782" x="-965077.8689018193" y="5047373.608534614" linkRefId="pt_159_metro" name="Aeroporto" isBlocking="false"/>
+		<stopFacility id="5782.1" x="-965077.8689018193" y="5047373.608534614" linkRefId="pt_160_metro" name="Aeroporto" stopAreaId="5782" isBlocking="false"/>
+		<stopFacility id="5783" x="-964606.5421778006" y="5047439.779735808" linkRefId="pt_158_metro" name="Botica" isBlocking="false"/>
+		<stopFacility id="5783.1" x="-964606.5421778006" y="5047439.779735808" linkRefId="pt_161_metro" name="Botica" stopAreaId="5783" isBlocking="false"/>
+		<stopFacility id="5791" x="-957596.9764815297" y="5039410.1663633445" linkRefId="pt_141_metro" name="Hospital de Sao Joao" isBlocking="false"/>
+		<stopFacility id="5791.1" x="-957596.9764815297" y="5039410.1663633445" linkRefId="pt_142_metro" name="Hospital de Sao Joao" stopAreaId="5791" isBlocking="false"/>
+		<stopFacility id="5792" x="-958077.3200843026" y="5029399.935706173" linkRefId="pt_126_metro" name="Santo Ovidio" isBlocking="false"/>
+		<stopFacility id="5792.1" x="-958077.3200843026" y="5029399.935706173" linkRefId="pt_157_metro" name="Santo Ovidio" stopAreaId="5792" isBlocking="false"/>
+	
+	</transitStops>
+	<transitLine id="A---A">
+		<attributes>
+			<attribute name="gtfs_agency_id" class="java.lang.String">NONE</attribute>
+			<attribute name="gtfs_route_short_name" class="java.lang.String">A</attribute>
+			<attribute name="gtfs_route_type" class="java.lang.String">1</attribute>
+		</attributes>
+
+		<transitRoute id="A---A_0">
+			<transportMode>subway</transportMode>
+			<routeProfile>
+				<stop refId="5708" arrivalOffset="00:00:00" departureOffset="00:00:00" awaitDeparture="true"/>
+				<stop refId="5703" arrivalOffset="00:02:00" departureOffset="00:02:00" awaitDeparture="true"/>
+				<stop refId="5712" arrivalOffset="00:04:00" departureOffset="00:04:00" awaitDeparture="true"/>
+				<stop refId="5697" arrivalOffset="00:06:00" departureOffset="00:06:00" awaitDeparture="true"/>
+				<stop refId="5699" arrivalOffset="00:07:00" departureOffset="00:07:00" awaitDeparture="true"/>
+				<stop refId="5726" arrivalOffset="00:08:00" departureOffset="00:08:00" awaitDeparture="true"/>
+				<stop refId="5713" arrivalOffset="00:11:00" departureOffset="00:11:00" awaitDeparture="true"/>
+				<stop refId="5704" arrivalOffset="00:12:00" departureOffset="00:12:00" awaitDeparture="true"/>
+				<stop refId="5706" arrivalOffset="00:13:00" departureOffset="00:13:00" awaitDeparture="true"/>
+				<stop refId="5711" arrivalOffset="00:15:00" departureOffset="00:15:00" awaitDeparture="true"/>
+				<stop refId="5721" arrivalOffset="00:17:00" departureOffset="00:17:00" awaitDeparture="true"/>
+				<stop refId="5729" arrivalOffset="00:19:00" departureOffset="00:19:00" awaitDeparture="true"/>
+				<stop refId="5725" arrivalOffset="00:20:00" departureOffset="00:20:00" awaitDeparture="true"/>
+				<stop refId="5724" arrivalOffset="00:22:00" departureOffset="00:22:00" awaitDeparture="true"/>
+				<stop refId="5727" arrivalOffset="00:25:00" departureOffset="00:25:00" awaitDeparture="true"/>
+				<stop refId="5709" arrivalOffset="00:27:00" departureOffset="00:27:00" awaitDeparture="true"/>
+				<stop refId="5720" arrivalOffset="00:29:00" departureOffset="00:29:00" awaitDeparture="true"/>
+				<stop refId="5719" arrivalOffset="00:31:00" departureOffset="00:31:00" awaitDeparture="true"/>
+				<stop refId="5701" arrivalOffset="00:34:00" departureOffset="00:34:00" awaitDeparture="true"/>
+				<stop refId="5715" arrivalOffset="00:35:00" departureOffset="00:35:00" awaitDeparture="true"/>
+				<stop refId="5700" arrivalOffset="00:37:00" departureOffset="00:37:00" awaitDeparture="true"/>
+				<stop refId="5716" arrivalOffset="00:39:00" departureOffset="00:39:00" awaitDeparture="true"/>
+				<stop refId="5723" arrivalOffset="00:41:00" departureOffset="00:41:00" awaitDeparture="true"/>
+			</routeProfile>
+			<route>
+				<link refId="pt_0_metro"/>
+				<link refId="pt_1_metro"/>
+				<link refId="pt_2_metro"/>
+				<link refId="pt_3_metro"/>
+				<link refId="pt_4_metro"/>
+				<link refId="pt_5_metro"/>
+				<link refId="pt_6_metro"/>
+				<link refId="pt_7_metro"/>
+				<link refId="pt_8_metro"/>
+				<link refId="pt_9_metro"/>
+				<link refId="pt_10_metro"/>
+				<link refId="pt_11_metro"/>
+				<link refId="pt_12_metro"/>
+				<link refId="pt_13_metro"/>
+				<link refId="pt_14_metro"/>
+				<link refId="pt_15_metro"/>
+				<link refId="pt_16_metro"/>
+				<link refId="pt_17_metro"/>
+				<link refId="pt_18_metro"/>
+				<link refId="pt_19_metro"/>
+				<link refId="pt_20_metro"/>
+				<link refId="pt_21_metro"/>
+				<link refId="pt_22_metro"/>
+			</route>
+			<departures>
+				<departure id="AU0_0" departureTime="06:19:00" vehicleRefId="tr_0_metro"/>
+				<departure id="AU10_0" departureTime="08:51:00" vehicleRefId="tr_1_metro"/>
+				<departure id="AU153_0" departureTime="07:02:00" vehicleRefId="tr_2_metro"/>
+				<departure id="AU158_0" departureTime="24:40:00" vehicleRefId="tr_3_metro"/>
+				<departure id="AU15_0" departureTime="09:51:00" vehicleRefId="tr_4_metro"/>
+				<departure id="AU17_0" departureTime="10:19:00" vehicleRefId="tr_5_metro"/>
+				<departure id="AU1_0" departureTime="06:48:00" vehicleRefId="tr_6_metro"/>
+				<departure id="AU20_0" departureTime="10:56:00" vehicleRefId="tr_7_metro"/>
+				<departure id="AU24_0" departureTime="11:56:00" vehicleRefId="tr_8_metro"/>
+				<departure id="AU27_0" departureTime="12:41:00" vehicleRefId="tr_9_metro"/>
+				<departure id="AU28_0" departureTime="12:56:00" vehicleRefId="tr_10_metro"/>
+				<departure id="AU2_0" departureTime="07:15:00" vehicleRefId="tr_11_metro"/>
+				<departure id="AU39_0" departureTime="15:42:00" vehicleRefId="tr_12_metro"/>
+				<departure id="AU3_0" departureTime="07:26:00" vehicleRefId="tr_13_metro"/>
+				<departure id="AU40_0" departureTime="15:56:00" vehicleRefId="tr_14_metro"/>
+				<departure id="AU42_0" departureTime="16:26:00" vehicleRefId="tr_15_metro"/>
+				<departure id="AU43_0" departureTime="16:38:00" vehicleRefId="tr_16_metro"/>
+				<departure id="AU44_0" departureTime="16:51:00" vehicleRefId="tr_17_metro"/>
+				<departure id="AU45_0" departureTime="17:03:00" vehicleRefId="tr_18_metro"/>
+				<departure id="AU46_0" departureTime="17:15:00" vehicleRefId="tr_19_metro"/>
+				<departure id="AU48_0" departureTime="17:38:00" vehicleRefId="tr_20_metro"/>
+				<departure id="AU49_0" departureTime="17:51:00" vehicleRefId="tr_21_metro"/>
+				<departure id="AU50_0" departureTime="18:03:00" vehicleRefId="tr_22_metro"/>
+				<departure id="AU51_0" departureTime="18:15:00" vehicleRefId="tr_23_metro"/>
+				<departure id="AU53_0" departureTime="18:38:00" vehicleRefId="tr_24_metro"/>
+				<departure id="AU54_0" departureTime="18:51:00" vehicleRefId="tr_25_metro"/>
+				<departure id="AU55_0" departureTime="19:03:00" vehicleRefId="tr_26_metro"/>
+				<departure id="AU56_0" departureTime="19:15:00" vehicleRefId="tr_27_metro"/>
+				<departure id="AU59_0" departureTime="19:50:00" vehicleRefId="tr_28_metro"/>
+				<departure id="AU5_0" departureTime="07:51:00" vehicleRefId="tr_29_metro"/>
+				<departure id="AU60_0" departureTime="20:04:00" vehicleRefId="tr_30_metro"/>
+				<departure id="AU61_0" departureTime="20:15:00" vehicleRefId="tr_31_metro"/>
+				<departure id="AU62_0" departureTime="20:28:00" vehicleRefId="tr_32_metro"/>
+				<departure id="AU64_0" departureTime="20:55:00" vehicleRefId="tr_33_metro"/>
+				<departure id="AU6_0" departureTime="08:02:00" vehicleRefId="tr_34_metro"/>
+				<departure id="AU9_0" departureTime="08:39:00" vehicleRefId="tr_35_metro"/>
+			</departures>
+		</transitRoute>
+
+		<transitRoute id="A---A_1">
+			<transportMode>subway</transportMode>
+			<routeProfile>
+				<stop refId="5723.1" arrivalOffset="00:00:00" departureOffset="00:00:00" awaitDeparture="true"/>
+				<stop refId="5716.1" arrivalOffset="00:01:00" departureOffset="00:01:00" awaitDeparture="true"/>
+				<stop refId="5700.1" arrivalOffset="00:03:00" departureOffset="00:03:00" awaitDeparture="true"/>
+				<stop refId="5715.1" arrivalOffset="00:05:00" departureOffset="00:05:00" awaitDeparture="true"/>
+				<stop refId="5701.1" arrivalOffset="00:07:00" departureOffset="00:07:00" awaitDeparture="true"/>
+				<stop refId="5719.1" arrivalOffset="00:09:00" departureOffset="00:09:00" awaitDeparture="true"/>
+				<stop refId="5720.1" arrivalOffset="00:11:00" departureOffset="00:11:00" awaitDeparture="true"/>
+				<stop refId="5709.1" arrivalOffset="00:13:00" departureOffset="00:13:00" awaitDeparture="true"/>
+				<stop refId="5727.1" arrivalOffset="00:16:00" departureOffset="00:16:00" awaitDeparture="true"/>
+				<stop refId="5724.1" arrivalOffset="00:19:00" departureOffset="00:19:00" awaitDeparture="true"/>
+				<stop refId="5725.1" arrivalOffset="00:21:00" departureOffset="00:21:00" awaitDeparture="true"/>
+				<stop refId="5729.1" arrivalOffset="00:22:00" departureOffset="00:22:00" awaitDeparture="true"/>
+				<stop refId="5721.1" arrivalOffset="00:24:00" departureOffset="00:24:00" awaitDeparture="true"/>
+				<stop refId="5711.1" arrivalOffset="00:25:00" departureOffset="00:25:00" awaitDeparture="true"/>
+				<stop refId="5706.1" arrivalOffset="00:27:00" departureOffset="00:27:00" awaitDeparture="true"/>
+				<stop refId="5704.1" arrivalOffset="00:29:00" departureOffset="00:29:00" awaitDeparture="true"/>
+				<stop refId="5713.1" arrivalOffset="00:30:00" departureOffset="00:30:00" awaitDeparture="true"/>
+				<stop refId="5726.1" arrivalOffset="00:32:00" departureOffset="00:32:00" awaitDeparture="true"/>
+				<stop refId="5699.1" arrivalOffset="00:33:00" departureOffset="00:33:00" awaitDeparture="true"/>
+				<stop refId="5697.1" arrivalOffset="00:35:00" departureOffset="00:35:00" awaitDeparture="true"/>
+				<stop refId="5712.1" arrivalOffset="00:36:00" departureOffset="00:36:00" awaitDeparture="true"/>
+				<stop refId="5703.1" arrivalOffset="00:38:00" departureOffset="00:38:00" awaitDeparture="true"/>
+				<stop refId="5708.1" arrivalOffset="00:41:00" departureOffset="00:41:00" awaitDeparture="true"/>
+			</routeProfile>
+			<route>
+				<link refId="pt_23_metro"/>
+				<link refId="pt_24_metro"/>
+				<link refId="pt_25_metro"/>
+				<link refId="pt_26_metro"/>
+				<link refId="pt_27_metro"/>
+				<link refId="pt_28_metro"/>
+				<link refId="pt_29_metro"/>
+				<link refId="pt_30_metro"/>
+				<link refId="pt_31_metro"/>
+				<link refId="pt_32_metro"/>
+				<link refId="pt_33_metro"/>
+				<link refId="pt_34_metro"/>
+				<link refId="pt_35_metro"/>
+				<link refId="pt_36_metro"/>
+				<link refId="pt_37_metro"/>
+				<link refId="pt_38_metro"/>
+				<link refId="pt_39_metro"/>
+				<link refId="pt_40_metro"/>
+				<link refId="pt_41_metro"/>
+				<link refId="pt_42_metro"/>
+				<link refId="pt_43_metro"/>
+				<link refId="pt_44_metro"/>
+				<link refId="pt_45_metro"/>
+			</route>
+			<departures>
+				<departure id="AU100_0" departureTime="11:24:00" vehicleRefId="tr_36_metro"/>
+				<departure id="AU103_0" departureTime="12:09:00" vehicleRefId="tr_37_metro"/>
+				<departure id="AU104_0" departureTime="12:24:00" vehicleRefId="tr_38_metro"/>
+				<departure id="AU107_0" departureTime="13:09:00" vehicleRefId="tr_39_metro"/>
+				<departure id="AU108_0" departureTime="13:24:00" vehicleRefId="tr_40_metro"/>
+				<departure id="AU111_0" departureTime="14:09:00" vehicleRefId="tr_41_metro"/>
+				<departure id="AU112_0" departureTime="14:24:00" vehicleRefId="tr_42_metro"/>
+				<departure id="AU113_0" departureTime="14:39:00" vehicleRefId="tr_43_metro"/>
+				<departure id="AU119_0" departureTime="16:03:00" vehicleRefId="tr_44_metro"/>
+				<departure id="AU120_0" departureTime="16:15:00" vehicleRefId="tr_45_metro"/>
+				<departure id="AU122_0" departureTime="16:39:00" vehicleRefId="tr_46_metro"/>
+				<departure id="AU123_0" departureTime="16:51:00" vehicleRefId="tr_47_metro"/>
+				<departure id="AU124_0" departureTime="17:04:00" vehicleRefId="tr_48_metro"/>
+				<departure id="AU126_0" departureTime="17:28:00" vehicleRefId="tr_49_metro"/>
+				<departure id="AU127_0" departureTime="17:39:00" vehicleRefId="tr_50_metro"/>
+				<departure id="AU128_0" departureTime="17:51:00" vehicleRefId="tr_51_metro"/>
+				<departure id="AU129_0" departureTime="18:04:00" vehicleRefId="tr_52_metro"/>
+				<departure id="AU131_0" departureTime="18:28:00" vehicleRefId="tr_53_metro"/>
+				<departure id="AU133_0" departureTime="18:51:00" vehicleRefId="tr_54_metro"/>
+				<departure id="AU134_0" departureTime="19:04:00" vehicleRefId="tr_55_metro"/>
+				<departure id="AU136_0" departureTime="19:28:00" vehicleRefId="tr_56_metro"/>
+				<departure id="AU137_0" departureTime="19:39:00" vehicleRefId="tr_57_metro"/>
+				<departure id="AU138_0" departureTime="19:50:00" vehicleRefId="tr_58_metro"/>
+				<departure id="AU139_0" departureTime="20:04:00" vehicleRefId="tr_59_metro"/>
+				<departure id="AU140_0" departureTime="20:18:00" vehicleRefId="tr_60_metro"/>
+				<departure id="AU141_0" departureTime="20:31:00" vehicleRefId="tr_61_metro"/>
+				<departure id="AU142_0" departureTime="20:45:00" vehicleRefId="tr_62_metro"/>
+				<departure id="AU143_0" departureTime="21:00:00" vehicleRefId="tr_63_metro"/>
+				<departure id="AU144_0" departureTime="21:15:00" vehicleRefId="tr_64_metro"/>
+				<departure id="AU145_0" departureTime="21:30:00" vehicleRefId="tr_65_metro"/>
+				<departure id="AU146_0" departureTime="22:00:00" vehicleRefId="tr_66_metro"/>
+				<departure id="AU147_0" departureTime="22:30:00" vehicleRefId="tr_67_metro"/>
+				<departure id="AU148_0" departureTime="23:00:00" vehicleRefId="tr_68_metro"/>
+				<departure id="AU149_0" departureTime="23:31:00" vehicleRefId="tr_69_metro"/>
+				<departure id="AU150_0" departureTime="24:07:00" vehicleRefId="tr_70_metro"/>
+				<departure id="AU159_0" departureTime="21:45:00" vehicleRefId="tr_71_metro"/>
+				<departure id="AU160_0" departureTime="22:15:00" vehicleRefId="tr_72_metro"/>
+				<departure id="AU161_0" departureTime="22:45:00" vehicleRefId="tr_73_metro"/>
+				<departure id="AU165_0" departureTime="24:32:00" vehicleRefId="tr_74_metro"/>
+				<departure id="AU166_0" departureTime="24:46:00" vehicleRefId="tr_75_metro"/>
+				<departure id="AU167_0" departureTime="25:00:00" vehicleRefId="tr_76_metro"/>
+				<departure id="AU78_0" departureTime="06:35:00" vehicleRefId="tr_77_metro"/>
+				<departure id="AU80_0" departureTime="07:03:00" vehicleRefId="tr_78_metro"/>
+				<departure id="AU81_0" departureTime="07:15:00" vehicleRefId="tr_79_metro"/>
+				<departure id="AU83_0" departureTime="07:39:00" vehicleRefId="tr_80_metro"/>
+				<departure id="AU84_0" departureTime="07:51:00" vehicleRefId="tr_81_metro"/>
+				<departure id="AU85_0" departureTime="08:02:00" vehicleRefId="tr_82_metro"/>
+				<departure id="AU87_0" departureTime="08:27:00" vehicleRefId="tr_83_metro"/>
+				<departure id="AU88_0" departureTime="08:39:00" vehicleRefId="tr_84_metro"/>
+				<departure id="AU90_0" departureTime="09:03:00" vehicleRefId="tr_85_metro"/>
+				<departure id="AU91_0" departureTime="09:15:00" vehicleRefId="tr_86_metro"/>
+				<departure id="AU92_0" departureTime="09:29:00" vehicleRefId="tr_87_metro"/>
+				<departure id="AU93_0" departureTime="09:40:00" vehicleRefId="tr_88_metro"/>
+				<departure id="AU96_0" departureTime="10:24:00" vehicleRefId="tr_89_metro"/>
+				<departure id="AU99_0" departureTime="11:09:00" vehicleRefId="tr_90_metro"/>
+			</departures>
+		</transitRoute>
+	</transitLine>
+
+</transitSchedule>

@@ -3,4 +3,4 @@ h---w	1	0	0	0	0	0	0	0	0	0	0	0	0
 w---h	0	1	0	0	0	0	0	0	0	0	0	0	0
 w---w	0	1	0	0	0	0	0	0	0	0	0	0	0
 
-average leg duration: 356.0 seconds = 00:05:56
+average leg duration: 341.6666666666667 seconds = 00:05:41
