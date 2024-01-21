@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE config SYSTEM "http://www.matsim.org/files/dtd/config_v2.dtd">
 <config>
-	<module name="changeMode" >
-		<!-- Defines all the modes available, including chain-based modes, seperated by commas -->
-		<param name="modes" value="car,subway" />
-	</module>
 	<module name="controler" >
 		<!-- Default=1000. Last Iteration of a simulation. -->
 		<param name="lastIteration" value="10" />
@@ -89,7 +85,7 @@
 		</parameterset>
 	</module>
 	<module name="plans" >
-		<param name="inputPlansFile" value="plans1.xml" />
+		<param name="inputPlansFile" value="plans.xml" />
 	</module>
 	<module name="planscalcroute" >
 		<parameterset type="teleportedModeParameters" >
@@ -110,8 +106,6 @@
 	</module>
 	<module name="qsim" >
 		<param name="endTime" value="00:00:00" />
-		<!-- [comma-separated list] Defines which modes are congested modes. Technically, these are the modes that the departure handler of the netsimengine handles.  Effective cell size, effective lane width, flow capacity factor, and storage capacity factor need to be set with diligence.  Need to be vehicular modes to make sense. -->
-		<param name="mainMode" value="subway,car" />
 		<param name="startTime" value="00:00:00" />
 	</module>
 	<module name="strategy" >
@@ -127,37 +121,6 @@
 			<param name="strategyName" value="ReRoute" />
 			<param name="weight" value="0.1" />
 		</parameterset>
-		<parameterset type="strategysettings" >
-			<param name="strategyName" value="ChangeTripMode" />
-			<param name="weight" value="0.1" />
-		</parameterset>
-	</module>
-	<module name="swissRailRaptor" >
-		<!-- Sets whether intermodal access and egress modes are selected by least cost (default) or randomly chosen out of the available access / egress modes. -->
-		<param name="intermodalAccessEgressModeSelection" value="CalcLeastCostModePerStop" />
-		<!-- Possible values: Default,Individual -->
-		<param name="scoringParameters" value="Default" />
-		<param name="transferPenaltyBaseCost" value="0.0" />
-		<param name="transferPenaltyCostPerTravelTimeHour" value="0.0" />
-		<param name="transferPenaltyMaxCost" value="Infinity" />
-		<param name="transferPenaltyMinCost" value="-Infinity" />
-		<!-- time deducted from transfer walk leg during transfers between pt legs in order to avoid missing a vehicle by a few seconds due to delays. -->
-		<param name="transferWalkMargin" value="5.0" />
-		<!-- If true, SwissRailRaptor tries to detect when agents cannot board a vehicle in the previous iteration because it is already full and tries to find an alternative route instead. -->
-		<param name="useCapacityConstraints" value="false" />
-		<param name="useIntermodalAccessEgress" value="false" />
-		<param name="useModeMappingForPassengers" value="false" />
-		<param name="useRangeQuery" value="false" />
-	</module>
-	<module name="transit" >
-		<!-- Comma-separated list of transportation modes that are handled as transit. Defaults to 'pt'. -->
-		<param name="transitModes" value="subway" />
-		<!-- Input file containing the transit schedule to be simulated. -->
-		<param name="transitScheduleFile" value="transitScheduleMetro.xml" />
-		<!-- Set this parameter to true if transit should be simulated, false if not. -->
-		<param name="useTransit" value="true" />
-		<!-- Input file containing the vehicles used by the departures in the transit schedule. -->
-		<param name="vehiclesFile" value="transitVehiclesMetro.xml" />
 	</module>
 
 </config>
