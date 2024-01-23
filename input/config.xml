@@ -15,14 +15,14 @@
 		<param name="inputPlansFile" value="plans.xml" />
 	</module>
 	
-	<!--
+
 	<module name="transit">
 		<param name="transitScheduleFile" value="transitSchedule.xml" />
 		<param name="vehiclesFile" value="transitVehicles.xml" />
-		<param name="transitModes" value="bus" />
+		<param name="transitModes" value="bus,subway" />
 		<param name="useTransit" value="true" />
 	</module>
-	-->
+
 
 	<module name="controler">
 		<param name="outputDirectory" value="./../output" />
@@ -34,7 +34,8 @@
 		<!-- "start/endTime" of MobSim (00:00:00 == take earliest activity time/ run as long as active vehicles exist) -->
 		<param name="startTime" value="00:00:00" />
 		<param name="endTime" value="00:00:00" />
-		<!--<param name="mainMode" value="car,bus" />-->
+		<param name="flowCapacityFactor" value="0.1" />
+		<param name="mainMode" value="car,bus,subway" />
 		<param name = "snapshotperiod"	value = "00:00:00"/> <!-- 00:00:00 means NO snapshot writing -->
 	</module>
 
@@ -62,25 +63,23 @@
 		</parameterset>
 	</module>
 	
-	<!--
 	<module name="changeMode">
-  		<param name="modes" value="car,bus" />
+  		<param name="modes" value="car,bus,subway" />
 	</module>
-	-->
+
 
 	<module name="strategy">
 		<param name="maxAgentPlanMemorySize" value="0" /> <!-- 0 means unlimited -->
 
-		<param name="ModuleProbability_1" value="0.8" />
+		<param name="ModuleProbability_1" value="0.6" />
 		<param name="Module_1" value="BestScore" />
 
 		<param name="ModuleProbability_2" value="0.1" />
 		<param name="Module_2" value="ReRoute" />
 
-		<!--
-		<param name="ModuleProbability_3" value="0.1" />
+		<param name="ModuleProbability_3" value="0.3" />
 	    <param name="Module_3" value="ChangeTripMode" />
-		-->
+
 	</module>
 
 </config>

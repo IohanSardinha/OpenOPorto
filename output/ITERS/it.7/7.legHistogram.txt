@@ -1,3 +1,3 @@
-time	time	departures_all	arrivals_all	stuck_all	en-route_all	departures_car	arrivals_car	stuck_car	en-route_car
-00:00:00	0	0	0	0	0	0	0	0	0
-00:05:00	300	6	6	0	0	6	6	0	0
+time	time	departures_all	arrivals_all	stuck_all	en-route_all	departures_car	arrivals_car	stuck_car	en-route_car	departures_pt	arrivals_pt	stuck_pt	en-route_pt	departures_walk	arrivals_walk	stuck_walk	en-route_walk
+00:00:00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+00:05:00	300	29754	29754	0	0	12202	12202	0	0	6440	6440	0	0	11112	11112	0	0
