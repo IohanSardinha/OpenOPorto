@@ -6,8 +6,10 @@ from ipfn.ipfn import ipfn
 from ...ProcessStep import ProcessStep
 from itertools import combinations, product
 
+IMPOSSIBILITIES_VAL = 0.0001
+
 class IPF2DProcess(ProcessStep):
-    def process(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}):
+    def process(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}, impossible_val = IMPOSSIBILITIES_VAL, correction_fac = 1):
 
         marginals = []
         for dim in columns:
@@ -31,7 +33,7 @@ class IPF2DProcess(ProcessStep):
                     break
                 indices.append(idx)
             if valid:
-                M[tuple(indices)] = 0.0
+                M[tuple(indices)] = impossible_val
         
         # Run IPF with 1D marginals
         M = ipfn(M, marginals, [[0], [1]]).iteration()
@@ -42,7 +44,7 @@ class IPF2DProcess(ProcessStep):
         return data
 
 class IPFHighDimProcess(ProcessStep):
-    def process(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}):
+    def process(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}, impossible_val = IMPOSSIBILITIES_VAL, correction_fac = 1):
         marginals = []
         for dim in columns:
             marginals.append(data[dim].values)
@@ -90,7 +92,7 @@ class IPFHighDimProcess(ProcessStep):
             for d in range(n_dims):
                 idx = columns[d].index(forb[d])
                 indices.append(idx)
-            M[tuple(indices)] = 1e-10
+            M[tuple(indices)] = impossible_val
         
         # Prepare layers for N-dimensional IPF
         layers = [list(comb) for comb in combs]

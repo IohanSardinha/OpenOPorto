@@ -13,3 +13,5 @@ plans.xml
 config.xml
 test.ipynb
 Simulation/matsim-example-project/
+Simulation/output/
+Simulation/input/

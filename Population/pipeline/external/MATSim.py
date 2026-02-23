@@ -43,13 +43,17 @@ class MATSimPopulationExporter():
         activity_open = lambda leg: f"""\t\t\t<activity type="{leg['activity']}" x="{leg['x']}" y="{leg['y']}" end_time="{leg['arrival']}">\n"""
         activity_close = "\t\t\t</activity>\n"
         leg_open = lambda leg: f"\t\t\t<leg mode=\"{leg['mode']}\">\n"
-        route = "\t\t\t\t<route></route>\n"
         leg_close = "\t\t\t</leg>\n"
 
+
         for i, person in enumerate(self.population):
+
+            last_activity = person["trips"][0].copy()
+            last_activity["arrival"] = "23:59:59"
+            
             trips_xml = "".join(
-                "".join([activity_open(leg), activity_close, leg_open(leg), route, leg_close])
-                for leg in person["trips"]
+                ["".join([activity_open(leg), activity_close, leg_open(leg), leg_close])
+                for leg in person["trips"]]+[activity_open(last_activity), activity_close]
             )
             
             if self.id_builder is None:

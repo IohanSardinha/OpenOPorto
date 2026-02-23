@@ -12,7 +12,7 @@ config = {
         "BOUNDING_BOX":(-8.76,41.0764,-8.4155,41.3796),
         "CROP_FILE":".tmp/porto.osm.pbf",
     },  
-    "CRS":"EPSG:3857",
+    "CRS":"EPSG:3763",
     "PUBLIC_TRANSPORT":{
         "STCP":{
             "URL":"https://opendata.porto.digital/dataset/5275c986-592c-43f5-8f87-aabbd4e4f3a4/resource/89a6854f-2ea3-4ba0-8d2f-6558a9df2a98/download/horarios_gtfs_stcp_16_04_2025.zip",
