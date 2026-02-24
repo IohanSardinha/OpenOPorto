@@ -73,6 +73,7 @@ f"""<?xml version="1.0" ?>
 
 
 	<module name="routing">
+		<param name="accessEgressType" value="accessEgressModeToLink" />
 		<param name= "networkModes" value= "{','.join([x for x in config.get("transitModes", []) if x not in ['tram']]+['car'])}" /> <!-- Cannot have tram for some reason, needs fixing in future -->
 		<param name="networkRouteConsistencyCheck" value="disable" />
     </module>
