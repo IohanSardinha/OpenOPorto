@@ -52,7 +52,7 @@ f"""<?xml version="1.0" ?>
 	<module name="qsim">
 		<!-- "start/endTime" of MobSim (00:00:00 == take earliest activity time/ run as long as active vehicles exist) -->
 		<param name="startTime" value="00:00:00" />
-		<param name="endTime" value="00:00:00" />
+		<param name="endTime" value="23:59:59" />
 		<param name="flowCapacityFactor" value="0.1" />
 		<param name="mainMode" value="{','.join(config.get("transitModes", [])+['car'])}" />
 		<param name = "snapshotperiod"	value = "00:00:00"/> <!-- 00:00:00 means NO snapshot writing -->
@@ -68,7 +68,11 @@ f"""<?xml version="1.0" ?>
 		<param name="waiting" value="-0" />
 {"".join([_activity_params(param) for param in config.get("activityParams", [])])}
 
-{"".join([_mode_params(param) for param in config.get("transitModes", [])])}
+
+	<parameterset type= "modeParams" >
+		<param name= "mode" value= "pt" />
+		<param name= "monetaryDistanceRate" value= "-0.0002 " />
+	</parameterset>
 	</module>
 
 
