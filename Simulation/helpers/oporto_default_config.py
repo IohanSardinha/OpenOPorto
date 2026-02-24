@@ -74,7 +74,7 @@ f"""<?xml version="1.0" ?>
 
 	<module name="routing">
 		<param name="accessEgressType" value="accessEgressModeToLink" />
-		<param name= "networkModes" value= "car"
+		<param name= "networkModes" value= "car"/>
 		<param name="networkRouteConsistencyCheck" value="disable" />
     </module>
 
