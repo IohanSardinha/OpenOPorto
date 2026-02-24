@@ -27,6 +27,8 @@ def extract_plan_info(plan_file):
     activity_type_times = {}
     earliest_time_all = datetime.strptime("23:59:59", df)
     latest_time_all = datetime.strptime("00:00:00", df)
+    modes = set()
+
 
     for person in root.findall("person"):
         activities = person.find("plan").findall("activity")
@@ -48,10 +50,13 @@ def extract_plan_info(plan_file):
                 earliest_time_all = act_start_time
             if act_end_time > latest_time_all:
                 latest_time_all = act_end_time
+        
+        for leg in person.find("plan").findall("leg"):
+            modes.add(leg.get("mode"))
 
     for k in activity_type_times.keys():
         activity_type_times[k]["avg"] = str(timedelta(seconds=sum(activity_type_times[k]["avg"])/len(activity_type_times[k]["avg"]))).split(".")[0]
         activity_type_times[k]["earliest"] = str(activity_type_times[k]["earliest"].time())
         activity_type_times[k]["latest"] = str(activity_type_times[k]["latest"].time())
 
-    return str(earliest_time_all.time()), str(latest_time_all.time()), activity_type_times
+    return str(earliest_time_all.time()), str(latest_time_all.time()), activity_type_times, modes

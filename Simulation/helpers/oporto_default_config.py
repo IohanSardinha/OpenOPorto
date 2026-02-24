@@ -38,7 +38,7 @@ f"""<?xml version="1.0" ?>
 	<module name="transit">
 		<param name="transitScheduleFile" value="{config.get("transitScheduleFile", "schedule.xml")}" />
 		<param name="vehiclesFile" value="{config.get("vehiclesFile", "vehicles.xml")}" />
-{"".join([f'\t\t<param name="transitModes" value="{mode}" />\n' for mode in config.get("transitModes", [])])}
+		<param name="transitModes" value="{','.join(['pt'] + config.get("transitModes", []))}" />
 		<param name="useTransit" value="{'true' if len(config.get("transitModes",[])) > 0 else 'false'}" />
 	</module>
 
@@ -79,7 +79,7 @@ f"""<?xml version="1.0" ?>
     </module>
 
 	<module name="changeMode">
-  		<param name="modes" value="{','.join(config.get("transitModes", [])+['car'])}" /> 
+  		<param name="modes" value="{','.join(config.get("activityModes", []))}" /> 
 	</module>
 
 	<module name="replanning">

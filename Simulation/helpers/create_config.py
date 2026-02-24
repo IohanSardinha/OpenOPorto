@@ -22,11 +22,13 @@ def main():
     config = load_config(args.config)
 
     config["transitModes"] = extract_vehicle_info(config["inputFolder"] + config["vehiclesFile"])
-    _,_, plans_info = extract_plan_info(config["inputFolder"] + config["inputPlansFile"])
+    _,_, plans_info, modes = extract_plan_info(config["inputFolder"] + config["inputPlansFile"])
 
     config["activityParams"] = [{"type": k,
                                 "typicalDuration": v["avg"]
                                 } for k,v in plans_info.items()]
+    config["activityModes"] = modes
+
     with open(args.output, "w") as f:
         f.write(DEFAULT_CONFIG(config))
 
