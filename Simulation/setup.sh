@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$1" = "clear" ] || [ "$2" = "clear" ] ; then
+    echo "Clearing input and output folders..."
+    rm -rf ./input/* ./output/*
+fi
+
 echo "Setting up MATSim simulation environment..."
 
 mkdir -p ./input
@@ -69,5 +74,13 @@ if [ ! -f "./matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar" ]
 fi
 
 echo "Setup complete. You can now run the MATSim simulation."
-echo "To run the simulation, execute: "
-echo "java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/"
+
+
+if [ "$1" = "run" ] || [ "$2" = "run" ] ; then
+    echo "Running MATSim simulation..."
+    java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml
+else
+    echo "To run the simulation, execute: "
+    echo "java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml"
+fi
+
