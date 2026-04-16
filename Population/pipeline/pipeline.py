@@ -29,7 +29,7 @@ class PostLocationAssignActivityChainMatcher(ProcessStep):
         return combined, self.validate(err, errors)
 
     def validate(self, matcherError, assignerErrors):
-        return (matcherError, *assignerErrors)
+        return {"matcher": matcherError, "assigner": assignerErrors}   
 
 class MultiStepPopulationSynthesis(ProcessStep):
     class ItermidiateResult(Enum):
@@ -90,4 +90,4 @@ class MultiStepPopulationSynthesis(ProcessStep):
         return self.matched_population, self.validate()
     
     def validate(self):
-        return (self.synthesis_error, self.matching_error)
+        return {"synthesis": self.synthesis_error, "matching": self.matching_error}

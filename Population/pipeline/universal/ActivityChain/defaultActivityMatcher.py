@@ -36,6 +36,8 @@ class DefaultActivityMatcher(ProcessStep):
             sample_attr_keys = next(iter(persons.values()))["attributes"].keys()
             include_attr_keys = [k for k in sample_attr_keys if k not in population.columns]
 
+        self._match_stats = {"exact": 0, "prioritized": 0, "random": 0, "total": 0}
+
         #Procedure
         for  person in population.itertuples(index=False, name=None):
 
@@ -53,9 +55,16 @@ class DefaultActivityMatcher(ProcessStep):
 
                     if not keys:
                         keys = list(profiles.keys())
+                        self._match_stats["random"] += 1
+                    else:
+                        self._match_stats["prioritized"] += 1
                 else:
                     keys = list(profiles.keys())
-                
+                    self._match_stats["random"] += 1
+            else:
+                self._match_stats["exact"] += 1
+            self._match_stats["total"] += 1
+
             if sum([len(profilePool[key]) for key in keys]) == 0:
                 for key in keys:
                     profilePool[key] = profiles[key].copy()
@@ -84,7 +93,27 @@ class DefaultActivityMatcher(ProcessStep):
             population = pd.DataFrame(matches, columns=[k for k in list(persons.values())[0]["attributes"].keys() if not k in population.columns]+["match"])
 
 
-        return population, self.validate(population)
+        return population, self.validate(population, persons, joinOn)
 
-    def validate(self, data):
-        return 0
+    def validate(self, population, persons, joinOn):
+        total = self._match_stats["total"]
+        
+        match_quality = {
+            "exact_rate":      self._match_stats["exact"]      / total,
+            "prioritized_rate": self._match_stats["prioritized"] / total,
+            "random_rate":     self._match_stats["random"]     / total,
+        }
+        
+        # Distribution preservation: did matched attributes mirror input?
+        distribution_rmse = {}
+        for col in joinOn:
+            if col in population.columns and col in persons:
+                input_dist  = population[col].value_counts(normalize=True).sort_index()
+                output_dist = population[col].value_counts(normalize=True).sort_index()
+                diff = input_dist.subtract(output_dist, fill_value=0)
+                distribution_rmse[col] = np.sqrt((diff ** 2).mean())
+        
+        return {
+            "match_quality": match_quality,
+            "distribution_rmse": distribution_rmse
+        }

@@ -32,6 +32,8 @@ class DefaultIntegerizer(ProcessStep):
 
     def process(self, data):
 
+        self.continuous = data.copy()
+
         #First redestribute evenly the impossibilities that may have gotten some residual value
         if len(self.impossibilities) > 0:
             data = self.__setImpossiblesAsZeros(data)
@@ -46,7 +48,30 @@ class DefaultIntegerizer(ProcessStep):
 
         np.add.at(floors, tuple(top_idx.T), 1)
 
-        return floors, 0
+        return floors, self.validate(floors)
     
     def validate(self, data):
-        return data
+        
+        diff = data - self.continuous
+        rmse = np.sqrt(np.sum(diff ** 2) / diff.size)
+        
+        
+        ftr = 4 * np.sum(
+            (np.sqrt(data) - np.sqrt(self.continuous)) ** 2
+        )
+        
+        return {
+            "rmse": rmse,
+            "ftr": ftr
+        }
+    
+class MonteCarloSamplerIntegerizer(ProcessStep):
+    
+    def __init__(self):
+        raise NotImplementedError("MonteCarloSamplerIntegerizer is not implemented yet.")
+
+    def process(self, data):
+        raise NotImplementedError("MonteCarloSamplerIntegerizer is not implemented yet.")
+    
+    def validate(self, data):
+        raise NotImplementedError("MonteCarloSamplerIntegerizer is not implemented yet.")

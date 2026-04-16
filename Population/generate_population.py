@@ -25,10 +25,10 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
 
         self.places = PlacesGenericFormat(self.config["FILES"]["PLACES"])
 
-        self.ipfMen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"))\
+        self.ipfMen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"), correction_fac=self.config["CORRECTION_FACTOR"])\
                                                 .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
 
-        self.ipfWomen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("M"))\
+        self.ipfWomen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("M"), correction_fac=self.config["CORRECTION_FACTOR"])\
                                                 .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
 
         assigner = HeuristicLocationAssigner(self.places, self.ipfMen.sectionShapes, PlaceCategoryMapper,IMobActivity.HOME, silent=self.config["SILENT"], print_with_display=self.config["PRINT_WITH_DISPLAY"])
@@ -59,6 +59,9 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
         womenDf["gender"] = "Feminino"
 
         self.synthesized_population = pd.concat([menDf, womenDf], ignore_index=False)
+
+        self.synthesized_population = self.synthesized_population[self.synthesized_population["residence"] == "Live in Portugal"]
+
         self.synthesis_error = {"H": menErr, "M": womenErr}
 
         self.match(((self.persons,
