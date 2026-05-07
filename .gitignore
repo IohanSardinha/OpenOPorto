@@ -15,3 +15,8 @@ test.ipynb
 Simulation/matsim-example-project/
 Simulation/output/
 Simulation/input/
+PhysicalNetwork/unir/*/
+PhysicalNetwork/unir/*.json
+TravelSurvey/data/
+TravelSurvey/*.csv
+Analysis/plots/
