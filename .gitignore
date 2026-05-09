@@ -20,3 +20,5 @@ PhysicalNetwork/unir/*.json
 TravelSurvey/data/
 TravelSurvey/*.csv
 Analysis/plots/
+Synchronization/*
+!Synchronization/*.py
