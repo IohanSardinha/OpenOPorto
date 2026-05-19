@@ -133,6 +133,9 @@ def extract_pt_transfers(
             continue
 
         for transfer_index, (prev_i, next_i) in enumerate(zip(pt_positions[:-1], pt_positions[1:]), start=1):
+            #if next_i - prev_i != 2:
+            #        continue
+            
             prev_pt = trip_legs.loc[prev_i]
             next_pt = trip_legs.loc[next_i]
             between = trip_legs.iloc[prev_i + 1 : next_i]
@@ -281,6 +284,7 @@ def analyze_pt_transfer_synchronism(
     """Run end-to-end PT transfer synchronism analysis from MATSim legs output."""
     legs = load_legs(legs_csv_path)
     transfers = extract_pt_transfers(legs, pt_mode=pt_mode, transfer_modes=transfer_modes)
+    transfers = add_realistic_transfer_estimates(transfers)
     person_summary, trip_summary, global_summary = summarize_transfer_stats(transfers)
     return TransferAnalysisResult(
         transfers=transfers,

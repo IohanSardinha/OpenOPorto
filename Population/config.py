@@ -13,7 +13,7 @@ config = {
     "FILES": {
         "JSON": "population.json",
         "OUTPUT":"plans.xml",
-        "GEOPACKAGE":  ".data/C2021_SECCOES_1312_TRANSFORMED.gpkg",
+        "GEOPACKAGE":  ".data/C2021_SECCOES_11A_TRANSFORMED.gpkg",
         "HOUSEHOLDS":  ".data/IMOB2017/TBL_alojamento_AMP.csv",
         "EXPENSES":    ".data/IMOB2017/TBL_alojamento_despesa_AMP.csv",
         "VEHICLES":    ".data/IMOB2017/TBL_alojamento_veiculos_AMP.csv",
