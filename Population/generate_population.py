@@ -27,7 +27,7 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
 
     def generate_population(self):
 
-        if self.config.get("CHACHE", False):
+        if self.config.get("CACHE", False):
             Path("cache").mkdir(exist_ok=True)
 
         self.persons = self.load_cache("persons") or IMobProcesser.read(self.config["FILES"]["HOUSEHOLDS"], self.config["FILES"]["EXPENSES"], self.config["FILES"]["VEHICLES"], self.config["FILES"]["INCOMES"], self.config["FILES"]["INDIVIDUALS"], self.config["FILES"]["PASSES"], self.config["FILES"]["TRIPS"])
