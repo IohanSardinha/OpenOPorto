@@ -1,7 +1,7 @@
 config = {
     "SILENT": False,
     "PRINT_WITH_DISPLAY": False,
-    
+    "CACHE": True,
     "CORRECTION_FACTOR": 1e4,
     "REDUCTION_FACTOR": 0.05,
     "BOUNDING_BOX": [-9.4070, 40.6869, -7.4707, 41.5435],
