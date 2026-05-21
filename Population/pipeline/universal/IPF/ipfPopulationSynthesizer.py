@@ -87,12 +87,12 @@ class IPF2DProcess(ProcessStep):
 
         self.Original_M = M.copy()
 
-        M *= correction_fac
+        #M *= correction_fac
 
         # Run IPF with 1D marginals
         M = ipfn(M, marginals, [[0], [1]]).iteration()
 
-        M /= correction_fac
+        #M /= correction_fac
 
         self.pop = M
         result = self.array_to_dataframe(labels=labels, valueMapper=valueMapper) if asDF else M
@@ -138,9 +138,9 @@ class IPFHighDimProcess(ProcessStep):
             
             # Fit (N-1)-dimensional marginal using 1D marginals
             sub_layers = [[i] for i in range(len(current_dims))]
-            sub_M *= correction_fac
+            #sub_M *= correction_fac
             sub_M = ipfn(sub_M, current_marginals, sub_layers, max_iteration=1000).iteration()
-            sub_M /= correction_fac
+            #sub_M /= correction_fac
             next_marginals.append(sub_M)
             next_dimensions.append(list(comb))  # Convert to list for ipfn compatibility
         
@@ -161,9 +161,9 @@ class IPFHighDimProcess(ProcessStep):
 
         # Run final IPF
         self.Original_M = M.copy()
-        M *= correction_fac
+        #M *= correction_fac
         M = ipfn(M, next_marginals, layers, max_iteration=1000000).iteration()
-        M /= correction_fac
+        #M /= correction_fac
         self.pop = M
         result = self.array_to_dataframe(labels=labels, valueMapper=valueMapper) if asDF else M
         return result, self.validate(M, marginals, labels)
@@ -223,7 +223,7 @@ class IPFPopulationSynthesis(ProcessStep):
         df = df.replace(valueMapper)
 
         df["value"] = values
-        print("***********",sum(values))
+        
         df = df[df["value"] > 0].reset_index(drop=True)
 
         return df
@@ -278,6 +278,5 @@ class IPFPopulationSynthesisWithSections(IPFPopulationSynthesis):
             else:
                 df = pd.concat([df, ndf], ignore_index=False)
         self.pop = og
-        print(sum(df["value"]))
         df = df[df["value"] > 0].reset_index(drop=True)
         return df
