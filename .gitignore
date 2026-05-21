@@ -22,3 +22,4 @@ TravelSurvey/*.csv
 Analysis/plots/
 Synchronization/*
 !Synchronization/*.py
+Population/cache/

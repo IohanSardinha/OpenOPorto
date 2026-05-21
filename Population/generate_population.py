@@ -21,6 +21,7 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
 
     def load_cache(self, doc):
         if Path(f"cache/{doc}.pkl").exists() and self.config.get("CACHE", False):
+            print(f"Loading {doc} from cache.")
             with open(f"cache/{doc}.pkl", "rb") as f:
                 return pickle.load(f)
         return None  
@@ -40,7 +41,7 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
         self.boundingBox = BoundingBoxBuilder().build(*self.config["BOUNDING_BOX"])
 
         self.places = PlacesGenericFormat(self.config["FILES"]["PLACES"])
-
+    
         self.ipfMen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"), correction_fac=self.config["CORRECTION_FACTOR"])\
                                                 .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
 
@@ -67,16 +68,19 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
         cache_error = self.load_cache("synthesis_error")
 
         if cached_population is None:
-
+            
+            print(self.ipfMen.data)
             self.PopulationSynthesizer = self.ipfMen
             self.synthesize((self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")))
             menDf = self.synthesized_population
+            print(menDf)
             menErr = self.synthesis_error
             menDf["gender"] = "Masculino"
 
             self.PopulationSynthesizer = self.ipfWomen
             self.synthesize((self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")))
             womenDf = self.synthesized_population
+            print(womenDf)
             womenErr = self.synthesis_error
             womenDf["gender"] = "Feminino"
 

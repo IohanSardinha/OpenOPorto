@@ -39,7 +39,7 @@ class DefaultActivityMatcher(ProcessStep):
         self._match_stats = {"exact": 0, "prioritized": 0, "random": 0, "total": 0}
 
         #Procedure
-        for  person in population.itertuples(index=False, name=None):
+        for person in population.itertuples(index=False, name=None):
 
             mapped_attributes = [mapper[person[key]] if person[key] in mapper else person[key] for key in joinon_idx ]
             mapped_attributes_list = [attribute if type(attribute) == list else [attribute] for attribute in mapped_attributes]
@@ -96,6 +96,7 @@ class DefaultActivityMatcher(ProcessStep):
         return population, self.validate(population, persons, joinOn)
 
     def validate(self, population, persons, joinOn):
+        print(self._match_stats)
         total = self._match_stats["total"]
         
         match_quality = {

@@ -94,6 +94,7 @@ class IPF2DProcess(ProcessStep):
 
         M /= correction_fac
 
+        self.pop = M
         result = self.array_to_dataframe(labels=labels, valueMapper=valueMapper) if asDF else M
         return result, self.validate(M, marginals, labels)
 
@@ -139,6 +140,7 @@ class IPFHighDimProcess(ProcessStep):
             sub_layers = [[i] for i in range(len(current_dims))]
             sub_M *= correction_fac
             sub_M = ipfn(sub_M, current_marginals, sub_layers, max_iteration=1000).iteration()
+            print(sub_M)
             sub_M /= correction_fac
             next_marginals.append(sub_M)
             next_dimensions.append(list(comb))  # Convert to list for ipfn compatibility
@@ -163,7 +165,8 @@ class IPFHighDimProcess(ProcessStep):
         M *= correction_fac
         M = ipfn(M, next_marginals, layers, max_iteration=1000000).iteration()
         M /= correction_fac
-
+        print(M)
+        self.pop = M
         result = self.array_to_dataframe(labels=labels, valueMapper=valueMapper) if asDF else M
         return result, self.validate(M, marginals, labels)
 
@@ -194,6 +197,9 @@ class IPFPopulationSynthesis(ProcessStep):
             self.ipf = IPFHighDimProcess()
 
         data, error = self.ipf.process(self.data, columns, impossibilities, asDF=asDF, labels=self.labels, valueMapper=self.valueMapper, correction_fac=self.correction_fac)
+
+        print(data)
+        print(error)
 
         self.popErr = error
 
