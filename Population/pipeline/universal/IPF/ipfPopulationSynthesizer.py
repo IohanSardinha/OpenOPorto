@@ -223,6 +223,7 @@ class IPFPopulationSynthesis(ProcessStep):
         df = df.replace(valueMapper)
 
         df["value"] = values
+        print("***********",sum(values))
         df = df[df["value"] > 0].reset_index(drop=True)
 
         return df
@@ -277,5 +278,6 @@ class IPFPopulationSynthesisWithSections(IPFPopulationSynthesis):
             else:
                 df = pd.concat([df, ndf], ignore_index=False)
         self.pop = og
+        print(sum(df["value"]))
         df = df[df["value"] > 0].reset_index(drop=True)
         return df

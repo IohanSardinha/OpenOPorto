@@ -69,18 +69,15 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
 
         if cached_population is None:
             
-            print(self.ipfMen.data)
             self.PopulationSynthesizer = self.ipfMen
             self.synthesize((self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")))
             menDf = self.synthesized_population
-            print(menDf)
             menErr = self.synthesis_error
             menDf["gender"] = "Masculino"
 
             self.PopulationSynthesizer = self.ipfWomen
             self.synthesize((self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")))
             womenDf = self.synthesized_population
-            print(womenDf)
             womenErr = self.synthesis_error
             womenDf["gender"] = "Feminino"
 
