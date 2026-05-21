@@ -4,7 +4,7 @@ config = {
     
     "CORRECTION_FACTOR": 1e4,
     "REDUCTION_FACTOR": 0.05,
-    "BOUNDING_BOX": [-8.76, 41.0764, -8.4155, 41.3796],
+    "BOUNDING_BOX": [-9.4070, 40.6869, -7.4707, 41.5435],
     "SECTIONS_VAR": "DTMNFRSEC21",
     "PRIORITY_COLS": "ageGroup",
     "JOIN_COLS": ["ageGroup","educationLvl", "economicSituation","gender"],

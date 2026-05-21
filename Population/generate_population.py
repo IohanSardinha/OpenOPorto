@@ -1,3 +1,4 @@
+import pickle
 import argparse
 import importlib
 import pandas as pd
@@ -18,17 +19,27 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
     def __init__(self, config):
         self.config = config
 
+    def load_cache(self, doc):
+        if Path(f"cache/{doc}.pkl").exists():
+            with open(f"cache/{doc}.pkl", "rb") as f:
+                return pickle.load(f)
+        return None  
+
     def generate_population(self):
-        self.persons = IMobProcesser.read(self.config["FILES"]["HOUSEHOLDS"], self.config["FILES"]["EXPENSES"], self.config["FILES"]["VEHICLES"], self.config["FILES"]["INCOMES"], self.config["FILES"]["INDIVIDUALS"], self.config["FILES"]["PASSES"], self.config["FILES"]["TRIPS"])
+
+        if self.config["CACHE"]:
+            Path("cache").mkdir(exist_ok=True)
+
+        self.persons = self.load_cache("persons") or IMobProcesser.read(self.config["FILES"]["HOUSEHOLDS"], self.config["FILES"]["EXPENSES"], self.config["FILES"]["VEHICLES"], self.config["FILES"]["INCOMES"], self.config["FILES"]["INDIVIDUALS"], self.config["FILES"]["PASSES"], self.config["FILES"]["TRIPS"])
     
-        self.boundingBox = BoundingBoxBuilder().build(*self.config["BOUNDING_BOX"])
+        self.boundingBox = self.load_cache("bounding_box") or BoundingBoxBuilder().build(*self.config["BOUNDING_BOX"])
 
         self.places = PlacesGenericFormat(self.config["FILES"]["PLACES"])
 
-        self.ipfMen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"), correction_fac=self.config["CORRECTION_FACTOR"])\
+        self.ipfMen = self.load_cache("ipf_men") or IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"), correction_fac=self.config["CORRECTION_FACTOR"])\
                                                 .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
 
-        self.ipfWomen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("M"), correction_fac=self.config["CORRECTION_FACTOR"])\
+        self.ipfWomen = self.load_cache("ipf_women") or IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("M"), correction_fac=self.config["CORRECTION_FACTOR"])\
                                                 .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
 
         assigner = HeuristicLocationAssigner(self.places, self.ipfMen.sectionShapes, PlaceCategoryMapper,IMobActivity.HOME, silent=self.config["SILENT"], print_with_display=self.config["PRINT_WITH_DISPLAY"])

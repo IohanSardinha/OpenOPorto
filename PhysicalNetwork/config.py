@@ -21,7 +21,7 @@ config = {
         },
         "CP_Porto":{
             "PASSENGERS_PER_VEHICLE":103,
-            "LOCAL_PATH":"/home/iohan/Documentos/FEUP/Thesis/OpenOPorto/PhysicalNetwork/.tmp/gtfs_cp_porto.zip",
+            "LOCAL_PATH":".tmp/gtfs_cp_porto.zip",
             "DATE":"20251214",
         },
         "Metro":{
