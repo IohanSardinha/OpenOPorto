@@ -31,7 +31,7 @@ config = {
         },
         "UNIR":{
             "PASSENGERS_PER_VEHICLE":103,
-            "URL":"https://github.com/IohanSardinha/UNIR_GTFS/releases/download/1.0/unir_gtfs.zip",
+            "URL":"https://github.com/IohanSardinha/UNIR_GTFS/releases/download/1.0/gtfs_unir.zip",
             "DATE":"20260101",
         }
     }
