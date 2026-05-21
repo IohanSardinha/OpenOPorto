@@ -34,25 +34,17 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
         if self.config.get("CACHE", False):
             Path("cache").mkdir(exist_ok=True)
 
-        cached_persons = self.load_cache("persons")
-        self.persons = cached_persons or IMobProcesser.read(self.config["FILES"]["HOUSEHOLDS"], self.config["FILES"]["EXPENSES"], self.config["FILES"]["VEHICLES"], self.config["FILES"]["INCOMES"], self.config["FILES"]["INDIVIDUALS"], self.config["FILES"]["PASSES"], self.config["FILES"]["TRIPS"])
-        if cached_persons is None: self.save_cache("persons", self.persons)
+        self.persons = IMobProcesser.read(self.config["FILES"]["HOUSEHOLDS"], self.config["FILES"]["EXPENSES"], self.config["FILES"]["VEHICLES"], self.config["FILES"]["INCOMES"], self.config["FILES"]["INDIVIDUALS"], self.config["FILES"]["PASSES"], self.config["FILES"]["TRIPS"])
 
-        cached_bounding_box = self.load_cache("bounding_box")
-        self.boundingBox = cached_bounding_box or BoundingBoxBuilder().build(*self.config["BOUNDING_BOX"])
-        if cached_bounding_box is None: self.save_cache("bounding_box", self.boundingBox)
+        self.boundingBox = BoundingBoxBuilder().build(*self.config["BOUNDING_BOX"])
 
         self.places = PlacesGenericFormat(self.config["FILES"]["PLACES"])
 
-        cached_ipf_men = self.load_cache("ipf_men")
-        self.ipfMen = cached_ipf_men or IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"), correction_fac=self.config["CORRECTION_FACTOR"])\
+        self.ipfMen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"), correction_fac=self.config["CORRECTION_FACTOR"])\
                                                 .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
-        if cached_ipf_men is None: self.save_cache("ipf_men", self.ipfMen)
 
-        cached_ipf_women = self.load_cache("ipf_women")
-        self.ipfWomen = cached_ipf_women or IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("M"), correction_fac=self.config["CORRECTION_FACTOR"])\
+        self.ipfWomen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("M"), correction_fac=self.config["CORRECTION_FACTOR"])\
                                                 .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
-        if cached_ipf_women is None: self.save_cache("ipf_women", self.ipfWomen)
 
         assigner = HeuristicLocationAssigner(self.places, self.ipfMen.sectionShapes, PlaceCategoryMapper,IMobActivity.HOME, silent=self.config["SILENT"], print_with_display=self.config["PRINT_WITH_DISPLAY"])
         self.ActivityChainMatcher = PostLocationAssignActivityChainMatcher(DefaultActivityMatcher(), assigner)
@@ -69,23 +61,37 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
         print(f"Pipeline test population successfully exported to {self.config['FILES']['OUTPUT']}!")
 
     def process(self):
-        self.PopulationSynthesizer = self.ipfMen
-        self.synthesize((self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")))
-        menDf = self.synthesized_population
-        menErr = self.synthesis_error
-        menDf["gender"] = "Masculino"
 
-        self.PopulationSynthesizer = self.ipfWomen
-        self.synthesize((self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")))
-        womenDf = self.synthesized_population
-        womenErr = self.synthesis_error
-        womenDf["gender"] = "Feminino"
+        cached_population = self.load_cache("synthesized_population")
+        cache_error = self.load_cache("synthesis_error")
 
-        self.synthesized_population = pd.concat([menDf, womenDf], ignore_index=False)
+        if cached_population is None:
 
-        self.synthesized_population = self.synthesized_population[self.synthesized_population["residence"] == "Live in Portugal"]
+            self.PopulationSynthesizer = self.ipfMen
+            self.synthesize((self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")))
+            menDf = self.synthesized_population
+            menErr = self.synthesis_error
+            menDf["gender"] = "Masculino"
 
-        self.synthesis_error = {"H": menErr, "M": womenErr}
+            self.PopulationSynthesizer = self.ipfWomen
+            self.synthesize((self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")))
+            womenDf = self.synthesized_population
+            womenErr = self.synthesis_error
+            womenDf["gender"] = "Feminino"
+
+            self.synthesized_population = pd.concat([menDf, womenDf], ignore_index=False)
+
+            self.synthesized_population = self.synthesized_population[self.synthesized_population["residence"] == "Live in Portugal"]
+
+            self.synthesis_error = {"H": menErr, "M": womenErr}
+
+            self.synthesized_population.to_csv("cache/synthesized_population.csv", index=False)
+            self.save_cache("synthesized_population", self.synthesized_population)
+            self.save_cache("synthesis_error", self.synthesis_error)
+
+        else:
+            self.synthesized_population = cached_population
+            self.synthesis_error = cache_error
 
         self.match(((self.persons,
                     (self.synthesized_population, self.persons, self.config["JOIN_COLS"], self.config["MATCH_MAPPER"], JOIN_MODE.BOTH, self.config["REDUCTION_FACTOR"], self.config["PRIORITY_COLS"]),
