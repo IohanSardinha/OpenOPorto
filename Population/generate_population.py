@@ -20,14 +20,15 @@ class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
         self.config = config
 
     def load_cache(self, doc):
-        if Path(f"cache/{doc}.pkl").exists():
+        if Path(f"cache/{doc}.pkl").exists() and self.config.get("CACHE", False):
             with open(f"cache/{doc}.pkl", "rb") as f:
                 return pickle.load(f)
         return None  
 
     def save_cache(self, doc, data):
-        with open(f"cache/{doc}.pkl", "wb") as f:
-            pickle.dump(data, f)
+        if self.config.get("CACHE", False):
+            with open(f"cache/{doc}.pkl", "wb") as f:
+                pickle.dump(data, f)
 
     def generate_population(self):
 
