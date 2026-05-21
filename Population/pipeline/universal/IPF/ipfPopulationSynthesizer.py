@@ -140,7 +140,6 @@ class IPFHighDimProcess(ProcessStep):
             sub_layers = [[i] for i in range(len(current_dims))]
             sub_M *= correction_fac
             sub_M = ipfn(sub_M, current_marginals, sub_layers, max_iteration=1000).iteration()
-            print(sub_M)
             sub_M /= correction_fac
             next_marginals.append(sub_M)
             next_dimensions.append(list(comb))  # Convert to list for ipfn compatibility
