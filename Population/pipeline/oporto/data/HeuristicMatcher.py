@@ -38,7 +38,8 @@ def PlaceCategoryMapper(cat, person):
     elif cat == IMobActivity.PERSONAL_ISSUES:
         pass
     elif cat == IMobActivity.LEASURE_OTHER:
-        return ["leisure"]
+        pass
+        #return ["leisure"]
     elif cat == IMobActivity.DOCTOR:
         pass
     elif cat == IMobActivity.LEASURE_COLLECTIVE:
