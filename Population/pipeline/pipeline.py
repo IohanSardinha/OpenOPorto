@@ -19,7 +19,7 @@ class PostLocationAssignActivityChainMatcher(ProcessStep):
                 "attributes": {k: v for k, v in person.items() if k != "match"},
                 "trips": [
                     {**leg, "x": loc.x, "y": loc.y}
-                    for leg, loc in zip(trips[person["match"]]["legs"], locations[i])
+                    for leg, loc in zip(trips[person["match"]]["legs"], locations[person["match"]])
                 ],
                 "tripDesc": trips[person["match"]]["tripDesc"],
             }

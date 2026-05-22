@@ -140,7 +140,7 @@ class HeuristicLocationAssigner(ProcessStep):
         startMoment = time.time()
 
         #THIS SHOULD NOT BE LIKE THIS
-        sectionPoly = self.sections[self.sections["section"] == str(person.section)].iloc[0]["geometry"]
+        sectionPoly = self.sections[self.sections["section"] == str(person["section"])].iloc[0]["geometry"]
         home = Point(pointpats.random.poisson(sectionPoly,size=1))
 
         self.coords[self.home_id] = home
@@ -176,32 +176,6 @@ class HeuristicLocationAssigner(ProcessStep):
 
         return out,best_err
     
-    def _process_person_wrapper(pickled_method, person, trips_legs, boundingBox, attempts, max_time_in_seconds, alpha):
-        """Worker that unpickles and calls the method"""
-        hybrid_assign = cloudpickle.loads(pickled_method)
-        
-        fail = 0
-        profilePlaces = []
-        err = None
-        
-        for _ in range(attempts):
-            try:
-                profilePlaces, err = hybrid_assign(
-                    person, trips_legs, boundingBox, 
-                    alpha=alpha, max_time_in_seconds=max_time_in_seconds
-                )
-                if len(profilePlaces) == 0:
-                    fail = 1
-                else:
-                    fail = 0
-                    break
-            except KeyboardInterrupt:
-                raise
-            except Exception:
-                fail = 2
-        
-        return (person[0], profilePlaces, err, fail)
-
 
     def process(self, persons, trips, boundingBox, attempts=100, max_time_in_seconds=0.3, num_workers=None):
         if not TravelSurveyGenericFormat().validate(trips):
@@ -215,8 +189,8 @@ class HeuristicLocationAssigner(ProcessStep):
         
         # Prepare work items
         work_items = []
-        for person in persons.itertuples():
-            person_id = person[-1]
+        for person in persons.to_dict("records"):
+            person_id = person["match"]
             work_items.append((
                 pickled_method,
                 person,
@@ -276,11 +250,6 @@ class HeuristicLocationAssigner(ProcessStep):
                 except KeyboardInterrupt:
                     executor.shutdown(wait=False, cancel_futures=True)
                     raise
-                except Exception as e:
-                    print(f"Error processing person {idx}: {e}")
-                    count += 1
-                    exceptions += 1
-                    failed.append(f"F->{idx}")
         
         errors = np.array(errors) if errors else np.array([])
         self.results = results
@@ -289,3 +258,27 @@ class HeuristicLocationAssigner(ProcessStep):
             self.print(failed)
         
         return self.results, errors
+    
+def _process_person_wrapper(pickled_method, person, trips_legs, boundingBox, attempts, max_time_in_seconds, alpha):
+    """Worker that unpickles and calls the method"""
+    hybrid_assign = cloudpickle.loads(pickled_method)
+    
+    fail = 0
+    profilePlaces = []
+    err = None
+    
+    for _ in range(attempts):
+        try:
+            profilePlaces, err = hybrid_assign(
+                person, trips_legs, boundingBox, 
+                alpha=alpha, max_time_in_seconds=max_time_in_seconds
+            )
+            if len(profilePlaces) == 0:
+                fail = 1
+            else:
+                fail = 0
+                break
+        except KeyboardInterrupt:
+            raise
+    
+    return (person["match"], profilePlaces, err, fail)
