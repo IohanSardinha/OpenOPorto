@@ -65,8 +65,12 @@ class HeuristicLocationAssigner(ProcessStep):
                 is_discrete.append(True)
             elif cat!="ALL":
                 ids = self.places.loc[self.places["category"].isin(cat), 'id'].tolist()
-                cand_ids.append(ids)
-                is_discrete.append(True)
+                if len(ids) == 0:
+                    cand_ids.append([None])
+                    is_discrete.append(False)
+                else:
+                    cand_ids.append(ids)
+                    is_discrete.append(True)
             else:
                 cand_ids.append([None])
                 is_discrete.append(False)
