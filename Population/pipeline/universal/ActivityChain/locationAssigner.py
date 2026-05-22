@@ -250,6 +250,11 @@ class HeuristicLocationAssigner(ProcessStep):
                 except KeyboardInterrupt:
                     executor.shutdown(wait=False, cancel_futures=True)
                     raise
+                except Exception as e:
+                    print(f"Error processing person {idx}: {e}")
+                    count += 1
+                    exceptions += 1
+                    failed.append(f"F->{idx}")
         
         errors = np.array(errors) if errors else np.array([])
         self.results = results
@@ -280,5 +285,7 @@ def _process_person_wrapper(pickled_method, person, trips_legs, boundingBox, att
                 break
         except KeyboardInterrupt:
             raise
+        except Exception:
+            fail = 2
     
     return (person["match"], profilePlaces, err, fail)
