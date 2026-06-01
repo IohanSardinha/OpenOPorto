@@ -7,7 +7,7 @@ def parse_xml(file_path):
     return tree.getroot(), tree
 
 # Function to merge two XML files
-def merge_schedules(file1, file2, output_file):
+def merge_schedules(file1, file2, output_file, name1="", name2=""):
     # Parse the XML files
     root1, tree1 = parse_xml(file1)
     root2, tree2 = parse_xml(file2)
@@ -26,6 +26,11 @@ def merge_schedules(file1, file2, output_file):
         for relation in transfer_times2:
             transfer_times1.append(relation)
 
+    for root, name in ((root1, name1), (root2, name2)):
+        if name != "":
+            for departure in root.findall(".//departure"):
+                departure.set("vehicleRefId", f"{name}_{departure.attrib['vehicleRefId']}".lower())
+
     # Merge transitLines
     for line in root2.findall("transitLine"):
         root1.append(line)
@@ -42,9 +47,11 @@ def main():
     parser.add_argument("file1", help="Path to the first XML file")
     parser.add_argument("file2", help="Path to the second XML file")
     parser.add_argument("output_file", help="Path to the output XML file")
+    parser.add_argument("--name1", default="", help="Prefix for departure IDs in file1")
+    parser.add_argument("--name2", default="", help="Prefix for departure IDs in file2")
     args = parser.parse_args()
 
-    merge_schedules(args.file1, args.file2, args.output_file)
+    merge_schedules(args.file1, args.file2, args.output_file, args.name1, args.name2)
 
 if __name__ == "__main__":
     main()

@@ -87,7 +87,7 @@ def add_realistic_transfer_estimates(
 def load_legs(legs_csv_path: str | Path) -> pd.DataFrame:
     """Load MATSim output_legs.csv(.gz) and add parsed numeric columns."""
     legs_csv_path = Path(legs_csv_path)
-    df = pd.read_csv(legs_csv_path, sep=";")
+    df = pd.read_csv(legs_csv_path, sep=";", compression="infer")
 
     required = {"person", "trip_id", "dep_time", "trav_time", "distance", "mode"}
     missing = required.difference(df.columns)

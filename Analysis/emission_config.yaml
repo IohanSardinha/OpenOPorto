@@ -1,0 +1,50 @@
+scenario_name: amp
+
+crs: EPSG:3763
+
+network_file: ../Simulation/input/network.xml
+events_file: ../Simulation/output/output_events.xml.gz 
+output_folder: emissions/output
+
+time_bin_size: 1 h
+grid_size_m: 1000
+
+#Average car age in Portugal is 14.5 years (2012 - Euro Standard Euro 5) (https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_indicadores&indOcorrCod=0007246&contexto=bd&selTab=tab2)
+#Values extracted from European Environment Agency (EEA) emission factors hot emissions (https://www.eea.europa.eu/en/analysis/publications/emep-eea-guidebook-2023/part-b-sectoral-guidance-chapters/1-energy/1-a-combustion/1-a-3-b-i-1/@@download/file)
+emission by vehicle:
+  petrol_car:
+    above 5 km/h: 0.29619 g/km CO, 0.016964 g/km NOx
+  diesel_car:
+    above 10 km/h: 0.012771 g/km CO, 0.408774 g/km NOx
+  lpg_car:
+    above 5 km/h: 0.339472 g/km CO, 0.019016 g/km NOx
+  hev_car:
+    above 20 km/h: 0.019975 g/km CO, 0.018256 g/km NOx
+  
+  cng_bus:
+    above 5 km/h: 0.757629 g/km CO, 1.422956 g/km NOx
+  diesel_bus:
+    above 8 km/h: 0.92343 g/km CO, 5.00083 g/km NOx
+
+  electric:
+    above 0 km/h: 0 g/km CO, 0 g/km NOx
+    
+vehicle id to type:
+  default:
+    #Percentage of vehicle type in portugal rounded to two decimal places (https://www.ine.pt/xportal/xmain?xpid=INE&xpgid=ine_indicadores&indOcorrCod=0007244&contexto=bd&selTab=tab2)
+    chance:
+      diesel_car: 0.52
+      petrol_car: 0.41
+      lpg_car: 0.01
+      electric: 0.04
+      hev_car: 0.02
+
+  includes bus:
+    # STCP has 15 percent of electric buses, 75 percent of CNG and 10 percent of diesel (https://stcp.pt/pt/stcp-em-numeros)
+    chance:
+      cng_bus: 0.75
+      diesel_bus: 0.1
+      electric: 0.15
+  
+  includes subway: electric
+  includes rail: electric
