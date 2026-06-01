@@ -1,12 +1,24 @@
 from ..IMob.ActivityTypes import IMobActivity
 
+def _get_person_field(person, field_name, fallback_index):
+    if isinstance(person, dict):
+        return person[field_name]
+
+    if hasattr(person, field_name):
+        return getattr(person, field_name)
+
+    return person[fallback_index]
+
+
 def PlaceCategoryMapper(cat, person):
     if cat == IMobActivity.WORK:
-        if person[5] == "Worker 1 sec":
+        economic_situation = _get_person_field(person, "economicSituation", 5)
+
+        if economic_situation == "Worker 1 sec":
             return ["workplace_1st_sec"]
-        elif person[5] == "Worker 2 sec":
+        elif economic_situation == "Worker 2 sec":
             return ["workplace_2nd_sec"]
-        elif person[5] == "Worker 3 sec":
+        elif economic_situation == "Worker 3 sec":
             return ["workplace_3rd_sec"]
     
     elif cat == IMobActivity.TAKE_SOMEONE_SOMEWHERE:
@@ -16,9 +28,11 @@ def PlaceCategoryMapper(cat, person):
         return ["groceries","shop"]
     
     elif cat == IMobActivity.SCHOOL:
-        if person[3] in ["1 Basic", "None"]:
+        education_level = _get_person_field(person, "educationLvl", 3)
+
+        if education_level in ["1 Basic", "None"]:
             return ["primary_school"]
-        elif person[3] in ["2 Basic", "3 Basic"]:
+        elif education_level in ["2 Basic", "3 Basic"]:
             return ["secondary_school"]
         else:
             return ["university"]
@@ -38,7 +52,8 @@ def PlaceCategoryMapper(cat, person):
     elif cat == IMobActivity.PERSONAL_ISSUES:
         pass
     elif cat == IMobActivity.LEASURE_OTHER:
-        return ["leisure"]
+        pass
+        #return ["leisure"]
     elif cat == IMobActivity.DOCTOR:
         pass
     elif cat == IMobActivity.LEASURE_COLLECTIVE:

@@ -23,3 +23,6 @@ Analysis/plots/
 Synchronization/*
 !Synchronization/*.py
 Population/cache/
+*.xml
+Analysis/emissions
+Analysis/*.xlsx

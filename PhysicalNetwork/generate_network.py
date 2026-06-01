@@ -85,10 +85,17 @@ class OpenPortoNetworkGenerator:
                 output_vehicles = ".tmp/"+"_".join(list(self.config["PUBLIC_TRANSPORT"].keys())[:i+1])+"joint_vehicles.xml"
 
             if i > 0:
-                nc.logger.info(f"Merging schedules: {creator_config['mapper_config']['outputScheduleFile']} + {last_schedules} into {output_schedule}")
-                merge_schedules(creator_config["mapper_config"]["outputScheduleFile"], last_schedules, output_schedule)
                 
-                nc.logger.info(f"Merging vehicles: {creator_config['vehicles_path']} + {last_vehicles} into {output_vehicles}")
+                curr_name = list(self.config["PUBLIC_TRANSPORT"].keys())[i-1],list(self.config["PUBLIC_TRANSPORT"].keys())[i]
+                if i == 1:
+                    last_name = list(self.config["PUBLIC_TRANSPORT"].keys())[i-1],list(self.config["PUBLIC_TRANSPORT"].keys())[i-1]
+                else:
+                    last_name = ""
+
+                nc.logger.info(f"Merging schedules: {creator_config['mapper_config']['outputScheduleFile']} + {last_schedules} into {output_schedule}")
+                merge_schedules(creator_config["mapper_config"]["outputScheduleFile"], last_schedules, output_schedule, last_name, curr_name)
+                
+                nc.logger.info(f"Merging vehicles: {creator_config['vehicles_path']} + {last_vehicles} into {output_vehicles}", last_name, curr_name)
                 merge_vehicles(creator_config["vehicles_path"], last_vehicles, output_vehicles)
                 last_schedules = output_schedule
                 last_vehicles = output_vehicles

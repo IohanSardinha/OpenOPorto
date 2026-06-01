@@ -3,10 +3,13 @@ import math
 import random
 import datetime
 import pointpats
+import cloudpickle
 import numpy as np
+import multiprocessing as mp
 from shapely.geometry import Point
 from ...ProcessStep import ProcessStep
 from .travelSurvey import TravelSurveyGenericFormat
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 class HeuristicLocationAssigner(ProcessStep):
     
@@ -62,8 +65,12 @@ class HeuristicLocationAssigner(ProcessStep):
                 is_discrete.append(True)
             elif cat!="ALL":
                 ids = self.places.loc[self.places["category"].isin(cat), 'id'].tolist()
-                cand_ids.append(ids)
-                is_discrete.append(True)
+                if len(ids) == 0:
+                    cand_ids.append([None])
+                    is_discrete.append(False)
+                else:
+                    cand_ids.append(ids)
+                    is_discrete.append(True)
             else:
                 cand_ids.append([None])
                 is_discrete.append(False)
@@ -137,7 +144,7 @@ class HeuristicLocationAssigner(ProcessStep):
         startMoment = time.time()
 
         #THIS SHOULD NOT BE LIKE THIS
-        sectionPoly = self.sections[self.sections["section"] == str(person.section)].iloc[0]["geometry"]
+        sectionPoly = self.sections[self.sections["section"] == str(person["section"])].iloc[0]["geometry"]
         home = Point(pointpats.random.poisson(sectionPoly,size=1))
 
         self.coords[self.home_id] = home
@@ -173,58 +180,116 @@ class HeuristicLocationAssigner(ProcessStep):
 
         return out,best_err
     
-    def process(self, persons, trips, boundingBox, attempts=500, max_time_in_seconds=0.3):
 
+    def process(self, persons, trips, boundingBox, attempts=100, max_time_in_seconds=0.3, num_workers=None):
         if not TravelSurveyGenericFormat().validate(trips):
-            raise "Wrong format for travel survey"
-
+            raise ValueError("Wrong format for travel survey")
+        
+        if num_workers is None:
+            num_workers = mp.cpu_count()
+        
+        # Serialize the method once
+        pickled_method = cloudpickle.dumps(self.hybrid_assign)
+        
+        # Prepare work items
+        work_items = []
+        for person in persons.to_dict("records"):
+            person_id = person["match"]
+            work_items.append((
+                pickled_method,
+                person,
+                trips[person_id]["legs"],
+                boundingBox,
+                attempts,
+                max_time_in_seconds,
+                1000  # alpha
+            ))
+        
         count = 0
         exceptions = 0
         failed = []
         errors = []
-        attempts = 100
+        results = {}
+        
         if not self.__silent:
             self.print("0%")
             startMoment = time.perf_counter()
-        for i,person in enumerate(persons.itertuples()):
-            fail = 0
-            for _ in range(attempts):
-                try:
-                    profilePlaces, err = self.hybrid_assign(person, trips[person[-1]]["legs"], boundingBox, alpha=1000, max_time_in_seconds=max_time_in_seconds)
-                    if len(profilePlaces) == 0:
-                        fail = 1
-                    else:
-                        fail = 0
-                        errors.append(err)
-                        break
-                #Should return if the exception is an interruption from keyboard
-                except KeyboardInterrupt as e:
-                    raise e
-                except:
-                    fail = 2
-
-
-            if fail == 1:
-                count += 1
-                failed.append(str(i))
-            elif fail == 2:
-                count += 1
-                exceptions += 1
-                failed.append(f"F->{i}")
-            else:
-                self.results[person[0]] =  profilePlaces
-
-
-            if not self.__silent:
-                elapsed = time.perf_counter() - startMoment
-                time_per_iter = elapsed / (i + 1)
-
-                remaining_seconds = (len(persons) - i - 1) * time_per_iter
-                remaining = datetime.timedelta(seconds=int(remaining_seconds))
-                self.clear()
-                self.print(f"Heuristic Location Assigner\nProcessing{'.'*((i//10%3)+1)}\nCompleted: {round(100*(i+1)/len(persons),4)}%, Failed: {100*count/(i+1)}%, Exceptions: {(100*exceptions/count) if count > 0 else 0}%\nExpected remaining Time: {remaining}")
         
-        errors = np.array(errors)
+        completed = 0
+        with ProcessPoolExecutor(max_workers=num_workers) as executor:
+            future_to_idx = {executor.submit(_process_person_wrapper, *item): i 
+                            for i, item in enumerate(work_items)}
+            
+            for future in as_completed(future_to_idx):
+                idx = future_to_idx[future]
+                try:
+                    person_id, profilePlaces, err, fail = future.result()
+                    
+                    if fail == 1:
+                        count += 1
+                        failed.append(str(idx))
+                    elif fail == 2:
+                        count += 1
+                        exceptions += 1
+                        failed.append(f"F->{idx}")
+                    else:
+                        results[person_id] = profilePlaces
+                        if err is not None:
+                            errors.append(err)
+                    
+                    completed += 1
+                    
+                    if not self.__silent:
+                        elapsed = time.perf_counter() - startMoment
+                        time_per_iter = elapsed / completed
+                        remaining_seconds = (len(work_items) - completed) * time_per_iter
+                        remaining = datetime.timedelta(seconds=int(remaining_seconds))
+                        self.clear()
+                        self.print(f"Heuristic Location Assigner\nProcessing{'.'*((completed//10%3)+1)}\n"
+                                f"Completed: {round(100*completed/len(work_items),4)}%, "
+                                f"Failed: {100*count/completed if completed > 0 else 0}%, "
+                                f"Exceptions: {(100*exceptions/count) if count > 0 else 0}%\n"
+                                f"Expected remaining Time: {remaining}")
+                        
+                except KeyboardInterrupt:
+                    executor.shutdown(wait=False, cancel_futures=True)
+                    raise
+                except Exception as e:
+                    print(f"Error processing person {idx}: {e}")
+                    count += 1
+                    exceptions += 1
+                    failed.append(f"F->{idx}")
+        
+        errors = np.array(errors) if errors else np.array([])
+        self.results = results
+        
         if len(failed) > 0:
             self.print(failed)
+        
         return self.results, errors
+    
+def _process_person_wrapper(pickled_method, person, trips_legs, boundingBox, attempts, max_time_in_seconds, alpha):
+    """Worker that unpickles and calls the method"""
+    hybrid_assign = cloudpickle.loads(pickled_method)
+    
+    fail = 0
+    profilePlaces = []
+    err = None
+    
+    for _ in range(attempts):
+        try:
+            profilePlaces, err = hybrid_assign(
+                person, trips_legs, boundingBox, 
+                alpha=alpha, max_time_in_seconds=max_time_in_seconds
+            )
+            if len(profilePlaces) == 0:
+                fail = 1
+            else:
+                fail = 0
+                break
+        except KeyboardInterrupt:
+            raise
+        except Exception:
+            fail = 2
+    
+    return (person["match"], profilePlaces, err, fail)

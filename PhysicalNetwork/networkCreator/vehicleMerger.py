@@ -12,7 +12,7 @@ def parse_xml(file_path):
     return tree.getroot(), tree
 
 
-def merge_vehicles(file1, file2, output_file):
+def merge_vehicles(file1, file2, output_file, name1="", name2=""):
     root1, tree1 = parse_xml(file1)
     root2, _ = parse_xml(file2)
 
@@ -20,9 +20,18 @@ def merge_vehicles(file1, file2, output_file):
     vehicle_types = []
     vehicles = []
 
-    for root in (root1, root2):
+    for root, name in ((root1, name1), (root2, name2)):
         vehicle_types.extend(root.findall("m:vehicleType", NSMAP))
+        if name != "":
+            for vt in root.findall("m:vehicleType", NSMAP):
+                vt.set("id", f"{name}_{vt.attrib['id']}".lower())
+                
         vehicles.extend(root.findall("m:vehicle", NSMAP))
+        if name != "":
+            for v in root.findall("m:vehicle", NSMAP):
+                v.set("id", f"{name}_{v.attrib['id']}".lower())
+                v.set("type", f"{name}_{v.attrib['type']}".lower())
+                
 
     # Remove all existing children
     for child in list(root1):
@@ -30,7 +39,7 @@ def merge_vehicles(file1, file2, output_file):
 
     # Reinsert in desired order
     for vt in vehicle_types:
-        root1.append(vt)
+        root1.append(vt)    
 
     for v in vehicles:
         root1.append(v)
@@ -49,9 +58,11 @@ def main():
     parser.add_argument("file1")
     parser.add_argument("file2")
     parser.add_argument("output_file")
+    parser.add_argument("--name1", default="", help="Prefix for vehicle types in file1")
+    parser.add_argument("--name2", default="", help="Prefix for vehicle types in file2")
     args = parser.parse_args()
 
-    merge_vehicles(args.file1, args.file2, args.output_file)
+    merge_vehicles(args.file1, args.file2, args.output_file, args.name1, args.name2)
 
 
 if __name__ == "__main__":
