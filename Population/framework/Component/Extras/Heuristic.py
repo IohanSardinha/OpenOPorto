@@ -1,4 +1,19 @@
-from ..IMob.ActivityTypes import IMobActivity
+class IMobActivity:
+    WORK = "work"
+    TAKE_SOMEONE_SOMEWHERE = "take_someone_somewhere"
+    HOME = "home"
+    GROCERIES = "groceries"
+    SCHOOL = "school"
+    AROUND_THE_BLOCK = "around_the_block"
+    WORKOUT = "workout"
+    VISIT_FRIEND_FAMILY = "visit_friend_family"
+    EAT_OUT = "eat_out"
+    OTHER = "other"
+    LEASURE_SPORT_OR_CULURAL = "leasure_sport_or_culural"
+    PERSONAL_ISSUES = "personal_issues"
+    LEASURE_OTHER = "leasure_other"
+    DOCTOR = "doctor"
+    LEASURE_COLLECTIVE = "leasure_collective"
 
 def _get_person_field(person, field_name, fallback_index):
     if isinstance(person, dict):

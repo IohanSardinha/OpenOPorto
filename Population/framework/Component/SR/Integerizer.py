@@ -1,7 +1,14 @@
+from abc import ABC, abstractmethod
 import numpy as np
-from ...ProcessStep import ProcessStep
 
-class DefaultIntegerizer(ProcessStep):
+class Integerizer(ABC):
+    columns = []
+    impossibilities = []
+    @abstractmethod
+    def __call__(self):
+        pass
+
+class DefaultIntegerizer(Integerizer):
     
     def __init__(self, columns=[], impossibilities=[]):
         self.columns = columns
@@ -30,7 +37,7 @@ class DefaultIntegerizer(ProcessStep):
 
         return data
 
-    def process(self, data):
+    def __call__(self, data):
 
         self.continuous = data.copy()
 
@@ -64,14 +71,7 @@ class DefaultIntegerizer(ProcessStep):
             "rmse": rmse,
             "ftr": ftr
         }
-    
-class MonteCarloSamplerIntegerizer(ProcessStep):
-    
-    def __init__(self):
-        raise NotImplementedError("MonteCarloSamplerIntegerizer is not implemented yet.")
 
-    def process(self, data):
-        raise NotImplementedError("MonteCarloSamplerIntegerizer is not implemented yet.")
-    
-    def validate(self, data):
-        raise NotImplementedError("MonteCarloSamplerIntegerizer is not implemented yet.")
+class GibbsIntegerizer(Integerizer):
+    def __init__(self):
+        raise NotImplementedError("GibbsIntegerizer is not implemented yet")

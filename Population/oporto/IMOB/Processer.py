@@ -254,7 +254,7 @@ class IMobProcesser:
                 }
 
     @staticmethod
-    def read(householdsFile, expensesFile,vehiclesFile,incomesFile,individualsFile,passesFile,tripsFile, fix_trips=True):
+    def __read_files(householdsFile, expensesFile,vehiclesFile,incomesFile,individualsFile,passesFile,tripsFile, fix_trips=True):
         households = IMobProcesser.__readHouseholds(householdsFile)
         IMobProcesser.__readExpenses(expensesFile, households)
         IMobProcesser.__readVehicles(vehiclesFile, households)
@@ -270,3 +270,30 @@ class IMobProcesser:
                 genericFormat[id]["legs"] = TripCleaner.fix_trip(genericFormat[id])
         
         return genericFormat
+    
+
+    @staticmethod
+    def read(**kwargs):
+        if "folder" in kwargs:
+            folder = kwargs["folder"]
+            return IMobProcesser.__read_files(
+                kwargs.get("householdsFile", f"{folder}/TBL_alojamento_AMP.csv"),
+                kwargs.get("expensesFile", f"{folder}/TBL_alojamento_despesa_AMP.csv"),
+                kwargs.get("vehiclesFile", f"{folder}/TBL_alojamento_veiculos_AMP.csv"),
+                kwargs.get("incomesFile", f"{folder}/TBL_alojamento_rendimentos_AMP.csv"),
+                kwargs.get("individualsFile", f"{folder}/TBL_individuos_AMP.csv"),
+                kwargs.get("passesFile", f"{folder}/TBL_tipo_de_passe_AMP.csv"),
+                kwargs.get("tripsFile", f"{folder}/TBL_viagens_AMP.csv"),
+                kwargs.get("fix_trips", True)
+            )
+        else:
+            return IMobProcesser.__read_files(
+                kwargs["householdsFile"],
+                kwargs["expensesFile"],
+                kwargs["vehiclesFile"],
+                kwargs["incomesFile"],
+                kwargs["individualsFile"],
+                kwargs["passesFile"],
+                kwargs["tripsFile"],
+                kwargs.get("fix_trips", True)
+            )

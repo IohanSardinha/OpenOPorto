@@ -14,6 +14,7 @@ config = {
         "JSON": "population.json",
         "OUTPUT":"plans.xml",
         "GEOPACKAGE":  ".data/C2021_SECCOES_11A_TRANSFORMED.gpkg",
+        "IMOB_FOLDER":  ".data/IMOB2017",
         "HOUSEHOLDS":  ".data/IMOB2017/TBL_alojamento_AMP.csv",
         "EXPENSES":    ".data/IMOB2017/TBL_alojamento_despesa_AMP.csv",
         "VEHICLES":    ".data/IMOB2017/TBL_alojamento_veiculos_AMP.csv",
@@ -68,7 +69,7 @@ config = {
     },
 
     "MATCH_MAPPER": {
-         ":0-4":"<= 14", 
+         "0-4":"<= 14", 
          "5-9":"<= 14", 
          "10-14":"<= 14", 
          "15-19":"15-24", 

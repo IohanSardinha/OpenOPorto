@@ -1,10 +1,17 @@
 import numpy as np
+import cloudpickle
 import pandas as pd
 from math import prod
 import geopandas as gpd
+from ...misc import cache
 from ipfn.ipfn import ipfn
-from ...ProcessStep import ProcessStep
+import multiprocessing as mp
+from abc import ABC, abstractmethod
+from .Integerizer import Integerizer
 from itertools import combinations, product
+from .SyntheticReconstruction import SyntheticReconstruction
+from concurrent.futures import ProcessPoolExecutor
+from ..ComponentSynthesis import ComponentSynthesis
 
 IMPOSSIBILITIES_VAL = 1e-4
 
@@ -57,60 +64,76 @@ class IPF_Validator():
         sse_a = (rmse_a ** 2) * size_a
         sse_b = (rmse_b ** 2) * size_b
         return np.sqrt((sse_a + sse_b) / (size_a + size_b))
-        
 
-class IPF2DProcess(ProcessStep):
-    def process(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}, impossible_val = IMPOSSIBILITIES_VAL, correction_fac = 1):
+class IPFProcesser(ABC):
 
-        marginals = [data[dim].values for dim in columns]    
-        self.marginals = marginals
-        
-        n_dims = len(columns)
-
-        # Handle 2D case directly
-        shape = tuple(len(sel) for sel in columns)
-        M = np.ones(shape, dtype=float)
-        
-        # Apply impossible combinations
-        for forb in impossibilities:
-            indices = []
-            valid = True
-            for d in range(n_dims):
-                try:
-                    idx = columns[d].index(forb[d])
-                except ValueError:
-                    valid = False
-                    break
-                indices.append(idx)
-            if valid:
-                M[tuple(indices)] = impossible_val
-
-        self.Original_M = M.copy()
-
-        #M *= correction_fac
-
-        # Run IPF with 1D marginals
-        M = ipfn(M, marginals, [[0], [1]]).iteration()
-
-        #M /= correction_fac
-
-        self.pop = M
-        result = self.array_to_dataframe(labels=labels, valueMapper=valueMapper) if asDF else M
-        return result, self.validate(M, marginals, labels)
+    def __init__(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}, impossible_val = IMPOSSIBILITIES_VAL, correction_factor=1):
+        self.data = data
+        self.columns = columns
+        self.impossibilities = impossibilities
+        self.asDF = asDF
+        self.labels = labels
+        self.valueMapper = valueMapper
+        self.impossible_val = impossible_val
+        self.correction_factor = correction_factor
 
     def validate(self, data, marginals, labels):
         return {"RMSE": IPF_Validator.RMSE(data, marginals, labels),
                 "FTR": IPF_Validator.FTR(data, self.Original_M, labels)}
 
-class IPFHighDimProcess(ProcessStep):
-    def process(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}, impossible_val = IMPOSSIBILITIES_VAL, correction_fac = 1):
+    @abstractmethod
+    def __call__(self):
+        pass
+
+class IPF2DProcess(IPFProcesser):
+
+    def __call__(self):
+
+        marginals = [self.data[dim].values for dim in self.columns]    
+        self.marginals = marginals
+        
+        n_dims = len(self.columns)
+
+        # Handle 2D case directly
+        shape = tuple(len(sel) for sel in self.columns)
+        M = np.ones(shape, dtype=float)
+        
+        # Apply impossible combinations
+        for forb in self.impossibilities:
+            indices = []
+            valid = True
+            for d in range(n_dims):
+                try:
+                    idx = self.columns[d].index(forb[d])
+                except ValueError:
+                    valid = False
+                    break
+                indices.append(idx)
+            if valid:
+                M[tuple(indices)] = self.impossible_val
+
+        self.Original_M = M.copy()
+
+        #M *= correction_factor
+
+        # Run IPF with 1D marginals
+        M = ipfn(M, marginals, [[0], [1]]).iteration()
+
+        #M /= correction_factor
+
+        self.pop = M
+
+        return self.pop, self.validate(M, marginals, self.labels)
+
+class IPFHighDimProcess(IPFProcesser):
+    def __call__(self):
         marginals = []
-        for dim in columns:
-            marginals.append(data[dim].values)
+        for dim in self.columns:
+            marginals.append(self.data[dim].values)
         
         self.marginals = marginals
 
-        n_dims = len(columns)
+        n_dims = len(self.columns)
         combs = list(combinations(range(n_dims), n_dims - 1))
         next_marginals = []
         next_dimensions = []
@@ -123,8 +146,8 @@ class IPFHighDimProcess(ProcessStep):
             
             # Apply impossible combinations relevant to current_dims
             
-            allDims = [x for xs in columns for x in xs]
-            temp_forb = [[imp_comb[d] for d in current_dims] for imp_comb in impossibilities]
+            allDims = [x for xs in self.columns for x in xs]
+            temp_forb = [[imp_comb[d] for d in current_dims] for imp_comb in self.impossibilities]
 
             count = {}
             for f in temp_forb:
@@ -134,77 +157,74 @@ class IPFHighDimProcess(ProcessStep):
                 else:
                     count[x] = [1, f]
 
-            ohterDimsProd = prod([len(columns[i]) for i in range(len(columns)) if i not in comb])            
+            ohterDimsProd = prod([len(self.columns[i]) for i in range(len(self.columns)) if i not in comb])            
             
             # Fit (N-1)-dimensional marginal using 1D marginals
             sub_layers = [[i] for i in range(len(current_dims))]
-            #sub_M *= correction_fac
+            #sub_M *= correction_factor
             sub_M = ipfn(sub_M, current_marginals, sub_layers, max_iteration=1000).iteration()
-            #sub_M /= correction_fac
+            #sub_M /= correction_factor
             next_marginals.append(sub_M)
             next_dimensions.append(list(comb))  # Convert to list for ipfn compatibility
         
         # Initialize N-dimensional matrix
-        shape = tuple(len(sel) for sel in columns)
+        shape = tuple(len(sel) for sel in self.columns)
         M = np.ones(shape, dtype=float)
         
         # Apply all N-dimensional impossible combinations
-        for forb in impossibilities:
+        for forb in self.impossibilities:
             indices = []
             for d in range(n_dims):
-                idx = columns[d].index(forb[d])
+                idx = self.columns[d].index(forb[d])
                 indices.append(idx)
-            M[tuple(indices)] = impossible_val
+            M[tuple(indices)] = self.impossible_val
         
         # Prepare layers for N-dimensional IPF
         layers = [list(comb) for comb in combs]
 
         # Run final IPF
         self.Original_M = M.copy()
-        #M *= correction_fac
+        #M *= correction_factor
         M = ipfn(M, next_marginals, layers, max_iteration=1000000).iteration()
-        #M /= correction_fac
+        #M /= correction_factor
         self.pop = M
-        result = self.array_to_dataframe(labels=labels, valueMapper=valueMapper) if asDF else M
-        return result, self.validate(M, marginals, labels)
+        return M, self.validate(M, marginals, self.labels)
 
-    def validate(self, data, marginals, labels):
-        return {"RMSE": IPF_Validator.RMSE(data, marginals, labels=labels),
-                "FTR": IPF_Validator.FTR(data, self.Original_M, labels=labels)}
-
-class IPFPopulationSynthesis(ProcessStep):
+class IPFSynthesis(SyntheticReconstruction):
     
-    def __init__(self, Integerizer:ProcessStep, asDF=False, labels=None, valueMapper={}, correction_fac = 1):
-        self.integerizer = Integerizer
+    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, data, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+        super().__init__(component)
+        self.integerizer = integerizer
+        self.data = data
+        self.columns = integerizer.columns
+        self.impossibilities = integerizer.impossibilities
         self.asDF = asDF
         self.labels = labels
         self.valueMapper = valueMapper
-        self.correction_fac = correction_fac
+        self.correction_factor = correction_factor
+    
+    @staticmethod
+    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, file_path:str, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+        return IPFSynthesis(component, Integerizer, gpd.read_file(file_path), asDF=asDF, labels=labels, valueMapper=valueMapper, correction_factor=correction_factor)
 
-    def fromGeoPackage(self, file_path:str):
-        self.data = gpd.read_file(file_path)
-        return self
+    def synthesize(self, asDF=True):
 
-    def process(self, columns, impossibilities, asDF=True):
-        
-        self.columns = columns
-
-        if len(columns) == 2:
-            self.ipf = IPF2DProcess()
+        if len(self.columns) == 2:
+            self.ipf = IPF2DProcess(self.data, self.columns, self.impossibilities, asDF=asDF, labels=self.labels, valueMapper=self.valueMapper, correction_factor=self.correction_factor)
         else:
-            self.ipf = IPFHighDimProcess()
+            self.ipf = IPFHighDimProcess(self.data, self.columns, self.impossibilities, asDF=asDF, labels=self.labels, valueMapper=self.valueMapper, correction_factor=self.correction_factor)
 
-        data, error = self.ipf.process(self.data, columns, impossibilities, asDF=asDF, labels=self.labels, valueMapper=self.valueMapper, correction_fac=self.correction_fac)
+        data, error = self.ipf()
 
         self.popErr = error
 
-        integerData, int_err = self.integerizer.process(data)
+        integerData, int_err = self.integerizer(data)
 
         self.intErr = int_err
 
         self.pop = integerData
         
-        return integerData if not (self.asDF and asDF) else self.array_to_dataframe(labels=self.labels, valueMapper=self.valueMapper), self.validate(None)
+        return integerData if not (self.asDF and asDF) else self.array_to_dataframe(labels=self.labels, valueMapper=self.valueMapper), self.validate()
 
     def array_to_dataframe(self, labels=None, valueMapper={}):
 
@@ -228,7 +248,7 @@ class IPFPopulationSynthesis(ProcessStep):
 
         return df
 
-    def validate(self, _ ):
+    def validate(self):
         
         return {
                 "ipf":self.popErr,
@@ -238,32 +258,48 @@ class IPFPopulationSynthesis(ProcessStep):
                          "ftr" : IPF_Validator.FTR (self.pop,self.ipf.Original_M, self.labels)
                         }
                 }
-                
-        
 
-class IPFPopulationSynthesisWithSections(IPFPopulationSynthesis):
-    def __init__(self, Integerizer, sectionVar, asDF=False, labels=None, valueMapper={}, correction_fac = 1):
-        super().__init__(Integerizer, asDF=asDF, labels=labels, valueMapper=valueMapper, correction_fac=correction_fac)
+class IPFSynthesisWithSections(IPFSynthesis):
+    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, data, sectionVar, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+        super().__init__(component, integerizer, data, asDF=asDF, labels=labels, valueMapper=valueMapper, correction_factor=correction_factor)
         self.sectionVar = sectionVar
+    
+    @staticmethod
+    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, sectionVar, file_path, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+        self = IPFSynthesisWithSections(component, integerizer, gpd.read_file(file_path), sectionVar, asDF=asDF, labels=labels, valueMapper=valueMapper, correction_factor=correction_factor)
+        self.sectionShapes = self.data[[self.sectionVar,"geometry"]].rename(columns={self.sectionVar:"section"})
+        return self
+    
+    @staticmethod
+    def _multithread_synthesize_wrapper(pickled_method):
+        synthesize = cloudpickle.loads(pickled_method)
+        M, error = synthesize(False)
+        return M, error
 
-    def process(self, columns, impossibilities, asDF=True):
+    def synthesize(self, asDF=True):
         ogData = self.data
         result = {}
         errors = {}
+
+        max_workers = globals().get('__mt_cores__', mp.cpu_count())
+
+        work_items = []
         for _, row in self.data.iterrows():
-            self.data = row
-            M, error = super().process(columns, impossibilities, asDF=False)
-            result[row[self.sectionVar]] = M
-            errors[row[self.sectionVar]] = error
+            worker = IPFSynthesis(self.component, self.integerizer, row, asDF=self.asDF, labels=self.labels, valueMapper=self.valueMapper, correction_factor=self.correction_factor)
+            pickled_method = cloudpickle.dumps(worker.synthesize)
+            work_items.append(pickled_method)
+
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
+            for future in [executor.submit(self._multithread_synthesize_wrapper, item) for item in work_items]:
+                M, error = future.result()
+                section_id = self.data.iloc[len(result)][self.sectionVar]
+                result[section_id] = M
+                errors[section_id] = error
+        
         self.data =  ogData
         self.pop = result
         return result if not (self.asDF and asDF) else self.array_to_dataframe(labels=self.labels, valueMapper=self.valueMapper), errors
     
-    def fromGeoPackage(self, file_path):
-        super().fromGeoPackage(file_path)
-        self.sectionShapes = self.data[[self.sectionVar,"geometry"]].rename(columns={self.sectionVar:"section"})
-        return self
-
     def array_to_dataframe(self, labels=None, valueMapper={}):
         og = self.pop
         df = None

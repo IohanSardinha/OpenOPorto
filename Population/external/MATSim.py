@@ -40,26 +40,24 @@ class MATSimPopulationExporter():
         parts.append('<!DOCTYPE population SYSTEM "http://www.matsim.org/files/dtd/population_v6.dtd">\n')
         parts.append("<population>\n")
 
-        activity_open = lambda leg: f"""\t\t\t<activity type="{leg['activity']}" x="{leg['x']}" y="{leg['y']}" end_time="{leg['arrival']}">\n"""
+
+        activity_open = lambda person,i: f"""\t\t\t<activity type="{person[f'leg_{i}_activity']}" x="{person[f'leg_{i}_x']}" y="{person[f'leg_{i}_y']}" end_time="{person[f'leg_{i}_arrival']}">\n"""
         activity_close = "\t\t\t</activity>\n"
-        leg_open = lambda leg: f"\t\t\t<leg mode=\"{leg['mode']}\">\n"
+        leg_open = lambda person,i: f"\t\t\t<leg mode=\"{person[f'leg_{i}_mode']}\">\n"
         leg_close = "\t\t\t</leg>\n"
 
 
-        for i, person in enumerate(self.population):
-
-            last_activity = person["trips"][0].copy()
-            last_activity["arrival"] = "23:59:59"
-            
+        for i, person in self.population.iterrows():
+                    
             trips_xml = "".join(
-                ["".join([activity_open(leg), activity_close, leg_open(leg), leg_close])
-                for leg in person["trips"]]+[activity_open(last_activity), activity_close]
+                ["".join([activity_open(person, i), activity_close, leg_open(person, i), leg_close])
+                for i in range(person["leg_count"])]+[activity_open({"leg_0_activity": person[f"leg_0_activity"], "leg_0_x": person[f"leg_0_x"], "leg_0_y": person[f"leg_0_y"], "leg_0_arrival": "23:59:59"}, 0), activity_close]
             )
             
             if self.id_builder is None:
                 person_id = "_".join(
                     self.__clean_string(str(v))
-                    for v in person["attributes"].values()
+                    for v in [person[c] for c in self.population.columns if not "leg_" in c]
                 )
             else:
                 person_id = self.id_builder(person)
@@ -69,6 +67,7 @@ class MATSimPopulationExporter():
             parts.append(trips_xml)
             parts.append('\t\t</plan>\n')
             parts.append('\t</person>\n')
+
 
         parts.append("</population>")
 

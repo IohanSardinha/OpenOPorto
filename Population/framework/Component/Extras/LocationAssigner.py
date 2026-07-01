@@ -5,15 +5,36 @@ import datetime
 import pointpats
 import cloudpickle
 import numpy as np
+import pandas as pd
 import multiprocessing as mp
+from pyreproj import Reprojector
 from shapely.geometry import Point
-from ...ProcessStep import ProcessStep
-from .travelSurvey import TravelSurveyGenericFormat
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from ...misc import cache
 
-class HeuristicLocationAssigner(ProcessStep):
+class PlacesGenericFormat():
+    def __init__(self, placesFile, origin_srs="WGS84", target_srs="EPSG:3763"):
+        self.coordinateTransformer = Reprojector().get_transformation_function(from_srs=origin_srs, to_srs=target_srs)
+        self.origin_srs = origin_srs
+        self.target_srs = target_srs
+        self.__places = pd.read_csv(placesFile)
+        self.__places["x"] = self.__places.apply(lambda x: self.coordinateTransformer(x["latitude"],x["longitude"])[0],axis=1)
+        self.__places["y"] = self.__places.apply(lambda x: self.coordinateTransformer(x["latitude"],x["longitude"])[1],axis=1)
+        self.__places = self.__places.reset_index().rename(columns={'index':'id'})
+
+        self.__coords = {}
+        for _, row in self.__places.iterrows():
+            self.__coords[row['id']] = Point(row['x'], row['y'])
+
+    def getPlaces(self):        
+        return self.__places
+
+    def getCoords(self):
+        return self.__coords
+
+class HeuristicLocationAssigner():
     
-    def __init__(self, placesInGenericFormat, sections, placeCategoryMapper, home_id="home", silent=True, print_with_display=False):
+    def __init__(self, placesFile, sections, placeCategoryMapper, home_id="home", silent=True, print_with_display=False):
         if print_with_display:
             from IPython.display import clear_output, display
             self.__clear_output = clear_output
@@ -21,6 +42,7 @@ class HeuristicLocationAssigner(ProcessStep):
         self.__silent=silent
         self.__print_with_display = print_with_display
         self.getPlaceCategory = placeCategoryMapper
+        placesInGenericFormat = PlacesGenericFormat(placesFile)
         self.places = placesInGenericFormat.getPlaces()
         self.coords = placesInGenericFormat.getCoords()
         self.sections = sections
@@ -139,7 +161,7 @@ class HeuristicLocationAssigner(ProcessStep):
                 if err <= alpha:
                     break
             return best_sol, err
-
+    
     def hybrid_assign(self, person, trip, polygon, alpha=1500, max_iters=1000, restarts=100, max_time_in_seconds=1):
         startMoment = time.time()
 
@@ -180,10 +202,7 @@ class HeuristicLocationAssigner(ProcessStep):
 
         return out,best_err
     
-
-    def process(self, persons, trips, boundingBox, attempts=100, max_time_in_seconds=0.3, num_workers=None):
-        if not TravelSurveyGenericFormat().validate(trips):
-            raise ValueError("Wrong format for travel survey")
+    def process(self, population, boundingBox, attempts=100, max_time_in_seconds=0.3, num_workers=None):
         
         if num_workers is None:
             num_workers = mp.cpu_count()
@@ -193,12 +212,15 @@ class HeuristicLocationAssigner(ProcessStep):
         
         # Prepare work items
         work_items = []
-        for person in persons.to_dict("records"):
-            person_id = person["match"]
+        for i, person in enumerate(population.to_dict("records")):
+
+            leg_keys = set(["_".join(key.split("_")[2:]) for key in person.keys() if key.startswith("leg_") and not key == "leg_count"])
+            legs = [{key: person[f"leg_{i}_{key}"] for key in leg_keys} for i in range(person["leg_count"]) if person[f"leg_{i}_activity"] is not None]
+
             work_items.append((
                 pickled_method,
                 person,
-                trips[person_id]["legs"],
+                legs,
                 boundingBox,
                 attempts,
                 max_time_in_seconds,
@@ -223,7 +245,7 @@ class HeuristicLocationAssigner(ProcessStep):
             for future in as_completed(future_to_idx):
                 idx = future_to_idx[future]
                 try:
-                    person_id, profilePlaces, err, fail = future.result()
+                    profilePlaces, err, fail = future.result()
                     
                     if fail == 1:
                         count += 1
@@ -233,7 +255,7 @@ class HeuristicLocationAssigner(ProcessStep):
                         exceptions += 1
                         failed.append(f"F->{idx}")
                     else:
-                        results[person_id] = profilePlaces
+                        results[idx] = profilePlaces
                         if err is not None:
                             errors.append(err)
                     
@@ -266,8 +288,19 @@ class HeuristicLocationAssigner(ProcessStep):
         if len(failed) > 0:
             self.print(failed)
         
-        return self.results, errors
+        return self.match_results(population, results)
     
+    def match_results(self, population, locations):
+
+        for i in range(population["leg_count"].max()):
+            x = [points[i].x if i < len(points) else None for _, points in sorted([(j, p) for j, p in locations.items()], key=lambda x: x[0])]
+            y = [points[i].y if i < len(points) else None for _, points in sorted([(j, p) for j, p in locations.items()], key=lambda x: x[0])]
+            print("x,y:",len(x), len(y))
+            population[f"leg_{i}_x"] = x
+            population[f"leg_{i}_y"] = y
+        
+        return population
+
 def _process_person_wrapper(pickled_method, person, trips_legs, boundingBox, attempts, max_time_in_seconds, alpha):
     """Worker that unpickles and calls the method"""
     hybrid_assign = cloudpickle.loads(pickled_method)
@@ -292,4 +325,4 @@ def _process_person_wrapper(pickled_method, person, trips_legs, boundingBox, att
         except Exception:
             fail = 2
     
-    return (person["match"], profilePlaces, err, fail)
+    return (profilePlaces, err, fail)
