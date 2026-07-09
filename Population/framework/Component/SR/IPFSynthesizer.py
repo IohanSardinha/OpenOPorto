@@ -1,3 +1,9 @@
+"""Iterative proportional fitting based synthetic reconstruction."""
+
+from __future__ import annotations
+
+from typing import Any
+
 import numpy as np
 import cloudpickle
 import pandas as pd
@@ -16,13 +22,45 @@ from ..ComponentSynthesis import ComponentSynthesis
 IMPOSSIBILITIES_VAL = 1e-4
 
 class IPF_Validator():
+    """Validation helpers for IPF and integerization results.
+    
+    Methods
+    -------
+    MAPE(pred, true, labels): Placeholder for mean absolute percentage error validation.
+    MSE(pred, true, labels): Compute mean squared error by marginal dimension.
+    RMSE(pred, true, labels): Compute root mean squared error by marginal dimension.
+    FTR(observed, expected, labels): Compute Freeman-Tukey residuals by marginal dimension.
+    combine_RMSE(rmse_a, size_a, rmse_b, size_b): Combine two RMSE values weighted by sample size.
+    """
 
     @staticmethod
-    def MAPE(pred, true, labels=None):
+    def MAPE(pred: np.ndarray, true: Any, labels: list[str] | None = None) -> Any:
+        """Placeholder for mean absolute percentage error validation.
+        
+        :param pred: Predicted values.
+        :type pred: np.ndarray
+        :param true: True values.
+        :type true: Any
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :returns: MAPE results.
+        :rtype: Any
+        """
         raise NotImplementedError()
 
     @staticmethod #Mean Square Error
-    def MSE(pred, true, labels=None):
+    def MSE(pred: np.ndarray, true: Any, labels: list[str] | None = None) -> dict[str, float]:
+        """Compute mean squared error by marginal dimension.
+        
+        :param pred: Predicted values.
+        :type pred: np.ndarray
+        :param true: True values.
+        :type true: Any
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :returns: MSE results by category.
+        :rtype: dict[str, float]
+        """
         if labels is None:
             labels = [f"dim{i}" for i in range(pred.ndim)]
 
@@ -37,14 +75,36 @@ class IPF_Validator():
         return mse_by_cat
 
     @staticmethod #Root Mean Square Error
-    def RMSE(pred, true, labels=None):
+    def RMSE(pred: np.ndarray, true: Any, labels: list[str] | None = None) -> dict[str, float]:
+        """Compute root mean squared error by marginal dimension.
+        
+        :param pred: Predicted values.
+        :type pred: np.ndarray
+        :param true: True values.
+        :type true: Any
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :returns: RMSE results by category.
+        :rtype: dict[str, float]
+        """
         mse = IPF_Validator.MSE(pred, true, labels)
         for cat in mse:
             mse[cat] = np.sqrt(mse[cat])
         return mse
     
     @staticmethod #Freeman-Tukey-Read 
-    def FTR(observed, expected, labels=None):
+    def FTR(observed: np.ndarray, expected: np.ndarray, labels: list[str] | None = None) -> dict[str, float]:
+        """Compute Freeman-Tukey residuals by marginal dimension.
+        
+        :param observed: Observed values.
+        :type observed: np.ndarray
+        :param expected: Expected values.
+        :type expected: np.ndarray
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :returns: FTR results by category.
+        :rtype: dict[str, float]
+        """
         if labels is None:
             labels = [f"dim{i}" for i in range(observed.ndim)]
         
@@ -60,14 +120,58 @@ class IPF_Validator():
         return ftr_by_cat
 
     @staticmethod
-    def combine_RMSE(rmse_a, size_a, rmse_b, size_b):
+    def combine_RMSE(rmse_a: float, size_a: int, rmse_b: float, size_b: int) -> float:
+        """Combine two RMSE values weighted by sample size.
+        
+        :param rmse_a: RMSE of the first sample.
+        :type rmse_a: float
+        :param size_a: Size of the first sample.
+        :type size_a: int
+        :param rmse_b: RMSE of the second sample.
+        :type rmse_b: float
+        :param size_b: Size of the second sample.
+        :type size_b: int
+        :returns: Combined RMSE.
+        :rtype: float
+        """
         sse_a = (rmse_a ** 2) * size_a
         sse_b = (rmse_b ** 2) * size_b
         return np.sqrt((sse_a + sse_b) / (size_a + size_b))
 
 class IPFProcesser(ABC):
+    """Base class for IPF execution pipelines.
+    
+    Methods
+    -------
+    __call__() -> tuple[np.ndarray, dict[str, Any]]
+        Execute the IPF process and return the resulting matrix and validation metrics.
+    validate(data: np.ndarray, marginals: list[np.ndarray], labels: list[str] | None) -> dict[str, Any]
+        Validate the IPF output against the original marginals
+    """
 
-    def __init__(self, data, columns, impossibilities, asDF=False, labels=None, valueMapper={}, impossible_val = IMPOSSIBILITIES_VAL, correction_factor=1):
+    def __init__(self, data: Any, columns: list[list[Any]], impossibilities: list[tuple[Any, ...]], asDF: bool = False, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None, impossible_val: float = IMPOSSIBILITIES_VAL, correction_factor: float = 1) -> IPFProcesser:
+        """Store IPF input data and configuration.
+        
+        :param data: Input data for IPF.
+        :type data: Any
+        :param columns: Ordered category values per dimension.
+        :type columns: list[list[Any]]
+        :param impossibilities: Forbidden category combinations.
+        :type impossibilities: list[tuple[Any, ...]]
+        :param asDF: Whether to return results as a DataFrame.
+        :type asDF: bool
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :param valueMapper: Optional mapping for category values.
+        :type valueMapper: dict[Any, Any] | None
+        :param impossible_val: Value to assign to impossible combinations.
+        :type impossible_val: float
+        :param correction_factor: Factor to adjust the IPF output.
+        :type correction_factor: float
+        :returns: IPFProcesser instance.
+        :rtype: IPFProcesser
+        """
+        valueMapper = valueMapper or {}
         self.data = data
         self.columns = columns
         self.impossibilities = impossibilities
@@ -77,17 +181,41 @@ class IPFProcesser(ABC):
         self.impossible_val = impossible_val
         self.correction_factor = correction_factor
 
-    def validate(self, data, marginals, labels):
+    def validate(self, data: np.ndarray, marginals: list[np.ndarray], labels: list[str] | None) -> dict[str, Any]:
+        """Validate IPF output against the original marginals.
+        
+        :param data: IPF output matrix.
+        :type data: np.ndarray
+        :param marginals: Original marginal distributions.
+        :type marginals: list[np.ndarray]
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :returns: Validation metrics including RMSE and FTR.
+        :rtype: dict[str, Any]
+        """
         return {"RMSE": IPF_Validator.RMSE(data, marginals, labels),
                 "FTR": IPF_Validator.FTR(data, self.Original_M, labels)}
 
     @abstractmethod
-    def __call__(self):
+    def __call__(self) -> tuple[np.ndarray, dict[str, Any]]:
+        """Execute the IPF process."""
         pass
 
 class IPF2DProcess(IPFProcesser):
+    """Two-dimensional IPF process.
+    
+    Methods
+    -------
+    __call__() -> tuple[np.ndarray, dict[str, Any]]
+        Execute the 2D IPF process and return the resulting matrix and validation metrics.
+    """
 
-    def __call__(self):
+    def __call__(self) -> tuple[np.ndarray, dict[str, Any]]:
+        """Run the 2D IPF routine.
+        
+        :returns: Tuple containing the IPF output matrix and validation metrics.
+        :rtype: tuple[np.ndarray, dict[str, Any]]
+        """
 
         marginals = [self.data[dim].values for dim in self.columns]    
         self.marginals = marginals
@@ -126,7 +254,22 @@ class IPF2DProcess(IPFProcesser):
         return self.pop, self.validate(M, marginals, self.labels)
 
 class IPFHighDimProcess(IPFProcesser):
-    def __call__(self):
+    """Higher-dimensional IPF process.
+    
+    Methods
+    -------
+    __call__() -> tuple[np.ndarray, dict[str, Any]]
+        Execute the high-dimensional IPF process and return the resulting matrix and validation metrics.
+    validate(data: np.ndarray, marginals: list[np.ndarray], labels: list[str] | None) -> dict[str, Any]
+        Validate the IPF output against the original marginals
+    """
+
+    def __call__(self) -> tuple[np.ndarray, dict[str, Any]]:
+        """Run the high-dimensional IPF routine.
+        
+        :returns: Tuple containing the IPF output matrix and validation metrics.
+        :rtype: tuple[np.ndarray, dict[str, Any]]
+        """
         marginals = []
         for dim in self.columns:
             marginals.append(self.data[dim].values)
@@ -191,8 +334,35 @@ class IPFHighDimProcess(IPFProcesser):
         return M, self.validate(M, marginals, self.labels)
 
 class IPFSynthesis(SyntheticReconstruction):
+    """Synthetic reconstruction using IPF plus integerization.
     
-    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, data, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+    Methods
+    ----
+    synthesize(asDF: bool = True) -> tuple[Any, dict[str, Any]]
+        Run IPF, integerize the result, and return validation metrics.
+    """
+    
+    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer: Integerizer, data: Any, asDF: bool = False, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None, correction_factor: float = 1) -> IPFSynthesis:
+        """Configure the IPF synthesizer.
+        
+        :param component: Component synthesis configuration.
+        :type component: ComponentSynthesis.COMPONTENTS
+        :param integerizer: Integerizer instance to convert continuous output to integers.
+        :type integerizer: Integerizer
+        :param data: Input data for IPF.
+        :type data: Any
+        :param asDF: Whether to return results as a DataFrame.
+        :type asDF: bool
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :param valueMapper: Optional mapping for category values.
+        :type valueMapper: dict[Any, Any] | None
+        :param correction_factor: Factor to adjust the IPF output.
+        :type correction_factor: float
+        :returns: IPFSynthesis instance.
+        :rtype: IPFSynthesis
+        """
+        valueMapper = valueMapper or {}
         super().__init__(component)
         self.integerizer = integerizer
         self.data = data
@@ -204,10 +374,37 @@ class IPFSynthesis(SyntheticReconstruction):
         self.correction_factor = correction_factor
     
     @staticmethod
-    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, file_path:str, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer: Integerizer, file_path: str, asDF: bool = False, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None, correction_factor: float = 1) -> IPFSynthesis:
+        """Create an IPF synthesizer from a GeoPackage file.
+        
+        :param component: Component synthesis configuration.
+        :type component: ComponentSynthesis.COMPONTENTS
+        :param integerizer: Integerizer instance to convert continuous output to integers.
+        :type integerizer: Integerizer
+        :param file_path: Path to the GeoPackage file containing input data.
+        :type file_path: str
+        :param asDF: Whether to return results as a DataFrame.
+        :type asDF: bool
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :param valueMapper: Optional mapping for category values.
+        :type valueMapper: dict[Any, Any] | None
+        :param correction_factor: Factor to adjust the IPF output.
+        :type correction_factor: float
+        :returns: IPFSynthesis instance.
+        :rtype: IPFSynthesis
+        """
+        valueMapper = valueMapper or {}
         return IPFSynthesis(component, Integerizer, gpd.read_file(file_path), asDF=asDF, labels=labels, valueMapper=valueMapper, correction_factor=correction_factor)
 
-    def synthesize(self, asDF=True):
+    def synthesize(self, asDF: bool = True) -> tuple[Any, dict[str, Any]]:
+        """Run IPF, integerize the result, and return validation metrics.
+        
+        :param asDF: Whether to return results as a DataFrame.
+        :type asDF: bool
+        :returns: Tuple containing the integerized output and validation metrics.
+        :rtype: tuple[Any, dict[str, Any]]
+        """
 
         if len(self.columns) == 2:
             self.ipf = IPF2DProcess(self.data, self.columns, self.impossibilities, asDF=asDF, labels=self.labels, valueMapper=self.valueMapper, correction_factor=self.correction_factor)
@@ -226,7 +423,17 @@ class IPFSynthesis(SyntheticReconstruction):
         
         return integerData if not (self.asDF and asDF) else self.array_to_dataframe(labels=self.labels, valueMapper=self.valueMapper), self.validate()
 
-    def array_to_dataframe(self, labels=None, valueMapper={}):
+    def array_to_dataframe(self, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None) -> pd.DataFrame:
+        """Convert the synthesized array into a dataframe representation.
+        
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :param valueMapper: Optional mapping for category values.
+        :type valueMapper: dict[Any, Any] | None
+        :returns: DataFrame representation of the synthesized data.
+        :rtype: pd.DataFrame
+        """
+        valueMapper = valueMapper or {}
 
         if labels is None:
             cols = [f"var{i+1}" for i in range(len(self.columns))]
@@ -248,7 +455,12 @@ class IPFSynthesis(SyntheticReconstruction):
 
         return df
 
-    def validate(self):
+    def validate(self) -> dict[str, Any]:
+        """Return the IPF and integerization validation summary.
+        
+        :returns: Dictionary containing validation metrics for IPF and integerization.
+        :rtype: dict[str, Any]
+        """
         
         return {
                 "ipf":self.popErr,
@@ -260,23 +472,90 @@ class IPFSynthesis(SyntheticReconstruction):
                 }
 
 class IPFSynthesisWithSections(IPFSynthesis):
-    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, data, sectionVar, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+
+    """IPF synthesis with support for sectioned data.
+
+    Methods
+    ----
+    synthesize(asDF: bool = True) -> tuple[Any, dict[str, Any]]
+        Run IPF for each section, integerize the results, and return validation metrics.
+    array_to_dataframe(labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None) -> pd.DataFrame
+        Convert the synthesized arrays for all sections into a single dataframe representation.
+    """
+
+    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, data: pd.DataFrame, sectionVar: str, asDF: bool=False, labels: list[str] | None=None, valueMapper: dict[Any, Any] | None=None, correction_factor: float = 1)-> IPFSynthesisWithSections:
+        """Initialize the IPFSynthesisWithSections instance.
+
+        :param component: Component synthesis configuration.
+        :type component: ComponentSynthesis.COMPONTENTS
+        :param integerizer: Integerizer instance to convert continuous output to integers.
+        :type integerizer: Integerizer
+        :param data: Input data for IPF, including section identifiers.
+        :type data: pd.DataFrame
+        :param sectionVar: Column name in `data` that identifies sections.
+        :type sectionVar: str
+        :param asDF: Whether to return results as a DataFrame.
+        :type asDF: bool
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :param valueMapper: Optional mapping for category values.
+        :type valueMapper: dict[Any, Any] | None
+        :param correction_factor: Factor to adjust the IPF output.
+        :type correction_factor: float
+        :returns: IPFSynthesisWithSections instance.
+        :rtype: IPFSynthesisWithSections
+        """
         super().__init__(component, integerizer, data, asDF=asDF, labels=labels, valueMapper=valueMapper, correction_factor=correction_factor)
         self.sectionVar = sectionVar
     
     @staticmethod
-    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, sectionVar, file_path, asDF=False, labels=None, valueMapper={}, correction_factor = 1):
+    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, sectionVar: str, file_path: str, asDF: bool=False, labels: list[str] | None=None, valueMapper: dict[Any, Any] | None=None, correction_factor: float = 1)-> IPFSynthesisWithSections:
+        """Create an IPFSynthesisWithSections instance from a GeoPackage file.
+
+        :param component: Component synthesis configuration.
+        :type component: ComponentSynthesis.COMPONTENTS
+        :param integerizer: Integerizer instance to convert continuous output to integers.
+        :type integerizer: Integerizer
+        :param sectionVar: Column name in the GeoPackage that identifies sections.
+        :type sectionVar: str
+        :param file_path: Path to the GeoPackage file containing input data.
+        :type file_path: str
+        :param asDF: Whether to return results as a DataFrame.
+        :type asDF: bool
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :param valueMapper: Optional mapping for category values.
+        :type valueMapper: dict[Any, Any] | None
+        :param correction_factor: Factor to adjust the IPF output.
+        :type correction_factor: float
+        :returns: IPFSynthesisWithSections instance.
+        :rtype: IPFSynthesisWithSections
+        """
         self = IPFSynthesisWithSections(component, integerizer, gpd.read_file(file_path), sectionVar, asDF=asDF, labels=labels, valueMapper=valueMapper, correction_factor=correction_factor)
         self.sectionShapes = self.data[[self.sectionVar,"geometry"]].rename(columns={self.sectionVar:"section"})
         return self
     
     @staticmethod
-    def _multithread_synthesize_wrapper(pickled_method):
+    def _multithread_synthesize_wrapper(pickled_method)-> tuple[np.ndarray, dict[str, Any]]:
+        """Wrapper to unpickle and execute the synthesize method in a separate process.
+        
+        :param pickled_method: Pickled method to execute.
+        :type pickled_method: bytes
+        :returns: Tuple containing the synthesized matrix and validation metrics.
+        :rtype: tuple[np.ndarray, dict[str, Any]]
+        """
         synthesize = cloudpickle.loads(pickled_method)
         M, error = synthesize(False)
         return M, error
 
-    def synthesize(self, asDF=True):
+    def synthesize(self, asDF: bool = True)-> tuple[Any, dict[str, Any]]:
+        """Run IPF for each section, integerize the results, and return validation metrics.
+
+        :param asDF: Whether to return results as a DataFrame.
+        :type asDF: bool
+        :returns: Tuple containing the integerized output for all sections and validation metrics.
+        :rtype: tuple[Any, dict[str, Any]]
+        """
         ogData = self.data
         result = {}
         errors = {}
@@ -300,7 +579,16 @@ class IPFSynthesisWithSections(IPFSynthesis):
         self.pop = result
         return result if not (self.asDF and asDF) else self.array_to_dataframe(labels=self.labels, valueMapper=self.valueMapper), errors
     
-    def array_to_dataframe(self, labels=None, valueMapper={}):
+    def array_to_dataframe(self, labels: list[str]|None=None, valueMapper: dict[str, str]={})-> pd.DataFrame:
+        """Convert the synthesized arrays for all sections into a single dataframe representation.
+
+        :param labels: Optional labels for dimensions.
+        :type labels: list[str] | None
+        :param valueMapper: Optional mapping for category values.
+        :type valueMapper: dict[str, str]
+        :returns: DataFrame representation of the synthesized data for all sections.
+        :rtype: pd.DataFrame
+        """
         og = self.pop
         df = None
         started = False

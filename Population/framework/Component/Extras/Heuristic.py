@@ -1,4 +1,16 @@
+"""Heuristic activity-to-place mapping helpers."""
+
+from typing import Any
+
 class IMobActivity:
+    """Activity labels used by the IMob heuristic mapper.
+    
+    Methods
+    -------
+    PlaceCategoryMapper(cat: str, person: Any) -> list[str] | str
+        Map an activity category to candidate place categories.
+    """
+
     WORK = "work"
     TAKE_SOMEONE_SOMEWHERE = "take_someone_somewhere"
     HOME = "home"
@@ -15,7 +27,18 @@ class IMobActivity:
     DOCTOR = "doctor"
     LEASURE_COLLECTIVE = "leasure_collective"
 
-def _get_person_field(person, field_name, fallback_index):
+def _get_person_field(person: Any, field_name: str, fallback_index: int) -> Any:
+    """Extract a person field from mappings, objects, or tuples.
+
+    :param person: Person-like object.
+    :type person: Any
+    :param field_name: Preferred attribute or key name.
+    :type field_name: str
+    :param fallback_index: Fallback index for sequence-based records.
+    :type fallback_index: int
+    :returns: The resolved person field value.
+    :rtype: Any
+    """
     if isinstance(person, dict):
         return person[field_name]
 
@@ -25,7 +48,16 @@ def _get_person_field(person, field_name, fallback_index):
     return person[fallback_index]
 
 
-def PlaceCategoryMapper(cat, person):
+def PlaceCategoryMapper(cat: str, person: Any) -> list[str] | str:
+    """Map an activity category to candidate place categories.
+
+    :param cat: Activity category label.
+    :type cat: str
+    :param person: Person-like record used for category refinement.
+    :type person: Any
+    :returns: Matching place categories or ``"ALL"`` when no restriction applies.
+    :rtype: list[str] | str
+    """
     if cat == IMobActivity.WORK:
         economic_situation = _get_person_field(person, "economicSituation", 5)
 

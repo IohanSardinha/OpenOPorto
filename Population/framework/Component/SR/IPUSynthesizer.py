@@ -1,4 +1,8 @@
+"""Iterative proportional updating synthesis placeholder."""
+
 from .SyntheticReconstruction import SyntheticReconstruction
 
 class IPUSinthesis(SyntheticReconstruction):
-    raise NotImplementedError("This class is not implemented yet")
+    """Placeholder for iterative proportional updating synthesis."""
+
+    pass

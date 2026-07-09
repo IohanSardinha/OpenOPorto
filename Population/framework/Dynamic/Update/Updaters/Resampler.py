@@ -1,3 +1,8 @@
+"""Resampling updater placeholder."""
+
 from ..DemographicUpdater import DemographicUpdater
+
 class Resampler(DemographicUpdater):
-    raise NotImplementedError("Resampler is not implemented yet")
+    """Placeholder for resampling based demographic updates."""
+
+    pass

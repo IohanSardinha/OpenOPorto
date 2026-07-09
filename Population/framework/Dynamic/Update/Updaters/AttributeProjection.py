@@ -1,3 +1,8 @@
+"""Attribute projection updater placeholder."""
+
 from ..DemographicUpdater import DemographicUpdater
+
 class AttributeProjector(DemographicUpdater):
-    raise NotImplementedError("AttributeProjector is not implemented yet")
+    """Placeholder for attribute projection based demographic updates."""
+
+    pass

@@ -1,6 +1,15 @@
+"""Probabilistic synthesis contracts."""
+
+from abc import ABC
+
 from .StatisticalLearning import StatisticalLearning
+
 class Probabilistic(StatisticalLearning, ABC):
+    """Abstract base class for probabilistic learning synthesizers."""
+
     pass
 
 class BayesianNetworkSynthesis(Probabilistic):
-    raise NotImplementedError("BayesianNetworkSynthesis is not implemented yet")
+    """Placeholder for Bayesian network based synthesis."""
+
+    pass

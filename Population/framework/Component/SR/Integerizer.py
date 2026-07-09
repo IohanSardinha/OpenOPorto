@@ -1,20 +1,66 @@
+"""Integerization helpers for synthetic reconstruction."""
+
 from abc import ABC, abstractmethod
+from typing import Any
+
 import numpy as np
 
 class Integerizer(ABC):
+    """Abstract base class for integerizing continuous reconstruction output.
+    
+    Call
+    ----
+    __call__(data: np.ndarray) -> tuple[np.ndarray, Any]
+        Convert a continuous matrix into an integerized representation.
+    """
+
     columns = []
     impossibilities = []
     @abstractmethod
-    def __call__(self):
+    def __call__(self, data: np.ndarray) -> tuple[np.ndarray, Any]:
+        """Convert a continuous matrix into an integerized representation.
+
+        :param data: Continuous matrix to integerize.
+        :type data: np.ndarray
+        :returns: Integerized data and validation output.
+        :rtype: tuple[np.ndarray, Any]
+        """
         pass
 
 class DefaultIntegerizer(Integerizer):
+    """Default integerizer that rounds while preserving totals.
     
-    def __init__(self, columns=[], impossibilities=[]):
+    Methods
+    ----
+    __call__(data: np.ndarray) -> tuple[np.ndarray, dict[str, float]]
+        Convert a continuous matrix into an integerized representation.
+    validate(data: np.ndarray) -> dict[str, float]
+        Evaluate the integerized matrix against the continuous source.
+    """
+    
+    def __init__(self, columns: list[Any] | None = None, impossibilities: list[Any] | None = None) -> None:
+        """Store integerization dimensions and forbidden combinations.
+
+        :param columns: Ordered category values per dimension.
+        :type columns: list[Any] | None
+        :param impossibilities: Forbidden category combinations.
+        :type impossibilities: list[Any] | None
+        :returns: ``None``.
+        :rtype: None
+        """
+        columns = columns or []
+        impossibilities = impossibilities or []
         self.columns = columns
         self.impossibilities = impossibilities
 
-    def __setImpossiblesAsZeros(self, data):
+    def __setImpossiblesAsZeros(self, data: np.ndarray) -> np.ndarray:
+        """Redistribute forbidden mass and set impossible cells to zero.
+
+        :param data: Continuous matrix to adjust.
+        :type data: np.ndarray
+        :returns: Adjusted matrix.
+        :rtype: np.ndarray
+        """
         
         index_maps = [{v: i for i, v in enumerate(col)} for col in self.columns]
 
@@ -37,7 +83,14 @@ class DefaultIntegerizer(Integerizer):
 
         return data
 
-    def __call__(self, data):
+    def __call__(self, data: np.ndarray) -> tuple[np.ndarray, dict[str, float]]:
+        """Integerize the provided matrix.
+
+        :param data: Continuous matrix to integerize.
+        :type data: np.ndarray
+        :returns: Integerized matrix and validation metrics.
+        :rtype: tuple[np.ndarray, dict[str, float]]
+        """
 
         self.continuous = data.copy()
 
@@ -57,7 +110,14 @@ class DefaultIntegerizer(Integerizer):
 
         return floors, self.validate(floors)
     
-    def validate(self, data):
+    def validate(self, data: np.ndarray) -> dict[str, float]:
+        """Evaluate the integerized matrix against the continuous source.
+
+        :param data: Integerized matrix to validate.
+        :type data: np.ndarray
+        :returns: Validation metrics.
+        :rtype: dict[str, float]
+        """
         
         diff = data - self.continuous
         rmse = np.sqrt(np.sum(diff ** 2) / diff.size)
@@ -73,5 +133,8 @@ class DefaultIntegerizer(Integerizer):
         }
 
 class GibbsIntegerizer(Integerizer):
-    def __init__(self):
+    """Placeholder for a Gibbs-sampling based integerizer."""
+
+    def __init__(self) -> None:
+        """Create a Gibbs integerizer placeholder."""
         raise NotImplementedError("GibbsIntegerizer is not implemented yet")

@@ -1,3 +1,8 @@
+"""Life course simulation updater placeholder."""
+
 from ..DemographicUpdater import DemographicUpdater
+
 class LifeCourseSimulation(DemographicUpdater):
-    raise NotImplementedError("LifeCourseSimulation is not implemented yet")
+    """Placeholder for life course simulation based demographic updates."""
+
+    pass
