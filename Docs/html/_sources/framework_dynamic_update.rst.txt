@@ -1,0 +1,12 @@
+Update
+======
+
+.. toctree::
+   :maxdepth: 2
+
+   framework_dynamic_update_updaters
+
+.. automodule:: framework.Dynamic.Update.DemographicUpdater
+   :members:
+   :undoc-members:
+   :show-inheritance:

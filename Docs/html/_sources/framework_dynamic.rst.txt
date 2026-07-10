@@ -1,0 +1,12 @@
+Dynamic
+=======
+
+.. toctree::
+   :maxdepth: 2
+
+   framework_dynamic_update
+
+.. automodule:: framework.Dynamic.DynamicPopulationSynthesis
+   :members:
+   :undoc-members:
+   :show-inheritance:

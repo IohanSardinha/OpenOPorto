@@ -1,0 +1,13 @@
+Static
+======
+
+.. toctree::
+   :maxdepth: 2
+
+   framework_static_multiple
+   framework_static_single
+
+.. automodule:: framework.Static.StaticPopulationSynthesis
+   :members:
+   :undoc-members:
+   :show-inheritance:

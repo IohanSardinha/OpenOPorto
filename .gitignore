@@ -4,6 +4,7 @@ __pycache__/
 .data/
 .tmp/
 .venv/
+Population/.sphinx/
 network.xml
 schedule.xml
 vehicles.xml
@@ -26,3 +27,4 @@ Population/cache/
 *.xml
 Analysis/emissions
 Analysis/*.xlsx
+Population/_*

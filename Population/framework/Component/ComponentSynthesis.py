@@ -26,7 +26,7 @@ class ComponentSynthesis(ABC):
 
     COMPONTENTS = Enum("COMPONTENTS", ("Attributes", "Relations", "Activities"))
 
-    def __init__(self, component: COMPONTENTS) -> ComponentSynthesis:
+    def __init__(self, component: COMPONTENTS) -> None:
         """Store the component type handled by this synthesizer.
 
         :param component: Component category handled by the synthesizer.
