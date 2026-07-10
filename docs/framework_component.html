@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Component &#8212; Dynamic Population Synthesis Framework  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Extras" href="framework_component_extras.html" />
+    <link rel="prev" title="Population Synthesis" href="framework_population_synthesis.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="component">
+<h1>Component<a class="headerlink" href="#component" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="framework_component_extras.html">Extras</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_extras.html#framework.Component.Extras.Heuristic.IMobActivity"><code class="docutils literal notranslate"><span class="pre">IMobActivity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_extras.html#framework.Component.Extras.Heuristic.PlaceCategoryMapper"><code class="docutils literal notranslate"><span class="pre">PlaceCategoryMapper()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_extras.html#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner"><code class="docutils literal notranslate"><span class="pre">HeuristicLocationAssigner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_extras.html#framework.Component.Extras.LocationAssigner.PlacesGenericFormat"><code class="docutils literal notranslate"><span class="pre">PlacesGenericFormat</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="framework_component_sampling.html">Sampling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sampling.html#framework.Component.Sampling.SamplingSynthesis.ActivityChainSampler"><code class="docutils literal notranslate"><span class="pre">ActivityChainSampler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sampling.html#framework.Component.Sampling.SamplingSynthesis.Sampling"><code class="docutils literal notranslate"><span class="pre">Sampling</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="framework_component_sr.html">SR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.SyntheticReconstruction.SyntheticReconstruction"><code class="docutils literal notranslate"><span class="pre">SyntheticReconstruction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.Integerizer.DefaultIntegerizer"><code class="docutils literal notranslate"><span class="pre">DefaultIntegerizer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.Integerizer.GibbsIntegerizer"><code class="docutils literal notranslate"><span class="pre">GibbsIntegerizer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.Integerizer.Integerizer"><code class="docutils literal notranslate"><span class="pre">Integerizer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.IPFSynthesizer.IPF2DProcess"><code class="docutils literal notranslate"><span class="pre">IPF2DProcess</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.IPFSynthesizer.IPFHighDimProcess"><code class="docutils literal notranslate"><span class="pre">IPFHighDimProcess</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.IPFSynthesizer.IPFProcesser"><code class="docutils literal notranslate"><span class="pre">IPFProcesser</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.IPFSynthesizer.IPFSynthesis"><code class="docutils literal notranslate"><span class="pre">IPFSynthesis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.IPFSynthesizer.IPFSynthesisWithSections"><code class="docutils literal notranslate"><span class="pre">IPFSynthesisWithSections</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework_component_sr.html#framework.Component.SR.IPFSynthesizer.IPF_Validator"><code class="docutils literal notranslate"><span class="pre">IPF_Validator</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p id="module-framework.Component.ComponentSynthesis">Base component synthesis contracts.</p>
+<p>This module defines the common lifecycle hooks used by component-level
+synthesis strategies.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.CombinedCapable">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.ComponentSynthesis.</span></span><span class="sig-name descname"><span class="pre">CombinedCapable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><span class="pre">COMPONTENTS</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.ComponentSynthesis.CombinedCapable" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#framework.Component.ComponentSynthesis.ComponentSynthesis" title="framework.Component.ComponentSynthesis.ComponentSynthesis"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComponentSynthesis</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Base class for synthesizers that combine multiple components.</p>
+<p>Store the set of components handled by the synthesizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>components</strong> (<em>set</em><em>[</em><a class="reference internal" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS"><em>ComponentSynthesis.COMPONTENTS</em></a><em>]</em>) – Components that can be synthesized together.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.ComponentSynthesis.</span></span><span class="sig-name descname"><span class="pre">ComponentSynthesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><span class="pre">COMPONTENTS</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for component synthesis strategies.</p>
+<p>Concrete implementations should override <a class="reference internal" href="#id2" title="framework.Component.ComponentSynthesis.ComponentSynthesis.synthesize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">synthesize()</span></code></a> and may
+optionally customize <a class="reference internal" href="#id1" title="framework.Component.ComponentSynthesis.ComponentSynthesis.before"><code class="xref py py-meth docutils literal notranslate"><span class="pre">before()</span></code></a> and <a class="reference internal" href="#id0" title="framework.Component.ComponentSynthesis.ComponentSynthesis.after"><code class="xref py py-meth docutils literal notranslate"><span class="pre">after()</span></code></a> hooks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis.before">
+<span class="sig-name descname"><span class="pre">before</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.before" title="Link to this definition">¶</a></dt>
+<dd><p>Pre-synthesis setup logic.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis.synthesize">
+<span class="sig-name descname"><span class="pre">synthesize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.synthesize" title="Link to this definition">¶</a></dt>
+<dd><p>Execute the component synthesis workflow.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis.after">
+<span class="sig-name descname"><span class="pre">after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.after" title="Link to this definition">¶</a></dt>
+<dd><p>Post-process the synthesis result.</p>
+</dd></dl>
+
+<p>Store the component type handled by this synthesizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>component</strong> (<a class="reference internal" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS"><em>COMPONTENTS</em></a>) – Component category handled by the synthesizer.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ComponentSynthesis instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#framework.Component.ComponentSynthesis.ComponentSynthesis" title="framework.Component.ComponentSynthesis.ComponentSynthesis">ComponentSynthesis</a></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">COMPONTENTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS.Activities">
+<span class="sig-name descname"><span class="pre">Activities</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS.Activities" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS.Attributes">
+<span class="sig-name descname"><span class="pre">Attributes</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS.Attributes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS.Relations">
+<span class="sig-name descname"><span class="pre">Relations</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#framework.Component.ComponentSynthesis.ComponentSynthesis.COMPONTENTS.Relations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd><p>Post-process the synthesis result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<em>Any</em>) – Raw result returned by <a class="reference internal" href="#id2" title="framework.Component.ComponentSynthesis.ComponentSynthesis.synthesize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">synthesize()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional tuple indicating whether to replace the result.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[bool, Any] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">before</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd><p>Run pre-synthesis setup logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">synthesize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dd><p>Execute the component synthesis workflow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Synthesized component output.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Dynamic Population Synthesis Framework</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="generate_population.html">Population Generator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_parsing_export.html">Input Parsing and Export</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="api.html">API Reference</a><ul>
+  <li><a href="framework.html">Framework</a><ul>
+      <li>Previous: <a href="framework_population_synthesis.html" title="previous chapter">Population Synthesis</a></li>
+      <li>Next: <a href="framework_component_extras.html" title="next chapter">Extras</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Iohan Sardinha.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/framework_component.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

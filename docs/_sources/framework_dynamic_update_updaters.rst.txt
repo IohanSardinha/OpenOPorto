@@ -1,0 +1,17 @@
+Updaters
+========
+
+.. automodule:: framework.Dynamic.Update.Updaters.AttributeProjection
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Dynamic.Update.Updaters.LifeCourseSimulation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Dynamic.Update.Updaters.Resampler
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,17 @@
+SR
+==
+
+.. automodule:: framework.Component.SR.SyntheticReconstruction
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Component.SR.Integerizer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Component.SR.IPFSynthesizer
+   :members:
+   :undoc-members:
+   :show-inheritance:

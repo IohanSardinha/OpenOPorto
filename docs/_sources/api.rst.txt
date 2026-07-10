@@ -1,0 +1,12 @@
+API Reference
+=============
+
+This page collects the documented modules and classes used by the population
+generator.
+
+.. toctree::
+   :maxdepth: 2
+
+   generate_population
+   framework
+   input_parsing_export
