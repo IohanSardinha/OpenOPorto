@@ -1,0 +1,12 @@
+Population Synthesis
+====================
+
+.. automodule:: framework.PopulationSynthesis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.misc
+   :members:
+   :undoc-members:
+   :show-inheritance:

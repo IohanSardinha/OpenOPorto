@@ -1,0 +1,14 @@
+Component
+=========
+
+.. toctree::
+   :maxdepth: 2
+
+   framework_component_extras
+   framework_component_sampling
+   framework_component_sr
+
+.. automodule:: framework.Component.ComponentSynthesis
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,12 @@
+Multiple
+=========
+
+.. automodule:: framework.Static.Multiple.Merge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Static.Multiple.MultipleComponentSynthesis
+   :members:
+   :undoc-members:
+   :show-inheritance:

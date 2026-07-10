@@ -1,0 +1,7 @@
+Single
+======
+
+.. automodule:: framework.Static.Single.SingleComponentSynthesis
+   :members:
+   :undoc-members:
+   :show-inheritance:

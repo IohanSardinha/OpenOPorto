@@ -1,0 +1,12 @@
+Extras
+======
+
+.. automodule:: framework.Component.Extras.Heuristic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Component.Extras.LocationAssigner
+   :members:
+   :undoc-members:
+   :show-inheritance:
