@@ -4,6 +4,7 @@ __pycache__/
 .data/
 .tmp/
 .venv/
+Population/.sphinx/
 network.xml
 schedule.xml
 vehicles.xml
@@ -15,3 +16,15 @@ test.ipynb
 Simulation/matsim-example-project/
 Simulation/output/
 Simulation/input/
+PhysicalNetwork/unir/*/
+PhysicalNetwork/unir/*.json
+TravelSurvey/data/
+TravelSurvey/*.csv
+Analysis/plots/
+Synchronization/*
+!Synchronization/*.py
+Population/cache/
+*.xml
+Analysis/emissions
+Analysis/*.xlsx
+Population/_*

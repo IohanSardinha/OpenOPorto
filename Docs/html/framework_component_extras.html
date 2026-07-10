@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Extras &#8212; Dynamic Population Synthesis Framework  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sampling" href="framework_component_sampling.html" />
+    <link rel="prev" title="Component" href="framework_component.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-framework.Component.Extras.Heuristic">
+<span id="extras"></span><h1>Extras<a class="headerlink" href="#module-framework.Component.Extras.Heuristic" title="Link to this heading">¶</a></h1>
+<p>Heuristic activity-to-place mapping helpers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.Extras.Heuristic.</span></span><span class="sig-name descname"><span class="pre">IMobActivity</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Activity labels used by the IMob heuristic mapper.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.PlaceCategoryMapper">
+<span class="sig-name descname"><span class="pre">PlaceCategoryMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.PlaceCategoryMapper" title="Link to this definition">¶</a></dt>
+<dd><p>Map an activity category to candidate place categories.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.AROUND_THE_BLOCK">
+<span class="sig-name descname"><span class="pre">AROUND_THE_BLOCK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'around_the_block'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.AROUND_THE_BLOCK" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.DOCTOR">
+<span class="sig-name descname"><span class="pre">DOCTOR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'doctor'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.DOCTOR" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.EAT_OUT">
+<span class="sig-name descname"><span class="pre">EAT_OUT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'eat_out'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.EAT_OUT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.GROCERIES">
+<span class="sig-name descname"><span class="pre">GROCERIES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'groceries'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.GROCERIES" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.HOME">
+<span class="sig-name descname"><span class="pre">HOME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'home'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.HOME" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.LEASURE_COLLECTIVE">
+<span class="sig-name descname"><span class="pre">LEASURE_COLLECTIVE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'leasure_collective'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.LEASURE_COLLECTIVE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.LEASURE_OTHER">
+<span class="sig-name descname"><span class="pre">LEASURE_OTHER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'leasure_other'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.LEASURE_OTHER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.LEASURE_SPORT_OR_CULURAL">
+<span class="sig-name descname"><span class="pre">LEASURE_SPORT_OR_CULURAL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'leasure_sport_or_culural'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.LEASURE_SPORT_OR_CULURAL" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.OTHER">
+<span class="sig-name descname"><span class="pre">OTHER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'other'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.OTHER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.PERSONAL_ISSUES">
+<span class="sig-name descname"><span class="pre">PERSONAL_ISSUES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal_issues'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.PERSONAL_ISSUES" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.SCHOOL">
+<span class="sig-name descname"><span class="pre">SCHOOL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'school'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.SCHOOL" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.TAKE_SOMEONE_SOMEWHERE">
+<span class="sig-name descname"><span class="pre">TAKE_SOMEONE_SOMEWHERE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'take_someone_somewhere'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.TAKE_SOMEONE_SOMEWHERE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.VISIT_FRIEND_FAMILY">
+<span class="sig-name descname"><span class="pre">VISIT_FRIEND_FAMILY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'visit_friend_family'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.VISIT_FRIEND_FAMILY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.WORK">
+<span class="sig-name descname"><span class="pre">WORK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'work'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.WORK" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.IMobActivity.WORKOUT">
+<span class="sig-name descname"><span class="pre">WORKOUT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'workout'</span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.IMobActivity.WORKOUT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="framework.Component.Extras.Heuristic.PlaceCategoryMapper">
+<span class="sig-prename descclassname"><span class="pre">framework.Component.Extras.Heuristic.</span></span><span class="sig-name descname"><span class="pre">PlaceCategoryMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">person</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#framework.Component.Extras.Heuristic.PlaceCategoryMapper" title="Link to this definition">¶</a></dt>
+<dd><p>Map an activity category to candidate place categories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cat</strong> (<em>str</em>) – Activity category label.</p></li>
+<li><p><strong>person</strong> (<em>Any</em>) – Person-like record used for category refinement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Matching place categories or <code class="docutils literal notranslate"><span class="pre">&quot;ALL&quot;</span></code> when no restriction applies.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str] | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-framework.Component.Extras.LocationAssigner">Heuristic location assignment utilities.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.Extras.LocationAssigner.</span></span><span class="sig-name descname"><span class="pre">HeuristicLocationAssigner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">placesFile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">placeCategoryMapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">home_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'home'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_with_display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Assign locations to activity chains using heuristic search.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.hybrid_assign">
+<span class="sig-name descname"><span class="pre">hybrid_assign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">person</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polygon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restarts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time_in_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.hybrid_assign" title="Link to this definition">¶</a></dt>
+<dd><p>Assign locations to one person’s trip chain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">population</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pd.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundingBox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time_in_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.DataFrame</span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.process" title="Link to this definition">¶</a></dt>
+<dd><p>Assign locations to every person in a population table.</p>
+</dd></dl>
+
+<p>Create a heuristic location assigner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>placesFile</strong> (<em>str</em>) – Path to the file containing place data.</p></li>
+<li><p><strong>sections</strong> (<em>pd.DataFrame</em>) – DataFrame containing activity sections.</p></li>
+<li><p><strong>placeCategoryMapper</strong> (<em>Any</em>) – Function to map activities to place categories.</p></li>
+<li><p><strong>home_id</strong> (<em>str</em>) – ID of the home location.</p></li>
+<li><p><strong>silent</strong> (<em>bool</em>) – Whether to run in silent mode.</p></li>
+<li><p><strong>print_with_display</strong> (<em>bool</em>) – Whether to use IPython display for output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of HeuristicLocationAssigner.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner" title="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner">HeuristicLocationAssigner</a></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.build_candidates">
+<span class="sig-name descname"><span class="pre">build_candidates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">person</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.build_candidates" title="Link to this definition">¶</a></dt>
+<dd><p>Build candidate place identifiers for each trip leg.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>person</strong> (<em>Any</em>) – The person for whom to build candidates.</p></li>
+<li><p><strong>trip</strong> (<em>list</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – The trip for which to build candidates.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the start index, candidate IDs, and discrete flags.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int | None, list[list[Any]], list[bool]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.get_pt">
+<span class="sig-name descname"><span class="pre">get_pt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol_pts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.get_pt" title="Link to this definition">¶</a></dt>
+<dd><p>Return the point associated with a leg solution index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>is_discrete</strong> (<em>list</em><em>[</em><em>bool</em><em>]</em>) – List indicating if each leg is discrete.</p></li>
+<li><p><strong>sol_ids</strong> (<em>list</em><em>[</em><em>Any</em><em>]</em>) – List of selected place IDs for discrete legs.</p></li>
+<li><p><strong>sol_pts</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>Any</em><em>]</em>) – Dictionary of sampled points for continuous legs.</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Index of the leg to retrieve.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The point corresponding to the leg index.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">hybrid_assign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">person</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polygon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restarts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time_in_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd><p>Assign locations to one person’s trip chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>person</strong> (<em>Any</em>) – The person for whom to assign locations.</p></li>
+<li><p><strong>trip</strong> (<em>list</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – The trip for which to assign locations.</p></li>
+<li><p><strong>polygon</strong> (<em>Any</em>) – Polygon within which to sample continuous points.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Allowable deviation from target distances.</p></li>
+<li><p><strong>max_iters</strong> (<em>int</em>) – Maximum number of iterations for the search.</p></li>
+<li><p><strong>restarts</strong> (<em>int</em>) – Number of random restarts for the search.</p></li>
+<li><p><strong>max_time_in_seconds</strong> (<em>float</em>) – Maximum allowed time for the search.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the assigned locations and the error.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[list[Any], float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.hybrid_assign_iteration">
+<span class="sig-name descname"><span class="pre">hybrid_assign_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cand_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polygon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMoment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time_in_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.hybrid_assign_iteration" title="Link to this definition">¶</a></dt>
+<dd><p>Run one search iteration for a single person’s trip chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – Number of legs in the trip.</p></li>
+<li><p><strong>start</strong> (<em>int</em><em> | </em><em>None</em>) – Starting index for the search.</p></li>
+<li><p><strong>is_discrete</strong> (<em>list</em><em>[</em><em>bool</em><em>]</em>) – List indicating if each leg is discrete.</p></li>
+<li><p><strong>cand_ids</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>Any</em><em>]</em><em>]</em>) – List of candidate place IDs for discrete legs.</p></li>
+<li><p><strong>targets</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – List of target distances for each leg.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Allowable deviation from target distances.</p></li>
+<li><p><strong>polygon</strong> (<em>Any</em>) – Polygon within which to sample continuous points.</p></li>
+<li><p><strong>max_iters</strong> (<em>int</em>) – Maximum number of iterations for the search.</p></li>
+<li><p><strong>startMoment</strong> (<em>float</em>) – Timestamp when the search started.</p></li>
+<li><p><strong>max_time_in_seconds</strong> (<em>float</em>) – Maximum allowed time for the search.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the best solution and its error.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[tuple[list[Any], dict[int, Any]], float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.match_results">
+<span class="sig-name descname"><span class="pre">match_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">population</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Point</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.match_results" title="Link to this definition">¶</a></dt>
+<dd><p>Write matched coordinates back to the population dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>population</strong> (<em>pd.DataFrame</em>) – Original population dataframe.</p></li>
+<li><p><strong>locations</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>list</em><em>[</em><em>Point</em><em>]</em><em>]</em>) – Dictionary mapping person indices to lists of assigned Points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated population dataframe with assigned coordinates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">population</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundingBox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time_in_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd><p>Assign locations to every person in a population table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>population</strong> (<em>pd.DataFrame</em>) – DataFrame of persons with trip chains.</p></li>
+<li><p><strong>boundingBox</strong> (<em>Any</em>) – Polygon within which to sample continuous points.</p></li>
+<li><p><strong>attempts</strong> (<em>int</em>) – Number of attempts per person.</p></li>
+<li><p><strong>max_time_in_seconds</strong> (<em>float</em>) – Maximum allowed time per person.</p></li>
+<li><p><strong>num_workers</strong> (<em>int</em><em> | </em><em>None</em>) – Number of parallel workers to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame of persons with assigned locations.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.sample_in_annulus">
+<span class="sig-name descname"><span class="pre">sample_in_annulus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Point</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polygon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Point</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.sample_in_annulus" title="Link to this definition">¶</a></dt>
+<dd><p>Sample a point near a target distance inside a polygon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p0</strong> (<em>Point</em>) – Reference point.</p></li>
+<li><p><strong>target</strong> (<em>float</em>) – Target distance from the reference point.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Allowable deviation from the target distance.</p></li>
+<li><p><strong>polygon</strong> (<em>Any</em>) – Polygon within which to sample.</p></li>
+<li><p><strong>attempts</strong> (<em>int</em>) – Number of sampling attempts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A sampled point or None if no valid point found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Point | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_discrete</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol_pts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.HeuristicLocationAssigner.validate" title="Link to this definition">¶</a></dt>
+<dd><p>Score a solution by the average distance error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – Number of legs in the trip.</p></li>
+<li><p><strong>is_discrete</strong> (<em>list</em><em>[</em><em>bool</em><em>]</em>) – List indicating if each leg is discrete.</p></li>
+<li><p><strong>targets</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – List of target distances for each leg.</p></li>
+<li><p><strong>sol_ids</strong> (<em>list</em><em>[</em><em>Any</em><em>]</em>) – List of selected place IDs for discrete legs.</p></li>
+<li><p><strong>sol_pts</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><em>Any</em><em>]</em>) – Dictionary of sampled points for continuous legs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Average distance error across all legs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.PlacesGenericFormat">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.Extras.LocationAssigner.</span></span><span class="sig-name descname"><span class="pre">PlacesGenericFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">placesFile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_srs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'WGS84'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_srs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'EPSG:3763'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.PlacesGenericFormat" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Load a places file and expose transformed coordinates.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.PlacesGenericFormat.getPlaces">
+<span class="sig-name descname"><span class="pre">getPlaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.DataFrame</span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.PlacesGenericFormat.getPlaces" title="Link to this definition">¶</a></dt>
+<dd><p>Return the loaded places table.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.Extras.LocationAssigner.PlacesGenericFormat.getCoords">
+<span class="sig-name descname"><span class="pre">getCoords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Point</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#framework.Component.Extras.LocationAssigner.PlacesGenericFormat.getCoords" title="Link to this definition">¶</a></dt>
+<dd><p>Return the places with transformed coordinates.</p>
+</dd></dl>
+
+<p>Read places and precompute projected coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>placesFile</strong> (<em>str</em>) – Path to a CSV file with columns ‘latitude’, ‘longitude’, and ‘category’.</p></li>
+<li><p><strong>origin_srs</strong> (<em>str</em>) – Source spatial reference system identifier.</p></li>
+<li><p><strong>target_srs</strong> (<em>str</em>) – Target spatial reference system identifier.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of PlacesGenericFormat with loaded places and transformed coordinates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#framework.Component.Extras.LocationAssigner.PlacesGenericFormat" title="framework.Component.Extras.LocationAssigner.PlacesGenericFormat">PlacesGenericFormat</a></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">getCoords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Point</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dd><p>Return the places with transformed coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary mapping place IDs to their transformed coordinates.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[int, Point]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">getPlaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dd><p>Return the loaded places table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame of places with transformed coordinates.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Dynamic Population Synthesis Framework</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="generate_population.html">Population Generator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_parsing_export.html">Input Parsing and Export</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="api.html">API Reference</a><ul>
+  <li><a href="framework.html">Framework</a><ul>
+  <li><a href="framework_component.html">Component</a><ul>
+      <li>Previous: <a href="framework_component.html" title="previous chapter">Component</a></li>
+      <li>Next: <a href="framework_component_sampling.html" title="next chapter">Sampling</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Iohan Sardinha.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/framework_component_extras.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

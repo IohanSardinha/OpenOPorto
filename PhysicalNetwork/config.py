@@ -9,18 +9,30 @@ config = {
     "OSM":{
         "FILE":".tmp/portugal.osm.pbf",
         "URL":"https://download.geofabrik.de/europe/portugal-latest.osm.pbf",
-        "BOUNDING_BOX":(-8.76,41.0764,-8.4155,41.3796),
-        "CROP_FILE":".tmp/porto.osm.pbf",
+        "CROP_RELATION":5396817,
+        "CROP_FILE":".tmp/amp.osm.pbf",
     },  
     "CRS":"EPSG:3763",
     "PUBLIC_TRANSPORT":{
         "STCP":{
+            "PASSENGERS_PER_VEHICLE":103,
             "URL":"https://opendata.porto.digital/dataset/5275c986-592c-43f5-8f87-aabbd4e4f3a4/resource/89a6854f-2ea3-4ba0-8d2f-6558a9df2a98/download/horarios_gtfs_stcp_16_04_2025.zip",
             "DATE":"20250416",
         },
+        "CP_Porto":{
+            "PASSENGERS_PER_VEHICLE":103,
+            "LOCAL_PATH":".tmp/gtfs_cp_porto.zip",
+            "DATE":"20251214",
+        },
         "Metro":{
+            "PASSENGERS_PER_VEHICLE":202,
             "URL":"https://opendata.porto.digital/dataset/15f22603-a216-492a-ab1c-40b1d8aa2f08/resource/becf0bfe-3eda-4adc-9658-4de8592982da/download/___",
             "DATE":"20250918",
         },
+        "UNIR":{
+            "PASSENGERS_PER_VEHICLE":103,
+            "URL":"https://github.com/IohanSardinha/UNIR_GTFS/releases/download/1.0/gtfs_unir.zip",
+            "DATE":"20260101",
+        }
     }
 }

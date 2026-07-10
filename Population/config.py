@@ -1,10 +1,10 @@
 config = {
     "SILENT": False,
     "PRINT_WITH_DISPLAY": False,
-    
+    "CACHE": True,
     "CORRECTION_FACTOR": 1e4,
-    "REDUCTION_FACTOR": 0.05,
-    "BOUNDING_BOX": [-8.76, 41.0764, -8.4155, 41.3796],
+    "REDUCTION_FACTOR": 1,
+    "BOUNDING_BOX": [-9.4070, 40.6869, -7.4707, 41.5435],
     "SECTIONS_VAR": "DTMNFRSEC21",
     "PRIORITY_COLS": "ageGroup",
     "JOIN_COLS": ["ageGroup","educationLvl", "economicSituation","gender"],
@@ -13,7 +13,8 @@ config = {
     "FILES": {
         "JSON": "population.json",
         "OUTPUT":"plans.xml",
-        "GEOPACKAGE":  ".data/C2021_SECCOES_1312_TRANSFORMED.gpkg",
+        "GEOPACKAGE":  ".data/C2021_SECCOES_11A_TRANSFORMED.gpkg",
+        "IMOB_FOLDER":  ".data/IMOB2017",
         "HOUSEHOLDS":  ".data/IMOB2017/TBL_alojamento_AMP.csv",
         "EXPENSES":    ".data/IMOB2017/TBL_alojamento_despesa_AMP.csv",
         "VEHICLES":    ".data/IMOB2017/TBL_alojamento_veiculos_AMP.csv",
@@ -68,7 +69,7 @@ config = {
     },
 
     "MATCH_MAPPER": {
-         ":0-4":"<= 14", 
+         "0-4":"<= 14", 
          "5-9":"<= 14", 
          "10-14":"<= 14", 
          "15-19":"15-24", 

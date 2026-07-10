@@ -28,7 +28,6 @@ class OpenPortoNetworkGenerator:
             "osm_config": osmConfig,
             "mapper_config": mapperConfig,
             "osm_url": self.config["OSM"]["URL"],
-            "osm_crop_bbox": self.config["OSM"]["BOUNDING_BOX"],
             "gtfs_crs": osmConfig["outputCoordinateSystem"],
             "skip_downloads": self.config["SKIP_DOWNLOADS"],
             "skip_cropping": self.config["SKIP_CROPPING"],
@@ -37,12 +36,18 @@ class OpenPortoNetworkGenerator:
             "osm_crop_path": self.config["OSM"]["CROP_FILE"],
         }
 
+        if "BOUNDING_BOX" in self.config["OSM"]:
+            creator_config["osm_crop_bbox"] = self.config["OSM"]["BOUNDING_BOX"]
+        elif "CROP_RELATION" in self.config["OSM"]:
+            creator_config["osm_crop_relation"] = self.config["OSM"]["CROP_RELATION"]
+
         last_schedules = None
         last_vehicles = None
         last_network_path = None
         modesToKeepOnCleanUp = set()
         for i, (name, pt) in enumerate(self.config["PUBLIC_TRANSPORT"].items()):
-            creator_config["gtfs_url"] = pt["URL"]
+            
+            creator_config["gtfs_url"] = pt["URL"] if "URL" in pt else None
             creator_config["gtfs_date"] = pt["DATE"]
             creator_config["gtfs_download_path"] = f".tmp/gtfs_{name.lower()}.zip"
             creator_config["gtfs_path"] = creator_config["gtfs_download_path"]
@@ -56,6 +61,13 @@ class OpenPortoNetworkGenerator:
             creator_config["mapper_config"]["outputScheduleFile"] = f".tmp/{name.lower()}_schedule.xml"
             creator_config["mapper_config"]["outputStreetNetworkFile"] = f".tmp/{name.lower()}_output_street_network.xml"
             
+            restore_downloads_config = None
+            if "LOCAL_PATH" in pt and not "URL" in pt:
+                creator_config["gtfs_download_path"] = pt["LOCAL_PATH"]
+                restore_downloads_config = creator_config["skip_downloads"]
+                creator_config["skip_downloads"] = True
+                
+
             if len(modesToKeepOnCleanUp) > 0:
                 creator_config["mapper_config"]["modesToKeepOnCleanUp"] = ",".join(modesToKeepOnCleanUp|{"car"})
 
@@ -69,14 +81,21 @@ class OpenPortoNetworkGenerator:
                 output_schedule = self.config["OUTPUT_SCHEDULE"]
                 output_vehicles = self.config["OUTPUT_VEHICLES"]
             else:
-                output_schedule = ".tmp/_".join(list(self.config["PUBLIC_TRANSPORT"].keys())[:i+1])+"joint_schedule.xml"
-                output_vehicles = ".tmp/_".join(list(self.config["PUBLIC_TRANSPORT"].keys())[:i+1])+"joint_vehicles.xml"
-            
+                output_schedule = ".tmp/"+"_".join(list(self.config["PUBLIC_TRANSPORT"].keys())[:i+1])+"joint_schedule.xml"
+                output_vehicles = ".tmp/"+"_".join(list(self.config["PUBLIC_TRANSPORT"].keys())[:i+1])+"joint_vehicles.xml"
+
             if i > 0:
-                nc.logger.info(f"Merging schedules: {creator_config['mapper_config']['outputScheduleFile']} + {last_schedules} into {output_schedule}")
-                merge_schedules(creator_config["mapper_config"]["outputScheduleFile"], last_schedules, output_schedule)
                 
-                nc.logger.info(f"Merging vehicles: {creator_config['vehicles_path']} + {last_vehicles} into {output_vehicles}")
+                curr_name = list(self.config["PUBLIC_TRANSPORT"].keys())[i-1],list(self.config["PUBLIC_TRANSPORT"].keys())[i]
+                if i == 1:
+                    last_name = list(self.config["PUBLIC_TRANSPORT"].keys())[i-1],list(self.config["PUBLIC_TRANSPORT"].keys())[i-1]
+                else:
+                    last_name = ""
+
+                nc.logger.info(f"Merging schedules: {creator_config['mapper_config']['outputScheduleFile']} + {last_schedules} into {output_schedule}")
+                merge_schedules(creator_config["mapper_config"]["outputScheduleFile"], last_schedules, output_schedule, last_name, curr_name)
+                
+                nc.logger.info(f"Merging vehicles: {creator_config['vehicles_path']} + {last_vehicles} into {output_vehicles}", last_name, curr_name)
                 merge_vehicles(creator_config["vehicles_path"], last_vehicles, output_vehicles)
                 last_schedules = output_schedule
                 last_vehicles = output_vehicles
@@ -87,7 +106,9 @@ class OpenPortoNetworkGenerator:
             modesToKeepOnCleanUp |= self.find_vehicles(last_vehicles)
 
             last_network_path = creator_config["output_network_path"]
-
+            
+            if restore_downloads_config is not None:
+                creator_config["skip_downloads"] = restore_downloads_config
 
 def load_config(path):
     path = Path(path).resolve()

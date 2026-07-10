@@ -200,7 +200,15 @@ class MATSimNetworkCreator:
             return
         self.logger.info(f"Cropping: {input_path} -> {output_path}")
         self._run(["osmium", "extract", "-b", ",".join(map(str, bbox)), input_path, "-o", output_path])
-    
+
+    def crop_osm_relation(self, input_path, output_path, relation_id, skip_if_exists=True):
+        if skip_if_exists and Path(output_path).exists():
+            self.logger.info(f"Skipping cropping to {output_path}")
+            return
+        self.logger.info(f"Cropping: {input_path} -> {output_path}")
+        self._run(["osmium", "getid", "-r", "-t", input_path, f"r{relation_id}", "-o", ".tmp/boundary.osm"])
+        self._run(["osmium", "extract", "--polygon", ".tmp/boundary.osm", input_path, "-o", output_path])
+
     def create_network(self, engineArgs):
         osm_path = self.config.get("osm_download_path",".tmp/map_full.osm.pbf")
         self.download_file(self.config["osm_url"], osm_path, self.config.get("skip_downloads", False))
@@ -210,6 +218,11 @@ class MATSimNetworkCreator:
             self.crop_osm(osm_path, crop_path, self.config["osm_crop_bbox"], self.config.get("skip_cropping", False))
             osm_path = crop_path
         
+        if "osm_crop_relation" in self.config:
+            crop_path = self.config.get("osm_crop_path",".tmp/map_cropped.osm")
+            self.crop_osm_relation(osm_path, crop_path, self.config["osm_crop_relation"], self.config.get("skip_cropping", False))
+            osm_path = crop_path
+
         if osm_path[-4:] == ".pbf":
             self.pbf_to_osm(osm_path, osm_path[:-4], self.config.get("skip_downloads", False))
             osm_path = osm_path[:-4]

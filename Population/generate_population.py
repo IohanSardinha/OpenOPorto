@@ -1,92 +1,95 @@
+import shutil
 import argparse
 import importlib
-import pandas as pd
 from pathlib import Path
-from pipeline.oporto.IMob.Processer import IMobProcesser
-from pipeline.oporto.misc import build_id
-from pipeline.external.MATSim import MATSimPopulationExporter
-from pipeline.universal.IPF.Integerizer import DefaultIntegerizer
-from pipeline.oporto.data.HeuristicMatcher import PlaceCategoryMapper
-from pipeline.universal.misc import BoundingBoxBuilder, PlacesGenericFormat, JOIN_MODE
-from pipeline.universal.ActivityChain.locationAssigner import HeuristicLocationAssigner
-from pipeline.universal.ActivityChain.defaultActivityMatcher import DefaultActivityMatcher
-from pipeline.universal.IPF.ipfPopulationSynthesizer import IPFPopulationSynthesisWithSections
-from pipeline.pipeline import MultiStepPopulationSynthesis, PostLocationAssignActivityChainMatcher
-from pipeline.oporto.IMob.ActivityTypes import IMobActivity
 
-class OpenOportoPopulationGenerator(MultiStepPopulationSynthesis):
-    def __init__(self, config):
-        self.config = config
+from framework.Static.Multiple.Merge import AttributeMatching
+from framework.Component.SR.IPFSynthesizer import IPFSynthesisWithSections
+from framework.Component.SR.Integerizer import DefaultIntegerizer
+from framework.Component.Sampling.SamplingSynthesis import ActivityChainSampler, Sampling
+from framework.Component.ComponentSynthesis import ComponentSynthesis
+from oporto.IMOB.Processer import IMobProcesser
+from framework.Static.Single.SingleComponentSynthesis import ChainedSingleComponentSynthesis
+from framework.Component.Extras.LocationAssigner import HeuristicLocationAssigner
+from framework.Component.Extras.Heuristic import PlaceCategoryMapper, IMobActivity
+from framework.misc import BoundingBoxBuilder, cache
+from external.MATSim import MATSimPopulationExporter
 
-    def generate_population(self):
-        self.persons = IMobProcesser.read(self.config["FILES"]["HOUSEHOLDS"], self.config["FILES"]["EXPENSES"], self.config["FILES"]["VEHICLES"], self.config["FILES"]["INCOMES"], self.config["FILES"]["INDIVIDUALS"], self.config["FILES"]["PASSES"], self.config["FILES"]["TRIPS"])
-    
-        self.boundingBox = BoundingBoxBuilder().build(*self.config["BOUNDING_BOX"])
+class OpenOportoPopulationGenerator(AttributeMatching):
+    def __init__(self, config_path):
+        self.load(config_path)
 
-        self.places = PlacesGenericFormat(self.config["FILES"]["PLACES"])
+        integerizer_H = DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H"))
 
-        self.ipfMen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("H"), correction_fac=self.config["CORRECTION_FACTOR"])\
-                                                .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
-
-        self.ipfWomen = IPFPopulationSynthesisWithSections(DefaultIntegerizer(self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")), self.config["SECTIONS_VAR"], asDF=True, labels=self.config["COLS"], valueMapper=self.config["DIM_VALUE_MAP"]("M"), correction_fac=self.config["CORRECTION_FACTOR"])\
-                                                .fromGeoPackage(self.config["FILES"]["GEOPACKAGE"])
-
-        assigner = HeuristicLocationAssigner(self.places, self.ipfMen.sectionShapes, PlaceCategoryMapper,IMobActivity.HOME, silent=self.config["SILENT"], print_with_display=self.config["PRINT_WITH_DISPLAY"])
-        self.ActivityChainMatcher = PostLocationAssignActivityChainMatcher(DefaultActivityMatcher(), assigner)
-
-        print(f"Generating OpenOporto Synthetic Population...")
-
-        self.process()
-
-        if "JSON" in self.config["FILES"]:
-            print(f"Exporting synthetic population as JSON to {self.config['FILES']['JSON']}...")
-            self.export(self.config["FILES"]["JSON"])
-
-        MATSimPopulationExporter(self.matched_population, id_builder=build_id).as_XML().export(self.config["FILES"]["OUTPUT"])
-        print(f"Pipeline test population successfully exported to {self.config['FILES']['OUTPUT']}!")
-
-    def process(self):
-        self.PopulationSynthesizer = self.ipfMen
-        self.synthesize((self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H")))
-        menDf = self.synthesized_population
-        menErr = self.synthesis_error
-        menDf["gender"] = "Masculino"
-
-        self.PopulationSynthesizer = self.ipfWomen
-        self.synthesize((self.config["DIMENSIONS"]("M"), self.config["IMPOSSIBILITIES"]("M")))
-        womenDf = self.synthesized_population
-        womenErr = self.synthesis_error
-        womenDf["gender"] = "Feminino"
-
-        self.synthesized_population = pd.concat([menDf, womenDf], ignore_index=False)
-
-        self.synthesized_population = self.synthesized_population[self.synthesized_population["residence"] == "Live in Portugal"]
-
-        self.synthesis_error = {"H": menErr, "M": womenErr}
-
-        self.match(((self.persons,
-                    (self.synthesized_population, self.persons, self.config["JOIN_COLS"], self.config["MATCH_MAPPER"], JOIN_MODE.BOTH, self.config["REDUCTION_FACTOR"], self.config["PRIORITY_COLS"]),
-                    (self.persons, self.boundingBox))))
-
-        return self.matched_population, self.validate()
-
-def load_config(path):
-    path = Path(path).resolve()
-
-    spec = importlib.util.spec_from_file_location("config_module", path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-
-    return module.config
-
-def main():
-    parser = argparse.ArgumentParser(description="Generate a Synthetic Population for OpenOPorto, based on the config file")
-    parser.add_argument("config", help="Path to config file", nargs="?", default="config.py")
-    args = parser.parse_args()
-
-    config = load_config(args.config)
+        sample_size = 0.005
         
-    OpenOportoPopulationGenerator(config).generate_population()
+        ipf_args = (
+            ComponentSynthesis.COMPONTENTS.Attributes,
+            integerizer_H,
+            self.config["SECTIONS_VAR"],
+            self.config["FILES"]["GEOPACKAGE"],
+            True,  # asDF
+            self.config["COLS"],  # labels
+            self.config["DIM_VALUE_MAP"]("H"),  # valueMapper
+            self.config["CORRECTION_FACTOR"],  # correction_factor
+        )
+
+        sample_args = (
+            ComponentSynthesis.COMPONTENTS.Attributes,
+            ChainedSingleComponentSynthesis.FutureResult(0),
+            sample_size
+        )
+
+        self.ipf = ChainedSingleComponentSynthesis({IPFSynthesisWithSections.fromGeoPackage: ipf_args, Sampling: sample_args})
+
+        imob = IMobProcesser().read(folder=self.config["FILES"]["IMOB_FOLDER"])
+
+        ac_sampler = ActivityChainSampler(imob)
+        
+        super().__init__({ComponentSynthesis.COMPONTENTS.Attributes: self.ipf.run,
+                          ComponentSynthesis.COMPONTENTS.Activities: ac_sampler},
+                          self.config["JOIN_COLS"], keyMapper={ComponentSynthesis.COMPONTENTS.Attributes:self.config["MATCH_MAPPER"]}, 
+                                                    prioritizeWhenMissing={ComponentSynthesis.COMPONTENTS.Attributes:self.config["PRIORITY_COLS"]})
+    
+    def run(self):
+        super().run()
+
+        location_assigner = HeuristicLocationAssigner(self.config["FILES"]["PLACES"],
+                                             self.ipf.components[0].sectionShapes, 
+                                             PlaceCategoryMapper, 
+                                             IMobActivity.HOME, 
+                                             False)
+
+
+        self.results = location_assigner.process(self.results,BoundingBoxBuilder().build(*self.config["BOUNDING_BOX"]))
+        
+        return self.results
+
+
+    def load(self, path):
+        path = Path(path).resolve()
+
+        spec = importlib.util.spec_from_file_location("config_module", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        self.config = module.config
+
+    def export(self, path="."):
+        self.results.to_csv(f"{path}/synthetic_population.csv")
+
+        MATSimPopulationExporter(self.results).as_XML().export(f"{path}/population.xml")
+
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Generate a Synthetic Population for OpenOPorto, based on the config file")
+    parser.add_argument("config", help="Path to config file", nargs="?", default="config.py")
+    parser.add_argument("--clear-cache", help="Clear cache before running", action="store_true")
+    args = parser.parse_args()
+
+
+    if args.clear_cache: shutil.rmtree("cache", ignore_errors=True)
+    generator = OpenOportoPopulationGenerator(args.config)
+    generator.results = generator.run()
+    generator.export()
+    print("Done")
