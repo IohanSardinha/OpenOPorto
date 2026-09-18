@@ -486,7 +486,6 @@ class HeuristicLocationAssigner():
         for i in range(population["leg_count"].max()):
             x = [points[i].x if i < len(points) else None for _, points in sorted([(j, p) for j, p in locations.items()], key=lambda x: x[0])]
             y = [points[i].y if i < len(points) else None for _, points in sorted([(j, p) for j, p in locations.items()], key=lambda x: x[0])]
-            print("x,y:",len(x), len(y))
             population[f"leg_{i}_x"] = x
             population[f"leg_{i}_y"] = y
         

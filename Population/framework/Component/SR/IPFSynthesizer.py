@@ -548,6 +548,10 @@ class IPFSynthesisWithSections(IPFSynthesis):
         M, error = synthesize(False)
         return M, error
 
+    def __str__(self):
+        return "IPFSynthesisWithSections"
+
+    @cache
     def synthesize(self, asDF: bool = True)-> tuple[Any, dict[str, Any]]:
         """Run IPF for each section, integerize the results, and return validation metrics.
 

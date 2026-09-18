@@ -19,7 +19,7 @@ class OpenOportoPopulationGenerator(AttributeMatching):
     def __init__(self, config_path):
         self.load(config_path)
 
-        integerizer_H = DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H"))
+        integerizer_H = DefaultIntegerizer(self.config["DIMENSIONS"], self.config["IMPOSSIBILITIES"])
 
         sample_size = 0.005
         
@@ -30,7 +30,7 @@ class OpenOportoPopulationGenerator(AttributeMatching):
             self.config["FILES"]["GEOPACKAGE"],
             True,  # asDF
             self.config["COLS"],  # labels
-            self.config["DIM_VALUE_MAP"]("H"),  # valueMapper
+            self.config["DIM_VALUE_MAP"],  # valueMapper
             self.config["CORRECTION_FACTOR"],  # correction_factor
         )
 

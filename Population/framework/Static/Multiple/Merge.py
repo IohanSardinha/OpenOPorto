@@ -2,6 +2,7 @@
 
 from abc import ABC, abstractmethod
 from typing import Any
+from enum import Enum
 
 import numpy as np
 import pandas as pd
@@ -39,6 +40,15 @@ class PoolMatching():
     pass
 
 class AttributeMatching(MergeSynthesis):
+    class JOIN_MODE(Enum):
+        LEFT = 1
+        RIGHT = 2
+        BOTH = 3
+        def __eq__(self, other):
+            if isinstance(other, int):
+                return self.value == other
+            return super().__eq__(other)
+
     """Match attribute records with activity or relation records.
     
     Methods
@@ -47,14 +57,14 @@ class AttributeMatching(MergeSynthesis):
         Execute the component synthesizers and merge the results.
     """
 
-    def __init__(self, components: dict[str, ComponentSynthesis], joinOn: list[str] | None = None, joinMode: int = 1, keyMapper: dict[Any, Any] | None = None, prioritizeWhenMissing: dict[Any, Any] | None = None) -> None:
+    def __init__(self, components: dict[str, ComponentSynthesis], joinOn: list[str] | None = None, joinMode: int = JOIN_MODE.BOTH, keyMapper: dict[Any, Any] | None = None, prioritizeWhenMissing: dict[Any, Any] | None = None) -> None:
         """Configure join keys and matching preferences.
 
         :param components: Mapping of component names to synthesizers.
         :type components: dict[str, ComponentSynthesis]
         :param joinOn: Fields used to build matching keys.
         :type joinOn: list[str] | None
-        :param joinMode: Matching mode selector.
+        :param joinMode: Matching mode selector (1=LEFT, 2=RIGHT, 3=BOTH), default is 3 (BOTH). An enum is provided for clarity: ``AttributeMatching.JOIN_MODE.LEFT``, ``AttributeMatching.JOIN_MODE.RIGHT``, ``AttributeMatching.JOIN_MODE.BOTH``.
         :type joinMode: int
         :param keyMapper: Optional mapping applied before matching.
         :type keyMapper: dict[Any, Any] | None
@@ -66,7 +76,6 @@ class AttributeMatching(MergeSynthesis):
         super().__init__(components)
         keyMapper = keyMapper or {}
         prioritizeWhenMissing = prioritizeWhenMissing or {}
-        joinOn.remove("gender") #Temporary - testing
         self.joinOn = joinOn
         self.joinMode = joinMode
         self.keyMapper = keyMapper
@@ -248,7 +257,7 @@ class AttributeMatching(MergeSynthesis):
 
         if type(attributes) == pd.DataFrame:
             column_index = {col: idx for idx, col in enumerate(attributes.columns)}
-            return lambda p, k: p[column_index[k]]
+            return lambda p, k: p[column_index[k]] if type(p) is tuple else p.iloc[column_index[k]]
         elif type(attributes) == dict:
             deep = lambda x, keys: x if len(keys) == 0 else deep(x[keys[0]], keys[1:])
             return lambda p, k: deep(p, path)[k] 
@@ -275,9 +284,10 @@ class AttributeMatching(MergeSynthesis):
         attribute_keys = self.__get_keys(attributes)
         attribute_keys.remove("value")
         activity_keys = self.__get_keys(activities)
-        for key in attribute_keys:
-            if key in activity_keys:
-                activity_keys.remove(key)
+        if self.joinMode == self.JOIN_MODE.BOTH:
+            for key in attribute_keys:
+                if key in activity_keys:
+                    activity_keys.remove(key)
 
         max_legs = max([len(activities_accessor_idx(act_idx)["legs"]) for act_idx in matches])
         leg_size = len(activities_accessor_idx(matches[0])["legs"])
@@ -287,14 +297,35 @@ class AttributeMatching(MergeSynthesis):
         for att_idx, act_idx in enumerate(matches):
             person_attributes = attributes_accessor_idx(att_idx)
             person_activities = activities_accessor_idx(act_idx)
-            result = [attributes_accessor(person_attributes, key) for key in attribute_keys] + \
-                     [activities_accessor(person_activities, key) for key in activity_keys] + \
-                     [len(person_activities["legs"])] + \
-                     list(chain(*[leg.values() for leg in person_activities["legs"]])) + \
-                     [None]*(max_legs - len(person_activities["legs"]))*leg_size
+
+            attributes_list = [attributes_accessor(person_attributes, key) for key in attribute_keys]
+
+            activity_attributes_list = [activities_accessor(person_activities, key) for key in activity_keys]
+
+            legs_list = [len(person_activities["legs"])] + \
+                        list(chain(*[leg.values() for leg in person_activities["legs"]])) + \
+                        [None]*(max_legs - len(person_activities["legs"]))*leg_size
+
+            match self.joinMode:
+                case self.JOIN_MODE.LEFT:
+                    result = attributes_list + legs_list
+                case self.JOIN_MODE.RIGHT:
+                    result = activity_attributes_list + legs_list
+                case self.JOIN_MODE.BOTH:
+                    result = attributes_list + activity_attributes_list + legs_list
+            
             results.append(result)
+
+        leg_columns = ["leg_count"] + list(chain(*[["leg_"+str(i)+"_"+key for key in person_activities["legs"][0].keys()] for i in range(max_legs)]))
+
+        match self.joinMode:
+            case self.JOIN_MODE.LEFT:
+                columns = attribute_keys + leg_columns
+            case self.JOIN_MODE.RIGHT:
+                columns = activity_keys + leg_columns
+            case self.JOIN_MODE.BOTH:
+                columns = attribute_keys + activity_keys + leg_columns
         
-        columns = attribute_keys + activity_keys + ["leg_count"] + list(chain(*[["leg_"+str(i)+"_"+key for key in person_activities["legs"][0].keys()] for i in range(max_legs)]))
         return pd.DataFrame(results, columns=columns)
             
 
@@ -332,7 +363,7 @@ class AttributeMatching(MergeSynthesis):
         :rtype: Any
         """
 
-        super().merge()
+        super().merge(results)
         
         #A-C
         if ComponentSynthesis.COMPONTENTS.Attributes in results and\

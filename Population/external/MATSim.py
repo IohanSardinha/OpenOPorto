@@ -62,7 +62,12 @@ class MATSimPopulationExporter():
             else:
                 person_id = self.id_builder(person)
 
+            attributes_xml = "".join([f"\t\t\t<{column}>{value}</{column}>\n" for value, column in [(person[c], c) for c in self.population.columns if not "leg_" in c]])
+
             parts.append(f'\t<person id="person_{i}_{person_id}">\n')
+            parts.append('\t\t<attributes>\n')
+            parts.append(attributes_xml)
+            parts.append('\t\t</attributes>\n')
             parts.append('\t\t<plan selected="yes">\n')
             parts.append(trips_xml)
             parts.append('\t\t</plan>\n')
