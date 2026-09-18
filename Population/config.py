@@ -71,6 +71,8 @@ config = {
     },
 
     "MATCH_MAPPER": {
+         "Male":"Masculino",
+         "Female":"Feminino",
          "0-4":"<= 14", 
          "5-9":"<= 14", 
          "10-14":"<= 14", 
