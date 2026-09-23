@@ -20,9 +20,7 @@ class OpenOportoPopulationGenerator(AttributeMatching):
         self.load(config_path)
 
         integerizer_H = DefaultIntegerizer(self.config["DIMENSIONS"], self.config["IMPOSSIBILITIES"])
-
-        sample_size = 0.005
-        
+ 
         ipf_args = (
             ComponentSynthesis.COMPONTENTS.Attributes,
             integerizer_H,
@@ -37,7 +35,7 @@ class OpenOportoPopulationGenerator(AttributeMatching):
         sample_args = (
             ComponentSynthesis.COMPONTENTS.Attributes,
             ChainedSingleComponentSynthesis.FutureResult(0),
-            sample_size
+            self.config["REDUCTION_FACTOR"]
         )
 
         self.ipf = ChainedSingleComponentSynthesis({IPFSynthesisWithSections.fromGeoPackage: ipf_args, Sampling: sample_args})
