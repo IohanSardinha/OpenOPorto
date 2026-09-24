@@ -371,7 +371,6 @@ class AttributeMatching(MergeSynthesis):
             attribute_to_activities = self.__merge_attributes_to_activities(results[ComponentSynthesis.COMPONTENTS.Attributes],
                                                                      results[ComponentSynthesis.COMPONTENTS.Activities])
             if ComponentSynthesis.COMPONTENTS.Relations not in results:
-                print("AAA")
                 return attribute_to_activities
         #A-C-R
         if ComponentSynthesis.COMPONTENTS.Attributes in results and\
