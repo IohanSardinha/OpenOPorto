@@ -36,7 +36,7 @@ else
     python ../Population/oporto/DataCreator.py --generate-places ../PhysicalNetwork/.tmp/amp.osm --output ../Population/.data/places.csv
 fi
 
-if [ -f "..Population/.data/IMOB2017" ] , then
+if [ -f "../Population/.data/IMOB2017" ] ; then
     echo "You already have the IMOB data. Everything is set up then!"
 else
     echo "\033[1mUnfortunately, the IMOB data is not publicly available, so it cannot be included in this repository.\033[0m"
