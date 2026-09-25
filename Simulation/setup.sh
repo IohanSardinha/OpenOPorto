@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exec > >(tee -a setup.out) 2>&1
+
 if [ "$1" = "clear" ] || [ "$2" = "clear" ] ; then
     echo "Clearing input and output folders..."
     rm -rf ./input/* ./output/*
@@ -84,3 +86,4 @@ else
     echo "java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml"
 fi
 
+exec >/dev/tty 2>&1

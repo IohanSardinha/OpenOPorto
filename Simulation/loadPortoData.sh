@@ -1,3 +1,5 @@
+exec > >(tee -a loadPortoData.out) 2>&1
+
 if [ -f "../Population/.data/C2021_SECCOES_11A.zip" ] ; then
     echo "Census file already exists. Skipping download."
 else
@@ -27,25 +29,6 @@ if [ ! -f "../PhysicalNetwork/.tmp/amp.osm" ] ; then
     cd ../Simulation
 fi
 
-mkdir -p ../Population/.data/IMOB2017
-touch ../Population/.data/IMOB2017/needed.txt
-
-touch ../Population/.data/IMOB2017/TBL_alojamento_AMP.csv.missing
-touch ../Population/.data/IMOB2017/TBL_alojamento_despesa_AMP.csv.missing
-touch ../Population/.data/IMOB2017/TBL_alojamento_veiculos_AMP.csv.missing
-touch ../Population/.data/IMOB2017/TBL_alojamento_rendimentos_AMP.csv.missing
-touch ../Population/.data/IMOB2017/TBL_individuos_AMP.csv.missing
-touch ../Population/.data/IMOB2017/TBL_tipo_de_passe_AMP.csv.missing
-touch ../Population/.data/IMOB2017/TBL_viagens_AMP.csv.missing
-
-echo ".data/IMOB2017/TBL_alojamento_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
-echo ".data/IMOB2017/TBL_alojamento_despesa_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
-echo ".data/IMOB2017/TBL_alojamento_veiculos_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
-echo ".data/IMOB2017/TBL_alojamento_rendimentos_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
-echo ".data/IMOB2017/TBL_individuos_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
-echo ".data/IMOB2017/TBL_tipo_de_passe_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
-echo ".data/IMOB2017/TBL_viagens_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
-
 if [ -f "../Population/.data/places.csv" ] ; then
     echo "Places data already exists. Skipping generation."
 else
@@ -53,8 +36,34 @@ else
     python ../Population/oporto/DataCreator.py --generate-places ../PhysicalNetwork/.tmp/amp.osm --output ../Population/.data/places.csv
 fi
 
+if [ -f "..Population/.data/IMOB2017" ] , then
+    echo "You already have the IMOB data. Everything is set up then!"
+else
+    echo "\033[1mUnfortunately, the IMOB data is not publicly available, so it cannot be included in this repository.\033[0m"
+    echo "\033[1mPlease refer to the README for instructions on how to obtain and paste it in the Population/.data folder.\033[0m"
+
+    mkdir -p ../Population/.data/IMOB2017
+    touch ../Population/.data/IMOB2017/needed.txt
+
+    touch ../Population/.data/IMOB2017/TBL_alojamento_AMP.csv.missing
+    touch ../Population/.data/IMOB2017/TBL_alojamento_despesa_AMP.csv.missing
+    touch ../Population/.data/IMOB2017/TBL_alojamento_veiculos_AMP.csv.missing
+    touch ../Population/.data/IMOB2017/TBL_alojamento_rendimentos_AMP.csv.missing
+    touch ../Population/.data/IMOB2017/TBL_individuos_AMP.csv.missing
+    touch ../Population/.data/IMOB2017/TBL_tipo_de_passe_AMP.csv.missing
+    touch ../Population/.data/IMOB2017/TBL_viagens_AMP.csv.missing
+
+    echo ".data/IMOB2017/TBL_alojamento_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
+    echo ".data/IMOB2017/TBL_alojamento_despesa_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
+    echo ".data/IMOB2017/TBL_alojamento_veiculos_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
+    echo ".data/IMOB2017/TBL_alojamento_rendimentos_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
+    echo ".data/IMOB2017/TBL_individuos_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
+    echo ".data/IMOB2017/TBL_tipo_de_passe_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
+    echo ".data/IMOB2017/TBL_viagens_AMP.csv\n" >> ../Population/.data/IMOB2017/needed.txt
+
+fi
+
 echo ""
 echo "Public data for Porto has been successfully loaded and processed to Population/.data\n"
 
-echo "\033[1mUnfortunately, the IMOB data is not publicly available, so it cannot be included in this repository.\033[0m"
-echo "\033[1mPlease refer to the README for instructions on how to obtain and paste it in the Population/.data folder.\033[0m"
+exec >/dev/tty 2>&1
