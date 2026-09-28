@@ -76,7 +76,7 @@ class OpenOportoPopulationGenerator(AttributeMatching):
     def export(self, path="."):
         self.results.to_csv(f"{path}/synthetic_population.csv")
 
-        MATSimPopulationExporter(self.results).as_XML().export(f"{path}/population.xml")
+        MATSimPopulationExporter(self.results).as_XML().export(f"{path}/plans.xml")
 
 
 if __name__ == "__main__":
