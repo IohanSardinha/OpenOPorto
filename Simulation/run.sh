@@ -6,10 +6,10 @@ if [ "$1" = "--memory" ]; then
     fi
     MEMORY=$2
     echo "Running MATSim with memory allocation: $MEMORY"
-    echo "java -Xmx"$MEMORY" -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml"
-    java -Xmx"$MEMORY" -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml
+    echo "java -Xmx"$MEMORY" -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar --config=input/config.xml"
+    java -Xmx"$MEMORY" -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar --config=input/config.xml
 else
     echo "Running MATSim with default memory allocation"
-    echo "java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml"
-    java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml
+    echo "java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar --config=input/config.xml"
+    java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar --config=input/config.xml
 fi

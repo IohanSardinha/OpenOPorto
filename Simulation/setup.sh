@@ -80,10 +80,10 @@ echo "Setup complete. You can now run the MATSim simulation."
 
 if [ "$1" = "run" ] || [ "$2" = "run" ] ; then
     echo "Running MATSim simulation..."
-    java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml
+    sh run.sh
 else
     echo "To run the simulation, execute: "
-    echo "java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar input/config.xml"
+    echo "java -jar matsim-example-project/matsim-example-project-0.0.1-SNAPSHOT.jar --config=input/config.xml"
 fi
 
 exec >/dev/tty 2>&1
