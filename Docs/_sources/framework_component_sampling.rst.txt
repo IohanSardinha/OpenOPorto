@@ -1,7 +1,0 @@
-Sampling
-========
-
-.. automodule:: framework.Component.Sampling.SamplingSynthesis
-   :members:
-   :undoc-members:
-   :show-inheritance:

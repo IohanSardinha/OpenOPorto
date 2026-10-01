@@ -45,7 +45,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>components</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.ComponentSynthesis" title="framework.Component.ComponentSynthesis.ComponentSynthesis"><em>ComponentSynthesis</em></a><em>]</em>) – Mapping of component names to synthesizers.</p></li>
 <li><p><strong>joinOn</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Fields used to build matching keys.</p></li>
-<li><p><strong>joinMode</strong> (<em>int</em>) – Matching mode selector.</p></li>
+<li><p><strong>joinMode</strong> (<em>int</em>) – Matching mode selector (1=LEFT, 2=RIGHT, 3=BOTH), default is 3 (BOTH). An enum is provided for clarity: <code class="docutils literal notranslate"><span class="pre">AttributeMatching.JOIN_MODE.LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">AttributeMatching.JOIN_MODE.RIGHT</span></code>, <code class="docutils literal notranslate"><span class="pre">AttributeMatching.JOIN_MODE.BOTH</span></code>.</p></li>
 <li><p><strong>keyMapper</strong> (<em>dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – Optional mapping applied before matching.</p></li>
 <li><p><strong>prioritizeWhenMissing</strong> (<em>dict</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>) – Fallback priorities when keys are missing.</p></li>
 </ul>
