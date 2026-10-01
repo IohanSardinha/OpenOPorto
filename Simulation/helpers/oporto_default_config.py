@@ -53,9 +53,8 @@ f"""<?xml version="1.0" ?>
 		<!-- "start/endTime" of MobSim (00:00:00 == take earliest activity time/ run as long as active vehicles exist) -->
 		<param name="startTime" value="00:00:00" />
 		<param name="endTime" value="23:59:59" />
-		<param name="flowCapacityFactor" value="0.1" />
 		<param name="mainMode" value="{','.join(config.get("transitModes", [])+['car'])}" />
-		<param name = "snapshotperiod"	value = "00:00:00"/> <!-- 00:00:00 means NO snapshot writing -->
+		<param name = "snapshotperiod"	value = "23:59:59"/> <!-- 00:00:00 means NO snapshot writing -->
 	</module>
 
 	<module name="scoring">
@@ -87,7 +86,7 @@ f"""<?xml version="1.0" ?>
 	</module>
 
 	<module name="replanning">
-		<param name="maxAgentPlanMemorySize" value="0" /> <!-- 0 means unlimited -->
+		<param name="maxAgentPlanMemorySize" value="5" /> <!-- 0 means unlimited -->
 
 		<param name="ModuleProbability_1" value="0.6" />
 		<param name="Module_1" value="BestScore" />
