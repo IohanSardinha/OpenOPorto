@@ -19,10 +19,8 @@ class OpenOportoPopulationGenerator(AttributeMatching):
     def __init__(self, config_path):
         self.load(config_path)
 
-        integerizer_H = DefaultIntegerizer(self.config["DIMENSIONS"]("H"), self.config["IMPOSSIBILITIES"]("H"))
-
-        sample_size = 0.005
-        
+        integerizer_H = DefaultIntegerizer(self.config["DIMENSIONS"], self.config["IMPOSSIBILITIES"])
+ 
         ipf_args = (
             ComponentSynthesis.COMPONTENTS.Attributes,
             integerizer_H,
@@ -30,14 +28,14 @@ class OpenOportoPopulationGenerator(AttributeMatching):
             self.config["FILES"]["GEOPACKAGE"],
             True,  # asDF
             self.config["COLS"],  # labels
-            self.config["DIM_VALUE_MAP"]("H"),  # valueMapper
+            self.config["DIM_VALUE_MAP"],  # valueMapper
             self.config["CORRECTION_FACTOR"],  # correction_factor
         )
 
         sample_args = (
             ComponentSynthesis.COMPONTENTS.Attributes,
             ChainedSingleComponentSynthesis.FutureResult(0),
-            sample_size
+            self.config["REDUCTION_FACTOR"]
         )
 
         self.ipf = ChainedSingleComponentSynthesis({IPFSynthesisWithSections.fromGeoPackage: ipf_args, Sampling: sample_args})
@@ -78,7 +76,7 @@ class OpenOportoPopulationGenerator(AttributeMatching):
     def export(self, path="."):
         self.results.to_csv(f"{path}/synthetic_population.csv")
 
-        MATSimPopulationExporter(self.results).as_XML().export(f"{path}/population.xml")
+        MATSimPopulationExporter(self.results).as_XML().export(f"{path}/plans.xml")
 
 
 if __name__ == "__main__":

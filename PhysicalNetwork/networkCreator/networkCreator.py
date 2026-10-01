@@ -96,8 +96,8 @@ class PT2MATSimWrapper(NetworkCreatorEngine):
     def create_unmapped_schedule(self, GTFS_path, date, crs, schedule_output_path, vehicles_output_path):
         self._run(["java", "-cp", ".tmp/pt2matsim.jar:libs", "org.matsim.pt2matsim.run.Gtfs2TransitSchedule", GTFS_path, date, crs, schedule_output_path, vehicles_output_path])    
     
-    def map_schedule(self, mapper_config_path):
-        self._run(["java", "-cp", ".tmp/pt2matsim.jar", "org.matsim.pt2matsim.run.PublicTransitMapper", mapper_config_path])
+    def map_schedule(self, mapper_config_path, merged=False):
+        self._run(["java"] + (["-Xmx4g"] if merged else []) + ["-cp", ".tmp/pt2matsim.jar", "org.matsim.pt2matsim.run.PublicTransitMapper", mapper_config_path])
 
     def createNetwork(self, osm_path, output_network_path, config):
 
@@ -149,7 +149,7 @@ class PT2MATSimWrapper(NetworkCreatorEngine):
         
         # Map the metro schedule to the network
         self.logger.info(f"Mapping schedule to final network: {mapperConfig['outputNetworkFile']}")
-        self.map_schedule(mapper_config_path)
+        self.map_schedule(mapper_config_path, config.get("mapper_merged", False))
 
 
 class MATSimNetworkCreator:
