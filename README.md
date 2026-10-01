@@ -88,3 +88,16 @@ Another script: `run.sh` is also provided, that just calls MATSim and starts the
 - Java openjdk 17.0.17 (build 17.0.17+10-Ubuntu-124.04)
 - pt2matsim 24.4
 - osmium 1.16.0 (libosmium 2.20.0)
+
+#### Simulation ran on following desktop
+OS: Ubuntu 20.04.6 LTS
+Kernel: 5.15.0-139-generic
+CPU: 13th Gen Intel(R) Core(TM) i7-13700K
+CPU cores/threads: 24
+RAM: 62Gi
+GPU: Intel Corporation Device a780 (rev 04)
+NVIDIA Corporation Device 2230 (rev a1)
+Storage:
+NAME      SIZE MODEL                  TYPE
+nvme0n1   3,7T WD_BLACK SN850X 4000GB disk
+Java Heap Size: 50G
