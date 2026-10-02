@@ -44,7 +44,7 @@ f"""<?xml version="1.0" ?>
 
 	<module name="controller">
 		<param name= "routingAlgorithmType" value= "AStarLandmarks" />
-        <param name="eventsFileFormat" value="xml.gz"/>
+        <param name="eventsFileFormat" value="xml"/>
         <param name="writeEventsInterval" value="{config.get("writeEventsInterval", "0")}" />
 		<param name="outputDirectory" value="{config.get("outputDirectory", "./output")}" />
 		<param name="firstIteration" value="{config.get("firstIteration", "0")}" />
