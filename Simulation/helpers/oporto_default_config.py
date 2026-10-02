@@ -44,6 +44,8 @@ f"""<?xml version="1.0" ?>
 
 	<module name="controller">
 		<param name= "routingAlgorithmType" value= "AStarLandmarks" />
+        <parameter name="eventsFileFormat" value="xml.gz"/>
+        <parameter name="writeEventsInterval" value="{config.get("writeEventsInterval", "0")}" />
 		<param name="outputDirectory" value="{config.get("outputDirectory", "./output")}" />
 		<param name="firstIteration" value="{config.get("firstIteration", "0")}" />
 		<param name="lastIteration" value="{config.get("lastIteration", "10")}" />
@@ -54,7 +56,8 @@ f"""<?xml version="1.0" ?>
 		<param name="startTime" value="00:00:00" />
 		<param name="endTime" value="23:59:59" />
 		<param name="mainMode" value="{','.join(config.get("transitModes", [])+['car'])}" />
-		<param name = "snapshotperiod"	value = "23:59:59"/> <!-- 00:00:00 means NO snapshot writing -->
+		<param name = "snapshotperiod"	value = "{config.get("snapshotperiod", "1000")}"/> <!-- 00:00:00 means NO snapshot writing -->
+        <parameter name="numberOfThreads" value="{config.get("numberOfThreads", "8")}"/>
 	</module>
 
 	<module name="scoring">
@@ -86,7 +89,7 @@ f"""<?xml version="1.0" ?>
 	</module>
 
 	<module name="replanning">
-		<param name="maxAgentPlanMemorySize" value="5" /> <!-- 0 means unlimited -->
+		<param name="maxAgentPlanMemorySize" value="{config.get("maxAgentPlanMemorySize", "1")}" /> <!-- 0 means unlimited -->
 
 		<param name="ModuleProbability_1" value="0.6" />
 		<param name="Module_1" value="BestScore" />
