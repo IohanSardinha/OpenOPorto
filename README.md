@@ -101,4 +101,4 @@ NVIDIA Corporation Device 2230 (rev a1)<br>
 Storage:<br>
 NAME      SIZE MODEL                  TYPE<br>
 nvme0n1   3,7T WD_BLACK SN850X 4000GB disk<br>
-Java Heap Size: 50G<br>
+Java Heap Size: Min: 52GB Max 56GB<br>

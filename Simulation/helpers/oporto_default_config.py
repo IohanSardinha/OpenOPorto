@@ -23,8 +23,8 @@ f"""<?xml version="1.0" ?>
 <config>
 
 	<module name="global">
-		<param name="randomSeed" value="4711" />
-		<param name="coordinateSystem" value="Atlantis" />
+		<param name="randomSeed" value="{config.get("randomSeed", "4711")}" />
+		<param name="coordinateSystem" value="{config.get("coordinateSystem", "Atlantis")}" />
 	</module>
 
 	<module name="network">
@@ -43,8 +43,8 @@ f"""<?xml version="1.0" ?>
 	</module>
 
 	<module name="controller">
-		<param name= "routingAlgorithmType" value= "AStarLandmarks" />
-        <param name="eventsFileFormat" value="xml"/>
+		<param name= "routingAlgorithmType" value= "{config.get("routingAlgorithmType", "Dijkstra")}" />
+        <param name="eventsFileFormat" value="{config.get("eventsFileFormat", "xml")}" />
         <param name="writeEventsInterval" value="{config.get("writeEventsInterval", "0")}" />
 		<param name="outputDirectory" value="{config.get("outputDirectory", "./output")}" />
 		<param name="firstIteration" value="{config.get("firstIteration", "0")}" />
@@ -53,35 +53,34 @@ f"""<?xml version="1.0" ?>
 
 	<module name="qsim">
 		<!-- "start/endTime" of MobSim (00:00:00 == take earliest activity time/ run as long as active vehicles exist) -->
-		<param name="startTime" value="00:00:00" />
-		<param name="endTime" value="23:59:59" />
+		<param name="startTime" value="{config.get("startTime", "00:00:00")}" />
+		<param name="endTime" value="{config.get("endTime", "23:59:59")}" />
 		<param name="mainMode" value="{','.join(config.get("transitModes", [])+['car'])}" />
-		<param name = "snapshotperiod"	value = "{config.get("snapshotperiod", "1000")}"/> <!-- 00:00:00 means NO snapshot writing -->
-        <param name="numberOfThreads" value="{config.get("numberOfThreads", "8")}"/>
+		<param name = "snapshotperiod"	value = "{config.get("snapshotperiod", "0")}"/> <!-- 00:00:00 means NO snapshot writing -->
+        <param name="numberOfThreads" value="{config.get("numberOfThreads", "4")}"/>
 	</module>
 
 	<module name="scoring">
-		<param name="learningRate" value="1.0" />
-		<param name="brainExpBeta" value="2.0" />
+		<param name="learningRate" value="{config.get("learningRate", "1.0")}" />
+		<param name="brainExpBeta" value="{config.get("brainExpBeta", "2.0")}" />
 
-		<param name="lateArrival" value="-18" />
-		<param name="earlyDeparture" value="-0" />
-		<param name="performing" value="+6" />
-		<param name="waiting" value="-0" />
+		<param name="lateArrival" value="{config.get("lateArrival", "-18")}" />
+		<param name="earlyDeparture" value="{config.get("earlyDeparture", "-0")}" />
+		<param name="performing" value="{config.get("performing", "+6")}" />
+		<param name="waiting" value="{config.get("waiting", "-0")}" />
 {"".join([_activity_params(param) for param in config.get("activityParams", [])])}
 
 
 	<parameterset type= "modeParams" >
 		<param name= "mode" value= "pt" />
-		<param name= "monetaryDistanceRate" value= "-0.0002 " />
+		<param name= "monetaryDistanceRate" value= "{config.get("monetaryDistanceRate_pt", "-0.0002")}" />
 	</parameterset>
 	</module>
 
-
 	<module name="routing">
-		<param name="accessEgressType" value="accessEgressModeToLink" />
+		<param name="accessEgressType" value="{config.get("accessEgressType", "accessEgressModeToLink")}" />
 		<param name= "networkModes" value= "car"/>
-		<param name="networkRouteConsistencyCheck" value="disable" />
+		<param name="networkRouteConsistencyCheck" value="{config.get("networkRouteConsistencyCheck", "disable")}" />
     </module>
 
 	<module name="changeMode">
@@ -91,13 +90,13 @@ f"""<?xml version="1.0" ?>
 	<module name="replanning">
 		<param name="maxAgentPlanMemorySize" value="{config.get("maxAgentPlanMemorySize", "1")}" /> <!-- 0 means unlimited -->
 
-		<param name="ModuleProbability_1" value="0.6" />
+		<param name="ModuleProbability_1" value="{config.get("BestScoreProbability", "0.6")}" />
 		<param name="Module_1" value="BestScore" />
 
-		<param name="ModuleProbability_2" value="0.1" />
+		<param name="ModuleProbability_2" value="{config.get("ReRouteProbability", "0.1")}" />
 		<param name="Module_2" value="ReRoute" />
 
-		<param name="ModuleProbability_3" value="0.3" />
+		<param name="ModuleProbability_3" value="{config.get("ChangeTripModeProbability", "0.3")}" />
 	    <param name="Module_3" value="ChangeTripMode" />
 
 	</module>

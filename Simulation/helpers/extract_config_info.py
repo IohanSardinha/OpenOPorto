@@ -17,7 +17,7 @@ def extract_vehicle_info(vehicle_file):
 
     vehicle_types.extend(map(lambda v: v.find("m:networkMode", NSMAP).get("networkMode"), root.findall("m:vehicleType", NSMAP)))
     
-    return vehicle_types
+    return list(set(vehicle_types))
 
 def extract_plan_info(plan_file):
 
