@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 exec > >(tee -a loadPortoData.out) 2>&1
 
 if [ -f "../Population/.data/C2021_SECCOES_11A.zip" ] ; then
