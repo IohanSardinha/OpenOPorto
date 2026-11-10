@@ -8,6 +8,11 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Any
 
+class COMPONTENTS(Enum):
+    Attributes = "Attributes"
+    Relations = "Relations"
+    Activities = "Activities"
+
 class ComponentSynthesis(ABC):
     """Abstract base class for component synthesis strategies.
 
@@ -24,7 +29,7 @@ class ComponentSynthesis(ABC):
         Post-process the synthesis result.
     """
 
-    COMPONTENTS = Enum("COMPONTENTS", ("Attributes", "Relations", "Activities"))
+    COMPONTENTS = COMPONTENTS
 
     def __init__(self, component: COMPONTENTS) -> None:
         """Store the component type handled by this synthesizer.
@@ -101,11 +106,11 @@ class ComponentSynthesis(ABC):
 class CombinedCapable(ComponentSynthesis, ABC):
     """Base class for synthesizers that combine multiple components."""
 
-    def __init__(self, components: set[ComponentSynthesis.COMPONTENTS]) -> None:
+    def __init__(self, components: set[COMPONTENTS]) -> None:
         """Store the set of components handled by the synthesizer.
 
         :param components: Components that can be synthesized together.
-        :type components: set[ComponentSynthesis.COMPONTENTS]
+        :type components: set[COMPONTENTS]
         :returns: ``None``.
         :rtype: None
         """

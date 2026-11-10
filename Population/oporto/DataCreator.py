@@ -1,7 +1,6 @@
 import argparse
 
 def expand_census_data(input_file):
-    import pandas as pd
     import geopandas as gpd
     data = gpd.read_file(input_file)
 
@@ -35,12 +34,84 @@ def expand_census_data(input_file):
 
     data.to_file(f"{input_file[:-5]}_TRANSFORMED.gpkg")
 
+    vars = {"ageGroup":['N_INDIVIDUOS_0A4', 'N_INDIVIDUOS_5A9', 'N_INDIVIDUOS_10A14', 'N_INDIVIDUOS_15A19', 'N_INDIVIDUOS_20A24', 'N_INDIVIDUOS_25A29', 'N_INDIVIDUOS_30A34', 'N_INDIVIDUOS_35A39', 'N_INDIVIDUOS_40A44', 'N_INDIVIDUOS_45A49', 'N_INDIVIDUOS_50A54', 'N_INDIVIDUOS_55A59', 'N_INDIVIDUOS_60A64', 'N_INDIVIDUOS_65A69', 'N_INDIVIDUOS_70A74', 'N_INDIVIDUOS_75_OU_MAIS'],
+        "gender": ["H", "M"]}
+    section_col = "DTMNFRSEC21"
+    section_age_gender = data.melt(id_vars=[section_col], value_vars=[f"{age_group}_{gender}" for age_group in vars["ageGroup"] for gender in vars["gender"]], var_name="age_gender", value_name="count")
+    section_age_gender[["ageGroup", "gender"]] = section_age_gender["age_gender"].str.extract(r"(.+)_(H|M)$")
+    section_age_gender = section_age_gender.groupby([section_col, "gender", "ageGroup"], as_index=False)["count"].sum().rename(columns={section_col: "section"})
+    section_age_gender["ageGroup"] = section_age_gender["ageGroup"].str.replace("N_INDIVIDUOS_", "").str.replace("_OU_MAIS", "+").str.replace("A", " to ")
+    section_age_gender["gender"] = section_age_gender["gender"].map({"H": "Male", "M": "Female"})
+    section_age_gender["section"] = section_age_gender["section"].astype(str)
+
+    section_age_gender.to_csv(f"{input_file[:-5]}_SECTION_AGE_GENDER.csv", index=False)
+
+def preprocess_ipums_data(input_file, output_file):
+    import pandas as pd
+    from ipumspy import readers
+
+    ddi = readers.read_ipums_ddi(f"{input_file}.xml")
+    df = readers.read_microdata_chunked(ddi, f"{input_file}.dat",chunksize=10000)
+
+    chunk = next(df, None)
+    part = chunk[chunk["GEO1_PT2011"] == 114]
+    while chunk is not None:
+        part = pd.concat([part, chunk[chunk["GEO1_PT2011"] == 114]])
+        chunk = next(df, None)
+    porto_df = part
+
+    invert_dict = lambda d: {v: k for k, v in d.items()}
+
+    persons = porto_df[["AGE2", "SEX", "EDUCPT", "EEMPSTAT","SCHOOL", "TRNWRK","CITIZEN"]].copy()
+    for col in persons.columns:
+        mapper = invert_dict(ddi.get_variable_info(col).codes)
+        persons[col] = persons[col].map(mapper)
+
+    persons["EEMPSTAT"] = persons["EEMPSTAT"].replace("Unemployed, never worked before","Unemployed")
+    persons.loc[persons["AGE2"].isin(["0 to 4", "5 to 9", "10 to 14", "15 to 19"]), "EEMPSTAT"] = "Students"
+    persons.loc[persons["AGE2"].isin(["0 to 4", "5 to 9", "10 to 14", "15 to 19"]), "SCHOOL"] = "Yes"
+    persons["TRNWRK"] = persons["TRNWRK"].replace({"Auto (driver)":"Car",
+                                                "Auto (passenger)":"Car", 
+                                                "Bus or trolley bus" : "Public Transport", 
+                                                "Railroad or train": "Public Transport", 
+                                                "Subway or elevated train": "Public Transport", 
+                                                "Ferryboat": "Public Transport",
+                                                "Special transportation (company coach, school bus, etc.)": "Car",
+                                                "Motorcycle, moped, or scooter":"Car",
+                                                "Bicycle":"Walking",
+                                                "Unknown/missing": "Other",
+                                                "Other, not elsewhere classified":"Other",
+                                                "NIU (not in universe)":"Other"
+                                                })
+
+    persons["EDUCPT"] = persons["EDUCPT"].replace({"Basic education, grades 1-4":"1 Basic",
+                                                "Basic education, grades 5-6":"2 Basic",
+                                                "Basic education, grades 7-9":"3 Basic",
+                                                "Basic education, grades 10-12":"Highschool",
+                                                "Specialized technical school (level 4)":"Highschool",
+                                                "Less than primary, illiterate": "No Education",
+                                                "Less than primary, literate": "No Education",
+                                                "Bachelor's degree":"Undergraduate+",
+                                                "Professional degree (licenciature)":"Undergraduate+",
+                                                "Master's and PhD":"Undergraduate+"})
+
+    persons["CITIZEN"] = persons["CITIZEN"].replace({'Citizen, not specified':'Portuguese', 'Not a citizen':'Non-Portuguese'})
+
+    #For now, all SCHOOL = Yes are students
+    persons.loc[persons["SCHOOL"] == "Yes", "EEMPSTAT"] = "Students"
+    persons.drop(columns=["SCHOOL"], inplace=True)
+    persons = persons.rename(columns={"AGE2":"ageGroup", "SEX":"gender", 
+                                      "EDUCPT":"educationLvl", 
+                                      "CITIZEN":"citizenship",
+                                      "EEMPSTAT":"economicSituation", 
+                                      "TRNWRK":"transportationMode"})
+    
+    persons.to_csv(output_file, index=False)
+
 def generate_places_data(input_file, output_file):
     import osmium
     import pandas as pd
-    import os
-    import json
-    from shapely.geometry import Polygon, Point
+    from shapely.geometry import Polygon
 
     class POIHandler(osmium.SimpleHandler):
         def __init__(self):
@@ -136,12 +207,15 @@ def generate_places_data(input_file, output_file):
 def main():
     parser = argparse.ArgumentParser(description='Data Creator for Oporto Population IMOB')
     parser.add_argument("--expand-census", type=str, help="Expand census data")
+    parser.add_argument("--preprocess-ipums", type=str, help="Preprocess IPUMS data")
     parser.add_argument("--generate-places", type=str, help="Generate places data")
     parser.add_argument("--output", type=str, help="Output file name")
     args = parser.parse_args()
 
     if args.expand_census:
         expand_census_data(args.expand_census)
+    elif args.preprocess_ipums:
+        preprocess_ipums_data(args.preprocess_ipums, args.output)
     elif args.generate_places:
         generate_places_data(args.generate_places, args.output)
 

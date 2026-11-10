@@ -17,7 +17,7 @@ from .Integerizer import Integerizer
 from itertools import combinations, product
 from .SyntheticReconstruction import SyntheticReconstruction
 from concurrent.futures import ProcessPoolExecutor
-from ..ComponentSynthesis import ComponentSynthesis
+from ..ComponentSynthesis import COMPONTENTS
 
 IMPOSSIBILITIES_VAL = 1e-4
 
@@ -342,11 +342,11 @@ class IPFSynthesis(SyntheticReconstruction):
         Run IPF, integerize the result, and return validation metrics.
     """
     
-    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer: Integerizer, data: Any, asDF: bool = False, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None, correction_factor: float = 1) -> IPFSynthesis:
+    def __init__(self, component: COMPONTENTS, integerizer: Integerizer, data: Any, asDF: bool = False, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None, correction_factor: float = 1) -> IPFSynthesis:
         """Configure the IPF synthesizer.
         
         :param component: Component synthesis configuration.
-        :type component: ComponentSynthesis.COMPONTENTS
+        :type component: COMPONTENTS
         :param integerizer: Integerizer instance to convert continuous output to integers.
         :type integerizer: Integerizer
         :param data: Input data for IPF.
@@ -374,11 +374,11 @@ class IPFSynthesis(SyntheticReconstruction):
         self.correction_factor = correction_factor
     
     @staticmethod
-    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer: Integerizer, file_path: str, asDF: bool = False, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None, correction_factor: float = 1) -> IPFSynthesis:
+    def fromGeoPackage(component: COMPONTENTS, integerizer: Integerizer, file_path: str, asDF: bool = False, labels: list[str] | None = None, valueMapper: dict[Any, Any] | None = None, correction_factor: float = 1) -> IPFSynthesis:
         """Create an IPF synthesizer from a GeoPackage file.
         
         :param component: Component synthesis configuration.
-        :type component: ComponentSynthesis.COMPONTENTS
+        :type component: COMPONTENTS
         :param integerizer: Integerizer instance to convert continuous output to integers.
         :type integerizer: Integerizer
         :param file_path: Path to the GeoPackage file containing input data.
@@ -483,11 +483,11 @@ class IPFSynthesisWithSections(IPFSynthesis):
         Convert the synthesized arrays for all sections into a single dataframe representation.
     """
 
-    def __init__(self, component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, data: pd.DataFrame, sectionVar: str, asDF: bool=False, labels: list[str] | None=None, valueMapper: dict[Any, Any] | None=None, correction_factor: float = 1)-> IPFSynthesisWithSections:
+    def __init__(self, component: COMPONTENTS, integerizer:Integerizer, data: pd.DataFrame, sectionVar: str, asDF: bool=False, labels: list[str] | None=None, valueMapper: dict[Any, Any] | None=None, correction_factor: float = 1)-> IPFSynthesisWithSections:
         """Initialize the IPFSynthesisWithSections instance.
 
         :param component: Component synthesis configuration.
-        :type component: ComponentSynthesis.COMPONTENTS
+        :type component: COMPONTENTS
         :param integerizer: Integerizer instance to convert continuous output to integers.
         :type integerizer: Integerizer
         :param data: Input data for IPF, including section identifiers.
@@ -509,11 +509,11 @@ class IPFSynthesisWithSections(IPFSynthesis):
         self.sectionVar = sectionVar
     
     @staticmethod
-    def fromGeoPackage(component: ComponentSynthesis.COMPONTENTS, integerizer:Integerizer, sectionVar: str, file_path: str, asDF: bool=False, labels: list[str] | None=None, valueMapper: dict[Any, Any] | None=None, correction_factor: float = 1)-> IPFSynthesisWithSections:
+    def fromGeoPackage(component: COMPONTENTS, integerizer:Integerizer, sectionVar: str, file_path: str, asDF: bool=False, labels: list[str] | None=None, valueMapper: dict[Any, Any] | None=None, correction_factor: float = 1)-> IPFSynthesisWithSections:
         """Create an IPFSynthesisWithSections instance from a GeoPackage file.
 
         :param component: Component synthesis configuration.
-        :type component: ComponentSynthesis.COMPONTENTS
+        :type component: COMPONTENTS
         :param integerizer: Integerizer instance to convert continuous output to integers.
         :type integerizer: Integerizer
         :param sectionVar: Column name in the GeoPackage that identifies sections.

@@ -25,6 +25,19 @@ else
     python ../Population/oporto/DataCreator.py --expand-census ../Population/.data/C2021_SECCOES_11A.gpkg
 fi
 
+if [ -f "../Population/.data/ipums.csv" ] ; then
+    echo "Processed IPUMS data already exists. Skipping processing."
+else
+    if [ -f "../Population/.data/ipums.dat" ] ; then
+        echo "IPUMS data exists! Will process it to CSV..."
+        python ../Population/oporto/DataCreator.py --preprocess-ipums ../Population/.data/ipums --output ../Population/.data/ipums.csv
+    else
+        echo "Unfortunately, IPUMS data download cannot be automated due to IPUMS restrictions."
+        echo "Please access the IPUMS website, download the data for Portugal with the following variables, and place the files in the Population/.data folder:"
+        echo "Variables: GEO1_PT2011, SEX, AGE, EEMPSTAT, SCHOOL, TRNWRK, CITIZEN"
+    fi
+fi
+
 if [ ! -f "../PhysicalNetwork/.tmp/amp.osm" ] ; then
     echo "Generating physical network data..."
     cd ../PhysicalNetwork
@@ -67,6 +80,7 @@ else
 fi
 
 echo ""
+
 echo "Public data for Porto has been successfully loaded and processed to Population/.data\n"
 
 exec >/dev/tty 2>&1
