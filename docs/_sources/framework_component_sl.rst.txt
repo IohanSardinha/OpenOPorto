@@ -1,0 +1,17 @@
+SL
+==
+
+.. automodule:: framework.Component.SL.NeuralNetwork
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Component.SL.Probabilistic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: framework.Component.SL.StatisticalLearning
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -4,7 +4,7 @@ from abc import ABC
 from typing import Any
 
 from ..StaticPopulationSynthesis import StaticPoplationSynthesis
-from ...Component.ComponentSynthesis import ComponentSynthesis
+from ...Component.ComponentSynthesis import ComponentSynthesis, COMPONTENTS
 
 class MultipleComponentSynthesis(StaticPoplationSynthesis, ABC):
     """Abstract base class for synthesis workflows with multiple components.
@@ -25,7 +25,7 @@ class MultipleComponentSynthesis(StaticPoplationSynthesis, ABC):
         :returns: ``None``.
         :rtype: None
         """
-        self.components = {k: components[k] for k in ComponentSynthesis.COMPONTENTS if k in components}
+        self.components = {k: components[k] for k in COMPONTENTS if k in components}
     
     def run_single(self, component: ComponentSynthesis) -> Any:
         """Execute a single component synthesizer.

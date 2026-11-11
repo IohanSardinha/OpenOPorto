@@ -11,7 +11,7 @@ from random import choices
 from itertools import product, chain
 
 from .MultipleComponentSynthesis import MultipleComponentSynthesis
-from ...Component.ComponentSynthesis import ComponentSynthesis
+from ...Component.ComponentSynthesis import ComponentSynthesis, COMPONTENTS
 
 class MergeSynthesis(MultipleComponentSynthesis, ABC):
     """Base class for synthesis strategies that merge multiple results.
@@ -276,13 +276,14 @@ class AttributeMatching(MergeSynthesis):
         attributes_accessor = self.__make_acessor(attributes)
         activities_accessor = self.__make_acessor(activities, path=["attributes"])
 
-        matches = self.__match_common(attributes, activities, attributes_accessor, activities_accessor, self.keyMapper.get(ComponentSynthesis.COMPONTENTS.Attributes, {}), self.prioritizeWhenMissing.get(ComponentSynthesis.COMPONTENTS.Attributes, None))
+        matches = self.__match_common(attributes, activities, attributes_accessor, activities_accessor, self.keyMapper.get(COMPONTENTS.Attributes, {}), self.prioritizeWhenMissing.get(COMPONTENTS.Attributes, None))
 
         attributes_accessor_idx = self.__make_idx_accessor(attributes)
         activities_accessor_idx = self.__make_idx_accessor(activities)
         
         attribute_keys = self.__get_keys(attributes)
-        attribute_keys.remove("value")
+        if "value" in attribute_keys:
+            attribute_keys.remove("value")
         activity_keys = self.__get_keys(activities)
         if self.joinMode == self.JOIN_MODE.BOTH:
             for key in attribute_keys:
@@ -315,7 +316,7 @@ class AttributeMatching(MergeSynthesis):
                     result = attributes_list + activity_attributes_list + legs_list
             
             results.append(result)
-
+    
         leg_columns = ["leg_count"] + list(chain(*[["leg_"+str(i)+"_"+key for key in person_activities["legs"][0].keys()] for i in range(max_legs)]))
 
         match self.joinMode:
@@ -366,27 +367,27 @@ class AttributeMatching(MergeSynthesis):
         super().merge(results)
         
         #A-C
-        if ComponentSynthesis.COMPONTENTS.Attributes in results and\
-           ComponentSynthesis.COMPONTENTS.Activities in results:
-            attribute_to_activities = self.__merge_attributes_to_activities(results[ComponentSynthesis.COMPONTENTS.Attributes],
-                                                                     results[ComponentSynthesis.COMPONTENTS.Activities])
-            if ComponentSynthesis.COMPONTENTS.Relations not in results:
+        if COMPONTENTS.Attributes in results and\
+           COMPONTENTS.Activities in results:
+            attribute_to_activities = self.__merge_attributes_to_activities(results[COMPONTENTS.Attributes],
+                                                                     results[COMPONTENTS.Activities])
+            if COMPONTENTS.Relations not in results:
                 return attribute_to_activities
         #A-C-R
-        if ComponentSynthesis.COMPONTENTS.Attributes in results and\
-           ComponentSynthesis.COMPONTENTS.Activities in results and\
-           ComponentSynthesis.COMPONTENTS.Relations in results:
-           return self.__merge_attributes_to_relations(attribute_to_activities, results[ComponentSynthesis.COMPONTENTS.Relations]) 
+        if COMPONTENTS.Attributes in results and\
+           COMPONTENTS.Activities in results and\
+           COMPONTENTS.Relations in results:
+           return self.__merge_attributes_to_relations(attribute_to_activities, results[COMPONTENTS.Relations]) 
 
         #A-R  
-        if ComponentSynthesis.COMPONTENTS.Attributes in results and\
-           ComponentSynthesis.COMPONTENTS.Relations in results:
-            return self.__merge_attributes_to_relations(results[ComponentSynthesis.COMPONTENTS.Attributes],
-                                                            results[ComponentSynthesis.COMPONTENTS.Relations])
+        if COMPONTENTS.Attributes in results and\
+           COMPONTENTS.Relations in results:
+            return self.__merge_attributes_to_relations(results[COMPONTENTS.Attributes],
+                                                            results[COMPONTENTS.Relations])
         
         #C-R
-        return self.__merge_activities_to_relations(results[ComponentSynthesis.COMPONTENTS.Activities],
-                                                  results[ComponentSynthesis.COMPONTENTS.Relations])            
+        return self.__merge_activities_to_relations(results[COMPONTENTS.Activities],
+                                                  results[COMPONTENTS.Relations])            
 
 class SimulationMatching(MergeSynthesis):
     """Placeholder for simulation-based matching synthesis."""

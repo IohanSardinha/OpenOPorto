@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SL &#8212; Dynamic Population Synthesis Framework  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dynamic" href="framework_dynamic.html" />
+    <link rel="prev" title="SR" href="framework_component_sr.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-framework.Component.SL.NeuralNetwork">
+<span id="sl"></span><h1>SL<a class="headerlink" href="#module-framework.Component.SL.NeuralNetwork" title="Link to this heading">¶</a></h1>
+<p>Neural network based synthesis contracts.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.NeuralNetwork.NeuralNetwork">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.NeuralNetwork.</span></span><span class="sig-name descname"><span class="pre">NeuralNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><span class="pre">COMPONTENTS</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.NeuralNetwork.NeuralNetwork" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#framework.Component.SL.StatisticalLearning.StatisticalLearning" title="framework.Component.SL.StatisticalLearning.StatisticalLearning"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatisticalLearning</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for neural network synthesizers.</p>
+<p>Store the set of components handled by the synthesizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>components</strong> (<em>set</em><em>[</em><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><em>COMPONTENTS</em></a><em>]</em>) – Components that can be synthesized together.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.NeuralNetwork.VAESynthesis">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.NeuralNetwork.</span></span><span class="sig-name descname"><span class="pre">VAESynthesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><span class="pre">COMPONTENTS</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.NeuralNetwork.VAESynthesis" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#framework.Component.SL.NeuralNetwork.NeuralNetwork" title="framework.Component.SL.NeuralNetwork.NeuralNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">NeuralNetwork</span></code></a></p>
+<p>Placeholder for variational autoencoder based synthesis.</p>
+<p>Store the set of components handled by the synthesizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>components</strong> (<em>set</em><em>[</em><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><em>COMPONTENTS</em></a><em>]</em>) – Components that can be synthesized together.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-framework.Component.SL.Probabilistic">Probabilistic synthesis contracts.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.BayesianNetworkSynthesis">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.Probabilistic.</span></span><span class="sig-name descname"><span class="pre">BayesianNetworkSynthesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><span class="pre">COMPONTENTS</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.STRUCTURE" title="framework.Component.SL.Probabilistic.STRUCTURE"><span class="pre">STRUCTURE</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">STRUCTURE.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.PARAMETERS" title="framework.Component.SL.Probabilistic.PARAMETERS"><span class="pre">PARAMETERS</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PARAMETERS.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impossible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesis" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#framework.Component.SL.Probabilistic.Probabilistic" title="framework.Component.SL.Probabilistic.Probabilistic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Probabilistic</span></code></a></p>
+<p>Bayesian Network Synthesizer</p>
+<section id="methods">
+<h2>Methods:<a class="headerlink" href="#methods" title="Link to this heading">¶</a></h2>
+<p>from_csv: Create an instance from a CSV file.
+synthesize: Main method to synthesize a population based on the learned model.</p>
+<p>Configure the Bayesian Network Synthesizer with the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param components<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The components to be synthesized.</p>
+</dd>
+</dl>
+<p>type components: self.COMPONTENTS
+:param data: The input data for learning the Bayesian network.
+type data: pd.DataFrame
+:param size: The desired size of the synthesized population.
+type size: int
+:param structure: The structure of the Bayesian network, either to be learned or provided.
+type structure: STRUCTURE|str
+:param structure_args: Additional arguments for structure learning.
+type structure_args: dict
+:param parameters: The parameters of the Bayesian network, either to be learned or provided.
+type parameters: PARAMETERS|Any
+:param parameters_args: Additional arguments for parameter learning.
+type parameters_args: dict
+:param impossible: List of impossible combinations to be filtered out.
+type impossible: list
+:param sampling_args: Additional arguments for the sampling process.
+type sampling_args: dict</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.BayesianNetworkSynthesis.from_csv">
+<span class="sig-name descname"><span class="pre">from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.STRUCTURE" title="framework.Component.SL.Probabilistic.STRUCTURE"><span class="pre">STRUCTURE</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">STRUCTURE.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.PARAMETERS" title="framework.Component.SL.Probabilistic.PARAMETERS"><span class="pre">PARAMETERS</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PARAMETERS.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impossible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesis.from_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Create an instance of BayesianNetworkSynthesis from a CSV file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>components</strong> (<em>self.COMPONTENTS</em>) – The components to be synthesized.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to the CSV file containing the data.</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – The desired size of the synthesized population.</p></li>
+<li><p><strong>structure</strong> (<em>self.STRUCTURE</em><em> | </em><em>str</em>) – The structure of the Bayesian network, either to be learned or provided.</p></li>
+<li><p><strong>structure_args</strong> (<em>dict</em>) – Additional arguments for structure learning.</p></li>
+<li><p><strong>parameters</strong> (<em>self.PARAMETERS</em><em> | </em><em>Any</em>) – The parameters of the Bayesian network, either to be learned or provided.</p></li>
+<li><p><strong>parameters_args</strong> (<em>dict</em>) – Additional arguments for parameter learning.</p></li>
+<li><p><strong>impossible</strong> (<em>list</em>) – List of impossible combinations to be filtered out.</p></li>
+<li><p><strong>sampling_args</strong> (<em>dict</em>) – Additional arguments for the sampling process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of BayesianNetworkSynthesis.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.BayesianNetworkSynthesis.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesis.sample" title="Link to this definition">¶</a></dt>
+<dd><p>Sample from the Bayesian network, filtering out impossible combinations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – The number of samples to generate.</p></li>
+<li><p><strong>evidence</strong> (<em>dict</em><em>, </em><em>optional</em>) – Optional evidence to condition the sampling on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing the sampled data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.BayesianNetworkSynthesis.synthesize">
+<span class="sig-name descname"><span class="pre">synthesize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesis.synthesize" title="Link to this definition">¶</a></dt>
+<dd><p>Synthesize a population based on the learned model.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.Probabilistic.</span></span><span class="sig-name descname"><span class="pre">BayesianNetworkSynthesisWithEvidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.STRUCTURE" title="framework.Component.SL.Probabilistic.STRUCTURE"><span class="pre">STRUCTURE</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">STRUCTURE.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.PARAMETERS" title="framework.Component.SL.Probabilistic.PARAMETERS"><span class="pre">PARAMETERS</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PARAMETERS.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impossible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evidenceData</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evidenceMapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesis" title="framework.Component.SL.Probabilistic.BayesianNetworkSynthesis"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianNetworkSynthesis</span></code></a></p>
+<p>Bayesian Network Synthesizer with Evidence Handling</p>
+<p>This class extends the BayesianNetworkSynthesis class to handle evidence during the sampling process. It allows for the specification of evidence data and a mapping for evidence variables, enabling more controlled and conditional sampling from the Bayesian network.</p>
+<section id="id1">
+<h2>Methods:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>from_csv: Create an instance from a CSV file, including evidence data and mapping.
+sample: Sample from the Bayesian network, considering the provided evidence and filtering out impossible combinations.</p>
+<p>Configure the Bayesian Network Synthesizer with Evidence Handling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param components<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The components to be synthesized.</p>
+</dd>
+<dt class="field-even">type components<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">param data<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The input data for learning the Bayesian network.</p>
+</dd>
+<dt class="field-even">type data<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-odd">param reduction_factor<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The factor by which to reduce the sample size during synthesis.</p>
+</dd>
+<dt class="field-even">type reduction_factor<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">param structure<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The structure of the Bayesian network, either to be learned or provided.</p>
+</dd>
+<dt class="field-even">type structure<span class="colon">:</span></dt>
+<dd class="field-even"><p>STRUCTURE|str</p>
+</dd>
+<dt class="field-odd">param structure_args<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Additional arguments for structure learning.</p>
+</dd>
+<dt class="field-even">type structure_args<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">param parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The parameters of the Bayesian network, either to be learned or provided.</p>
+</dd>
+<dt class="field-even">type parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p>PARAMETERS|Any</p>
+</dd>
+<dt class="field-odd">param parameters_args<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Additional arguments for parameter learning.</p>
+</dd>
+<dt class="field-even">type parameters_args<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">param impossible<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of impossible combinations to be filtered out.</p>
+</dd>
+<dt class="field-even">type impossible<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">param sampling_args<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Additional arguments for the sampling process.</p>
+</dd>
+<dt class="field-even">type sampling_args<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">param evidenceData<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame containing evidence data for conditional sampling.</p>
+</dd>
+<dt class="field-even">type evidenceData<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame, optional</p>
+</dd>
+<dt class="field-odd">param evidenceMapper<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A mapping of evidence variables to their corresponding values.</p>
+</dd>
+<dt class="field-even">type evidenceMapper<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict, optional</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence.from_csv">
+<span class="sig-name descname"><span class="pre">from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.STRUCTURE" title="framework.Component.SL.Probabilistic.STRUCTURE"><span class="pre">STRUCTURE</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">STRUCTURE.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#framework.Component.SL.Probabilistic.PARAMETERS" title="framework.Component.SL.Probabilistic.PARAMETERS"><span class="pre">PARAMETERS</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PARAMETERS.LEARN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impossible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evidenceData</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evidenceMapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence.from_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Create an instance of BayesianNetworkSynthesisWithEvidence from a CSV file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>components</strong> (<em>list</em>) – The components to be synthesized.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to the CSV file containing the data.</p></li>
+<li><p><strong>reduction_factor</strong> (<em>float</em>) – The factor by which to reduce the sample size during synthesis.</p></li>
+<li><p><strong>structure</strong> (<a class="reference internal" href="#framework.Component.SL.Probabilistic.STRUCTURE" title="framework.Component.SL.Probabilistic.STRUCTURE"><em>STRUCTURE</em></a><em>|</em><em>str</em>) – The structure of the Bayesian network, either to be learned or provided.</p></li>
+<li><p><strong>structure_args</strong> (<em>dict</em>) – Additional arguments for structure learning.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference internal" href="#framework.Component.SL.Probabilistic.PARAMETERS" title="framework.Component.SL.Probabilistic.PARAMETERS"><em>PARAMETERS</em></a><em>|</em><em>Any</em>) – The parameters of the Bayesian network, either to be learned or provided.</p></li>
+<li><p><strong>parameters_args</strong> (<em>dict</em>) – Additional arguments for parameter learning.</p></li>
+<li><p><strong>impossible</strong> (<em>list</em>) – List of impossible combinations to be filtered out.</p></li>
+<li><p><strong>sampling_args</strong> (<em>dict</em>) – Additional arguments for the sampling process.</p></li>
+<li><p><strong>evidenceData</strong> (<em>pd.DataFrame</em><em>, </em><em>optional</em>) – DataFrame containing evidence data for conditional sampling.</p></li>
+<li><p><strong>evidenceMapper</strong> (<em>dict</em><em>, </em><em>optional</em>) – A mapping of evidence variables to their corresponding values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of BayesianNetworkSynthesisWithEvidence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence" title="framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence">BayesianNetworkSynthesisWithEvidence</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.BayesianNetworkSynthesisWithEvidence.sample" title="Link to this definition">¶</a></dt>
+<dd><p>Sample from the Bayesian network, considering the provided evidence and filtering out impossible combinations. Each evidence row is processed in parallel to improve performance.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.PARAMETERS">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.Probabilistic.</span></span><span class="sig-name descname"><span class="pre">PARAMETERS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.PARAMETERS" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum for Bayesian network parameter learning
+Indicates that the parameters should be learned from the data, and is not provided by the user.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.PARAMETERS.LEARN">
+<span class="sig-name descname"><span class="pre">LEARN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#framework.Component.SL.Probabilistic.PARAMETERS.LEARN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.Probabilistic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.Probabilistic.</span></span><span class="sig-name descname"><span class="pre">Probabilistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><span class="pre">COMPONTENTS</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.Probabilistic" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#framework.Component.SL.StatisticalLearning.StatisticalLearning" title="framework.Component.SL.StatisticalLearning.StatisticalLearning"><code class="xref py py-class docutils literal notranslate"><span class="pre">StatisticalLearning</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for probabilistic learning synthesizers.</p>
+<p>Store the set of components handled by the synthesizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>components</strong> (<em>set</em><em>[</em><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><em>COMPONTENTS</em></a><em>]</em>) – Components that can be synthesized together.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.STRUCTURE">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.Probabilistic.</span></span><span class="sig-name descname"><span class="pre">STRUCTURE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.Probabilistic.STRUCTURE" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum for Bayesian network structure learning
+Indicates that the structure should be learned from the data, and is not provided by the user.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="framework.Component.SL.Probabilistic.STRUCTURE.LEARN">
+<span class="sig-name descname"><span class="pre">LEARN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#framework.Component.SL.Probabilistic.STRUCTURE.LEARN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p id="module-framework.Component.SL.StatisticalLearning">Statistical learning based component synthesis contracts.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="framework.Component.SL.StatisticalLearning.StatisticalLearning">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">framework.Component.SL.StatisticalLearning.</span></span><span class="sig-name descname"><span class="pre">StatisticalLearning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><span class="pre">COMPONTENTS</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#framework.Component.SL.StatisticalLearning.StatisticalLearning" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.CombinedCapable" title="framework.Component.ComponentSynthesis.CombinedCapable"><code class="xref py py-class docutils literal notranslate"><span class="pre">CombinedCapable</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for statistical learning synthesizers.</p>
+<p>Store the set of components handled by the synthesizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>components</strong> (<em>set</em><em>[</em><a class="reference internal" href="framework_component.html#framework.Component.ComponentSynthesis.COMPONTENTS" title="framework.Component.ComponentSynthesis.COMPONTENTS"><em>COMPONTENTS</em></a><em>]</em>) – Components that can be synthesized together.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Dynamic Population Synthesis Framework</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="generate_population.html">Population Generator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_parsing_export.html">Input Parsing and Export</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="api.html">API Reference</a><ul>
+  <li><a href="framework.html">Framework</a><ul>
+  <li><a href="framework_component.html">Component</a><ul>
+      <li>Previous: <a href="framework_component_sr.html" title="previous chapter">SR</a></li>
+      <li>Next: <a href="framework_dynamic.html" title="next chapter">Dynamic</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Iohan Sardinha.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/framework_component_sl.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -333,7 +333,7 @@ class HeuristicLocationAssigner():
         startMoment = time.time()
 
         #THIS SHOULD NOT BE LIKE THIS
-        sectionPoly = self.sections[self.sections["section"] == str(person["section"])].iloc[0]["geometry"]
+        sectionPoly = self.sections[self.sections["section"].astype(int) == int(person["section"])].iloc[0]["geometry"]
         home = Point(pointpats.random.poisson(sectionPoly,size=1))
 
         self.coords[self.home_id] = home
@@ -454,7 +454,7 @@ class HeuristicLocationAssigner():
                                 f"Failed: {100*count/completed if completed > 0 else 0}%, "
                                 f"Exceptions: {(100*exceptions/count) if count > 0 else 0}%\n"
                                 f"Expected remaining Time: {remaining}")
-                        
+                            
                 except KeyboardInterrupt:
                     executor.shutdown(wait=False, cancel_futures=True)
                     raise

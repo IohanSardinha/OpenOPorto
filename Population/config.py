@@ -3,7 +3,7 @@ config = {
     "PRINT_WITH_DISPLAY": False,
     "CACHE": True,
     "CORRECTION_FACTOR": 1e4,
-    "REDUCTION_FACTOR": 1,
+    "REDUCTION_FACTOR": 0.01,
     "BOUNDING_BOX": [-9.4070, 40.6869, -7.4707, 41.5435],
     "SECTIONS_VAR": "DTMNFRSEC21",
     "PRIORITY_COLS": "ageGroup",
@@ -11,9 +11,12 @@ config = {
     "COLS": ["gender","ageGroup","educationLvl", "economicSituation", "nationality", "residence"],
 
     "FILES": {
-        "JSON": "population.json",
+        "OUTPUT_JSON": "population.json",
+        "OUTPUT_CSV": "population.csv",
         "OUTPUT":"plans.xml",
         "GEOPACKAGE":  ".data/C2021_SECCOES_11A_TRANSFORMED.gpkg",
+        "BN_EVIDENCE": ".data/C2021_SECCOES_11A_SECTION_AGE_GENDER.csv",
+        "IPUMS": ".data/ipums.csv",
         "IMOB_FOLDER":  ".data/IMOB2017",
         "HOUSEHOLDS":  ".data/IMOB2017/TBL_alojamento_AMP.csv",
         "EXPENSES":    ".data/IMOB2017/TBL_alojamento_despesa_AMP.csv",
@@ -70,7 +73,50 @@ config = {
         'N_INDIVIDUOS_RESID_PT': "Live in Portugal"
     },
 
-    "MATCH_MAPPER": {
+    "EVIDENCE_MAPPER": {
+        "gender":{},
+        "ageGroup":{"75+":["75 to 79", "80 to 84", "85+"]}
+    },
+
+    "MATCH_MAPPER_BN": {
+        "Male":"Masculino",
+        "Female":"Feminino",
+
+        "0 to 4":"<= 14", 
+        "5 to 9":"<= 14", 
+        "10 to 14":"<= 14", 
+        "15 to 19":"15-24", 
+        "20 to 24":"15-24", 
+        "25 to 29":"25-44",
+        "30 to 34":"25-44", 
+        "35 to 39":"25-44", 
+        "40 to 44":"25-44", 
+        "45 to 49":"45-64", 
+        "50 to 54":"45-64", 
+        "55 to 59":"45-64", 
+        "60 to 64":"45-64", 
+        "65 to 69":"65-84", 
+        "70 to 74":"65-84",
+        "75 to 79": "65-84",
+        "80 to 84": "65-84",
+        "85+": ">= 85",
+
+        'No education':['Nenhum ou 1º ou 2º ou 3º ano completos','Não sabe','Não se aplica','Recusa'],
+        '1 Basic':"Ensino Básico (1º ciclo, 2º ciclo ou 3º ciclo completo)",
+        '2 Basic':"Ensino Básico (1º ciclo, 2º ciclo ou 3º ciclo completo)",
+        '3 Basic':"Ensino Básico (1º ciclo, 2º ciclo ou 3º ciclo completo)",
+        'Highschool':"Ensino Secundário (12º ano de escolaridade completo) ou Pós-secundário (curso de especialização tecnológica não superior)",
+        'Undergradute+':"Ensino Superior (Bacharelato, Licenciatura, Mestrado, Doutoramento, Curso técnico superior profissional)",
+        
+        'Students':'Estudante, Reformado(a), Ocupa-se principalmente de tarefas domésticas, Incapacitado(a) permanente ou Outra situação de inatividade', 
+        'Employed':"Empregado(a)", 
+        'Unemployed':"Desempregado(a)", 
+        'Others':['Não sabe', 'Não se aplica', 'Prefere não responder'],
+        'Pension or capital income recipients':'Estudante, Reformado(a), Ocupa-se principalmente de tarefas domésticas, Incapacitado(a) permanente ou Outra situação de inatividade', 
+        'Homemakers':'Estudante, Reformado(a), Ocupa-se principalmente de tarefas domésticas, Incapacitado(a) permanente ou Outra situação de inatividade'
+    },
+
+    "MATCH_MAPPER_IPF": {
          "Male":"Masculino",
          "Female":"Feminino",
          "0-4":"<= 14", 

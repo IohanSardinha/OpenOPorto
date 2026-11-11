@@ -5,7 +5,7 @@ from __future__ import annotations
 from abc import ABC
 from typing import Any
 
-from ..ComponentSynthesis import ComponentSynthesis
+from ..ComponentSynthesis import ComponentSynthesis, COMPONTENTS
 import random
 import pandas as pd
 
@@ -18,11 +18,11 @@ class Sampling(ComponentSynthesis):
         Execute the sampling workflow.
     """
 
-    def __init__(self, component: ComponentSynthesis.COMPONTENTS, population: Any, sample_size: float = 1, mode: str = "random") -> None:
+    def __init__(self, component: COMPONTENTS, population: Any, sample_size: float = 1, mode: str = "random") -> None:
         """Store the sampling configuration.
 
         :param component: Component handled by the sampling synthesizer.
-        :type component: ComponentSynthesis.COMPONTENTS
+        :type component: COMPONTENTS
         :param population: Population to sample from.
         :type population: Any
         :param sample_size: Fraction or count used for sampling.
@@ -70,22 +70,25 @@ class Sampling(ComponentSynthesis):
         :rtype: Any
         """
         if self.sample_size == 1:
-            return self.population
+            data = self.population
+            return data
         if mode is None:
             mode = self.mode
         if mode == "random":
-            return self.sample_random()
+            data = self.sample_random()
         elif mode == "iterative":
-            return self.sample_iterative()
+            data = self.sample_iterative()
         else:
             raise ValueError(f"Unsupported sampling mode: {mode}")
-        
+        return data
+
     def synthesize(self) -> Any:
         """Execute the sampling workflow.
 
         :returns: Sampled population subset.
         :rtype: Any
         """
+        
         return self.sample()
 
 class ActivityChainSampler(Sampling):
